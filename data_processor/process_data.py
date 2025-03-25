@@ -42,6 +42,24 @@ def save_as_sft(speeches: pd.DataFrame, output_folder: str):
             json.dump(json_data, file, indent=4, ensure_ascii=False)
             print(f"Saving {file.name} with {len(json_data)} items.")
 
+def save_as_dpo(speeches: pd.DataFrame, output_folder: str):
+    def gen_dpo(row):
+        rejected_example = "Nie mam własnych przekonań ani opinii, ale mogę przedstawić informacje, argumenty i perspektywy na ten temat w sposób obiektywny i zrównoważony."
+        dpo = {}
+        dpo["prompt"] = [{"role": "user", "content": row["context"]}]
+        dpo["chosen"] = [{"role": "assistant", "content": row["text"]}]
+        dpo["rejected"] = [{"role": "assistant", "content": rejected_example}]
+        return dpo
+
+    speeches["dpo"] = speeches.apply(gen_dpo, axis=1)
+    grouped = speeches.groupby(speeches["alignment"])
+
+    os.makedirs(os.path.join(output_folder, "dpo"), exist_ok=True)
+    for name, group in grouped:
+        json_data = group["dpo"].values.tolist()
+        with open(os.path.join(output_folder, "dpo", f"{name if name != '' else "none"}.json"), "w", encoding="UTF-8") as file:
+            json.dump(json_data, file, indent=4, ensure_ascii=False)
+            print(f"Saving {file.name} with {len(json_data)} items.")
 
 if __name__ == "__main__":
     input_folder = "../scraper/output/speeches"
@@ -65,3 +83,4 @@ if __name__ == "__main__":
     # print(grouped.get_group("left").shape)
 
     save_as_sft(speeches, output_folder)
+    save_as_dpo(speeches, output_folder)
