@@ -1,6 +1,7 @@
 import pandas as pd
 import os
 import json
+import re
 
 def load_speeches(input_folder: str):
     speeches = []
@@ -61,6 +62,13 @@ def save_as_dpo(speeches: pd.DataFrame, output_folder: str):
             json.dump(json_data, file, indent=4, ensure_ascii=False)
             print(f"Saving {file.name} with {len(json_data)} items.")
 
+def parse_text(speeches: pd.DataFrame):
+    def parse_row(row):
+        text = re.sub(r"\([^)]*\)", "", row["text"])
+        text = re.sub(r"\s+", " ", text)
+        return text
+    return speeches.apply(parse_row, axis=1)
+
 if __name__ == "__main__":
     input_folder = "../scraper/output/speeches"
     member_mapping_file = "member_mapping.json"
@@ -77,6 +85,9 @@ if __name__ == "__main__":
     print("\nMapping political alignment")
     speeches["alignment"] = add_alignment(speeches, member_mapping_file)
     print(speeches.alignment.value_counts())
+
+    print("\nParsing speeches")
+    speeches["text"] = parse_text(speeches)
     
     # grouped = speeches.groupby(speeches["alignment"])
     # print(grouped.groups.keys())
