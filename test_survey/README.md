@@ -43,10 +43,10 @@
   }
 ```
 
-### calc_weight.py
+### Sum.py
 
-Simple script to help calculating the sum of weights from questions in specific category. Run using:
+Simple script to calculate the number of questions and their weights. Run using:
 
 ```
-python calc_weights.py <category_name>
+python sum.py
 ```
