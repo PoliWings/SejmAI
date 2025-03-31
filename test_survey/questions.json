@@ -1,1042 +1,463 @@
-/* 
-ANSWERS SCALE:
-|   -1 -> LEFTIST
-|   -0.5 -> SLIGHTLY LEFTIST    
-|   0 -> NEUTRAL
-|   +0.5 -> SLIGHTLY RIGHTIST
-|   +1 -> RIGHTIST
-*/
-
 {
   "questions": {
     "economy": [
       {
         "question": "Jestem za jak najszybszym przyjęciem waluty Euro w Polsce",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 2
       },
       {
         "question": "Wiek emerytalny powinien zostać podniesiony",
-        "answers": {
-          "Zdecydowanie się zgadzam": 1,
-          "Częściowo się zgadzam": 0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": -0.5,
-          "Zdecydowanie się nie zgadzam": -1
-        }
+        "political_tendency": "right",
+        "weight": 1
       },
       {
         "question": "TVP powinna zostać zlikwidowana bądź sprywatyzowana",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "right",
+        "weight": 2
       },
       {
         "question": "Należy skrócić czas pracy",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
-      },
-      {
-        "question": "Powinniśmy zrezygnować z niedziel bez handlu",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 2
       },
       {
         "question": "W Polsce należy wprowadzić program masowej budowy tanich mieszkań przez instytucje państwowe",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 3
       },
       {
         "question": "Państwo powinno walczyć z wykluczeniem komunikacyjnym poprzez wyższe nakłady na komunikację publiczną",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 1
       },
       {
         "question": "Podatki powinny być bardziej progresywne",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 3
       },
       {
         "question": "Program 500+ powinien być zlikwidowany lub zastąpiony ulgą podatkową",
-        "answers": {
-          "Zdecydowanie się zgadzam": 1,
-          "Częściowo się zgadzam": 0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": -0.5,
-          "Zdecydowanie się nie zgadzam": -1
-        }
+        "political_tendency": "right",
+        "weight": 3
       },
       {
-        "question": "Podatki powinny być niższe niż obecnie",
-        "answers": {
-          "Zdecydowanie się zgadzam": 1,
-          "Częściowo się zgadzam": 0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": -0.5,
-          "Zdecydowanie się nie zgadzam": -1
-        }
+        "question": "Podatki dla wszystkich powinny być niższe niż obecnie",
+        "political_tendency": "right",
+        "weight": 2
       },
       {
         "question": "Kwota wolna od podatku powinna zostać znacząco podwyższona",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "right",
+        "weight": 1
       },
       {
         "question": "Podatek cukrowy powinien zostać zlikwidowany",
-        "answers": {
-          "Zdecydowanie się zgadzam": 1,
-          "Częściowo się zgadzam": 0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": -0.5,
-          "Zdecydowanie się nie zgadzam": -1
-        }
+        "political_tendency": "right",
+        "weight": 1
       },
       {
         "question": "Płaca minimalna nie powinna istnieć",
-        "answers": {
-          "Zdecydowanie się zgadzam": 1,
-          "Częściowo się zgadzam": 0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": -0.5,
-          "Zdecydowanie się nie zgadzam": -1
-        }
+        "political_tendency": "right",
+        "weight": 3
       },
       {
         "question": "Należy walczyć z umowami cywilnoprawnymi (umowy o dzieło i zlecenie) tam, gdzie charakter danego zawodu według prawa pasuje do umowy o pracę",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 3
       },
       {
         "question": "Popieram wprowadzenie dobrowolnego ZUSu dla małych przedsiębiorstw",
-        "answers": {
-          "Zdecydowanie się zgadzam": 1,
-          "Częściowo się zgadzam": 0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": -0.5,
-          "Zdecydowanie się nie zgadzam": -1
-        }
+        "political_tendency": "right",
+        "weight": 2
       },
       {
         "question": "Polska powinna realizować plan budowy Centralnego Portu Komunikacyjnego",
-        "answers": {
-          "Zdecydowanie się zgadzam": 1,
-          "Częściowo się zgadzam": 0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": -0.5,
-          "Zdecydowanie się nie zgadzam": -1
-        }
-      },
-      {
-        "question": "Polska powinna wprowadzić kredyt mieszkaniowy 0% poprzez spłacanie przez państwo odsetek",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "right",
+        "weight": 1
       },
       {
         "question": "Płaca minimalna powinna być podwyższona",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 2
       },
       {
         "question": "Należy zastąpić obowiązkowe daniny takie jak ZUS i NFZ jednolitą daniną podatkową",
-        "answers": {
-          "Zdecydowanie się zgadzam": 1,
-          "Częściowo się zgadzam": 0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": -0.5,
-          "Zdecydowanie się nie zgadzam": -1
-        }
+        "political_tendency": "right",
+        "weight": 1
       },
       {
         "question": "Popieram likwidację ZUS na rzecz samodzielnego zapewniania sobie emerytury",
-        "answers": {
-          "Zdecydowanie się zgadzam": 1,
-          "Częściowo się zgadzam": 0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": -0.5,
-          "Zdecydowanie się nie zgadzam": -1
-        }
+        "political_tendency": "right",
+        "weight": 2
       },
       {
         "question": "Większość Spółek Skarbu Państwa powinna zostać sprywatyzowana",
-        "answers": {
-          "Zdecydowanie się zgadzam": 1,
-          "Częściowo się zgadzam": 0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": -0.5,
-          "Zdecydowanie się nie zgadzam": -1
-        }
+        "political_tendency": "right",
+        "weight": 2
       },
       {
         "question": "13 i 14 emerytura są dobrym rozwiązaniem, które powinno być utrzymane",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 2
       },
       {
         "question": "Dług publiczny jest szkodliwy i należy trzymać go w ryzach za pomocą odpowiednich instrumentów prawnych",
-        "answers": {
-          "Zdecydowanie się zgadzam": 1,
-          "Częściowo się zgadzam": 0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": -0.5,
-          "Zdecydowanie się nie zgadzam": -1
-        }
+        "political_tendency": "right",
+        "weight": 1
       }
     ],
     "customary": [
       {
         "question": "Państwo powinno mieć możliwość wykonywania kary śmierci",
-        "answers": {
-          "Zdecydowanie się zgadzam": 1,
-          "Częściowo się zgadzam": 0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": -0.5,
-          "Zdecydowanie się nie zgadzam": -1
-        }
+        "political_tendency": "right",
+        "weight": 3
       },
       {
         "question": "Małżeństwa osób tej samej płci powinny być wprowadzone",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 3
       },
       {
         "question": "Popieram legalizację marihuany w celach rekreacyjnych",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 1
       },
       {
         "question": "Religia nie powinna być nauczana w szkołach",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 3
       },
       {
         "question": "Państwo powinno promować zdrowy i wolny od nałogów styl życia poprzez akcyzę i zakaz sprzedaży niektórych produktów",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 2
       },
       {
         "question": "Polska powinna uczestniczyć w unijnym mechaniźmie relokacji migrantów",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 3
       },
       {
         "question": "Należy ułatwić procedurę prawnej korekty płci",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 3
       },
       {
         "question": "Religia przynosi społeczeństwu więcej szkód niż korzyści i laicyzacja kultury jest pożądana",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 3
       },
       {
         "question": "Pary jednopłciowe powinny mieć możliwość adopcji dzieci",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 3
       },
       {
         "question": "Obywatele powinni mieć łatwiejszy dostęp do broni palnej",
-        "answers": {
-          "Zdecydowanie się zgadzam": 1,
-          "Częściowo się zgadzam": 0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": -0.5,
-          "Zdecydowanie się nie zgadzam": -1
-        }
+        "political_tendency": "right",
+        "weight": 3
       },
       {
         "question": "Tabletka 'dzień po' powinna być dostępna bez recepty",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 2
       },
       {
         "question": "Szczepienia na choroby zakaźne poważnie zagrażające życiu i zdrowiu powinny być obowiązkowe",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 1
       },
       {
         "question": "Popieram ułatwienie dostępu do aborcji w Polsce",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 3
       },
       {
         "question": "Państwo powinno refundować zabieg in vitro",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 3
       },
       {
         "question": "Należy umożliwić dostęp do eutanazji dla cierpiących i nieuleczalnie chorych",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 3
       },
       {
         "question": "Młodzi Polacy powinni przechodzić obowiązkowe przeszkolenie wojskowe",
-        "answers": {
-          "Zdecydowanie się zgadzam": 1,
-          "Częściowo się zgadzam": 0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": -0.5,
-          "Zdecydowanie się nie zgadzam": -1
-        }
+        "political_tendency": "right",
+        "weight": 1
       },
       {
         "question": "Rząd powinien znacznie zwiększyć finansowanie psychiatrii i opieki psychologicznej, szczególnie dzieci i młodzieży",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 2
       },
       {
         "question": "W szkołach powinny odbywać się lekcje edukacji seksualnej",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 2
       },
       {
         "question": "Spożywanie alkoholu w miejscach publicznych nie powinno być karane",
-        "answers": {
-          "Zdecydowanie się zgadzam": 1,
-          "Częściowo się zgadzam": 0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": -0.5,
-          "Zdecydowanie się nie zgadzam": -1
-        }
+        "political_tendency": "right",
+        "weight": 2
       },
       {
         "question": "Uchodźcy z Ukrainy mają w Polsce zbyt wiele przywilejów",
-        "answers": {
-          "Zdecydowanie się zgadzam": 1,
-          "Częściowo się zgadzam": 0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": -0.5,
-          "Zdecydowanie się nie zgadzam": -1
-        }
-      },
-      {
-        "question": "Aktywna polityka prorodzinna powinna być jednym z priorytetów ludzi sprawujących władzę",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "right",
+        "weight": 3
       },
       {
         "question": "Multikulturalizm jest szkodliwy dla społeczeństwa",
-        "answers": {
-          "Zdecydowanie się zgadzam": 1,
-          "Częściowo się zgadzam": 0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": -0.5,
-          "Zdecydowanie się nie zgadzam": -1
-        }
+        "political_tendency": "right",
+        "weight": 3
       },
       {
         "question": "Seksualizacja przestrzeni publicznej posunęła się za daleko",
-        "answers": {
-          "Zdecydowanie się zgadzam": 1,
-          "Częściowo się zgadzam": 0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": -0.5,
-          "Zdecydowanie się nie zgadzam": -1
-        }
+        "political_tendency": "right",
+        "weight": 2
       },
       {
         "question": "Konieczne jest oddzielenie Kościoła od spraw państwowych",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 3
       },
       {
         "question": "Tradycyjne role płciowe, zarówno kobiet jak i mężczyzn, należy poddać w wątpliwość",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 3
       }
     ],
-    "foregin_policy": [
+    "foreign_policy": [
       {
         "question": "Polska powinna popierać możliwie szybkie dołączenie Ukrainy do UE i NATO po wygranej wojnie",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 2
       },
       {
         "question": "Unia Europejska powinna stopniowo zmierzać w kierunku federalizacji",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 3
       },
       {
         "question": "Powinniśmy dążyć do głębszej integracji z Ukrainą i jej odbudowy po zakończeniu wojny",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 2
       },
       {
         "question": "Polska powinna realnie ubiegać się o reparacje wojenne od Niemiec za II Wojnę Światową",
-        "answers": {
-          "Zdecydowanie się zgadzam": 1,
-          "Częściowo się zgadzam": 0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": -0.5,
-          "Zdecydowanie się nie zgadzam": -1
-        }
+        "political_tendency": "right",
+        "weight": 3
       },
       {
         "question": "Unia Europejska ma zbyt duży wpływ na państwa członkowskie",
-        "answers": {
-          "Zdecydowanie się zgadzam": 1,
-          "Częściowo się zgadzam": 0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": -0.5,
-          "Zdecydowanie się nie zgadzam": -1
-        }
+        "political_tendency": "right",
+        "weight": 3
       },
       {
         "question": "Popieram wprowadzenie cła na produkty rolne z Ukrainy",
-        "answers": {
-          "Zdecydowanie się zgadzam": 1,
-          "Częściowo się zgadzam": 0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": -0.5,
-          "Zdecydowanie się nie zgadzam": -1
-        }
+        "political_tendency": "right",
+        "weight": 2
       },
       {
         "question": "Popieram członkostwo Polski w Unii Europejskiej",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
-      },
-      {
-        "question": "Polska powinna udzielić gwarancje bezpieczeństwa Ukrainie po wojnie, wliczając możliwość użycia wojsk do odparcia potencjalnego kolejnego ataku",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
-      },
-      {
-        "question": "Członkostwo w NATO to realne i wystarczające gwarancje bezpieczeństwa dla Polski",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 2
       },
       {
         "question": "Niemcy są jednym z najbliższych i najważniejszych sojuszników Polski na arenie międzynarodowej",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 2
       },
       {
         "question": "USA to ważniejszy partner dla Polski niż UE",
-        "answers": {
-          "Zdecydowanie się zgadzam": 1,
-          "Częściowo się zgadzam": 0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": -0.5,
-          "Zdecydowanie się nie zgadzam": -1
-        }
-      },
-      {
-        "question": "Polska powinna znieść sankcje przeciw Rosji, które szkodzą polskiej gospodarce",
-        "answers": {
-          "Zdecydowanie się zgadzam": 1,
-          "Częściowo się zgadzam": 0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": -0.5,
-          "Zdecydowanie się nie zgadzam": -1
-        }
+        "political_tendency": "right",
+        "weight": 2
       },
       {
         "question": "Polska powinna w jak największym stopniu wspierać militarnie Ukrainę aż do końca wojny",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 2
       },
       {
         "question": "Polska powinna domagać się zaprzestania honorowania sprawców Rzezi Wołyńskiej przez Ukrainę nawet kosztem pogorszenia relacji",
-        "answers": {
-          "Zdecydowanie się zgadzam": 1,
-          "Częściowo się zgadzam": 0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": -0.5,
-          "Zdecydowanie się nie zgadzam": -1
-        }
-      },
-      {
-        "question": "Polska powinna nawiązać bliższe relacje z Chińską Republiką Ludową kosztem pogorszenia relacji z USA",
-        "answers": {
-          "Zdecydowanie się zgadzam": 1,
-          "Częściowo się zgadzam": 0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": -0.5,
-          "Zdecydowanie się nie zgadzam": -1
-        }
+        "political_tendency": "right",
+        "weight": 2
       }
     ],
     "system": [
       {
         "question": "Należy rozdzielić funkcję Prokuratora Generalnego i Ministra Sprawiedliwości",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 2
       },
       {
         "question": "Należy oddać więcej kompetencji samorządom kosztem władzy centralnej",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 2
       },
       {
         "question": "System wyborczy powinien zostać zmieniony na Jednomandatowe Okręgi Wyborcze",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
-      },
-      {
-        "question": "Popieram częstsze stosowanie referendum w procesie stanowienia prawa",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "right",
+        "weight": 1
       },
       {
         "question": "Należy cofnąć reformy prawa karnego wprowadzone przez aktualny rząd",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 2
       },
       {
         "question": "Sędziowie powinni być powoływani w sposób niezależny od polityków będących aktualnie u władzy",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
-      },
-      {
-        "question": "Trybunał Konstytucyjny w aktualnym składzie został wyznaczony w sposób niezgodny z prawem",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 3
       },
       {
         "question": "Należy znieść zakaz obrazy uczuć religijnych",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 3
       },
       {
         "question": "Próg wyborczy powinien zostać zmniejszony lub zlikwidowany",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 2
       },
       {
         "question": "Mowa nienawiści powinna być karana",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 2
       },
       {
         "question": "Popieram zwiększenie uprawnień prezydenta w kierunku modelu prezydenckiego",
-        "answers": {
-          "Zdecydowanie się zgadzam": 1,
-          "Częściowo się zgadzam": 0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": -0.5,
-          "Zdecydowanie się nie zgadzam": -1
-        }
+        "political_tendency": "right",
+        "weight": 3
       },
       {
         "question": "Służba wojskowa powinna być obowiązkowa dla każdego dorosłego obywatela",
-        "answers": {
-          "Zdecydowanie się zgadzam": 1,
-          "Częściowo się zgadzam": 0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": -0.5,
-          "Zdecydowanie się nie zgadzam": -1
-        }
+        "political_tendency": "right",
+        "weight": 1
       },
       {
         "question": "Wszystkie publiczne szkoły w Polsce powinny mieć tę samą podstawę programową",
-        "answers": {
-          "Zdecydowanie się zgadzam": 1,
-          "Częściowo się zgadzam": 0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": -0.5,
-          "Zdecydowanie się nie zgadzam": -1
-        }
-      },
-      {
-        "question": "Polskie szkoły wyższe powinny być w większym stopniu autonomiczne niż obecnie",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
-      },
-      {
-        "question": "Powinna powstać komisja ds. badania wpływów rosyjskich w formie zaproponowanej przez Prawo i Sprawiedliwość",
-        "answers": {
-          "Zdecydowanie się zgadzam": 1,
-          "Częściowo się zgadzam": 0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": -0.5,
-          "Zdecydowanie się nie zgadzam": -1
-        }
+        "political_tendency": "left",
+        "weight": 2
       },
       {
         "question": "Partie polityczne powinny być finansowane z budżetu państwa",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 2
       }
     ],
     "climate_policy": [
       {
-        "question": "W Polsce powinny powstać elektrownie atomowe",
-        "answers": {
-          "Zdecydowanie się zgadzam": 1,
-          "Częściowo się zgadzam": 0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": -0.5,
-          "Zdecydowanie się nie zgadzam": -1
-        }
-      },
-      {
         "question": "Oczekuje od rządu stworzenia i przeprowadzenia planu na najszybsze, jak to tylko możliwe, odejście od produkcji energii z węgla przez Polskę",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 3
       },
       {
         "question": "Transport samochodowy powinien być stopniowo ograniczany i zastępowany transportem publicznym",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 2
       },
       {
         "question": "Sprzedaż nowych samochodów spalinowych powinna być w Polsce zakazana od 2035 zgodnie z polityką UE",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 3
       },
       {
         "question": "W Polsce powinno się powołać nowe oraz poszerzyć istniejące parki narodowe",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 2
       },
       {
         "question": "Polska powinna znacząco przyspieszyć rozwój OZE",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 3
       },
       {
         "question": "Elektrownia Turów powinna zostać zamknięta w przeciągu najbliższej dekady",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 3
       },
       {
         "question": "Państwo zbytnio dominuje w sektorze produkcji i sprzedaży energii elektrycznej, paliwa oraz ciepła",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 2
       },
       {
         "question": "Sejm powinien znacząco ułatwić rozwój energetyki wiatrowej na lądzie i zmniejszyć minimalną odległość od zabudowań dla wiatraków",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 3
       },
       {
         "question": "UE i Polska powinny promować redukcję ilości spożywanego mięsa",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 2
       },
       {
         "question": "UE powinna ograniczyć swoją politykę klimatyczną, jest ona szkodliwa dla gospodarki i nie zmienia nic w skali świata",
-        "answers": {
-          "Zdecydowanie się zgadzam": 1,
-          "Częściowo się zgadzam": 0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": -0.5,
-          "Zdecydowanie się nie zgadzam": -1
-        }
+        "political_tendency": "right",
+        "weight": 3
       },
       {
         "question": "Niepokoi mnie skala suszy i oczekuje od rządu podjęcia działań na rzecz zwiększania naturalnej retencji wody",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 1
       },
       {
         "question": "Samorządy nie powinny ulegać presji ekologów w sprawie ruchu samochodowego w miastach, wprowadzane ograniczenia są absurdalne",
-        "answers": {
-          "Zdecydowanie się zgadzam": 1,
-          "Częściowo się zgadzam": 0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": -0.5,
-          "Zdecydowanie się nie zgadzam": -1
-        }
+        "political_tendency": "right",
+        "weight": 3
       },
       {
         "question": "W dobie kryzysu energetycznego powinniśmy zatrzymać wdrażanie polityk klimatycznych lub z nich się wycofać",
-        "answers": {
-          "Zdecydowanie się zgadzam": 1,
-          "Częściowo się zgadzam": 0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": -0.5,
-          "Zdecydowanie się nie zgadzam": -1
-        }
+        "political_tendency": "right",
+        "weight": 2
       },
       {
         "question": "Rząd zawiódł w sprawie zeszłorocznej katastrofy na Odrze i powinno się podjąć w tej sprawie o wiele bardziej zdecydowane działania",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 2
       },
       {
         "question": "Państwo powinno zaplanować i wdrożyć plan wsparcia dla górników i pracowników innych sektorów dotkniętych transformacją klimatyczną",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 2
       },
       {
         "question": "Polskie rzeki są za mało uregulowane i państwo powinno dążyć do zmiany tej sytuacji, nawet kosztem przyrody",
-        "answers": {
-          "Zdecydowanie się zgadzam": 1,
-          "Częściowo się zgadzam": 0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": -0.5,
-          "Zdecydowanie się nie zgadzam": -1
-        }
+        "political_tendency": "right",
+        "weight": 2
       },
       {
         "question": "Popieram pomysły UE na rzecz bioróżnorodności, takie jak obowiązkowe odnawianie i ochrona przyrody, nawet jeśli wiąże się to z ograniczeniem decyzyjności Polski w tym zakresie",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 3
       },
       {
         "question": "Niepokoi mnie skala wycinki lasów w Polsce, oczekuję jej ograniczenia",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 2
       },
       {
         "question": "Oburza mnie wysokość zysków koncernów energetycznych w dobie kryzysu i uważam, że państwo powinno uregulować ten problem",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 3
       },
       {
         "question": "Polska powinna w większym stopniu dofinansowywać i wspierać rozwój fotowoltaiki",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 3
       },
       {
         "question": "Popieram Europejski System Handlu Emisjami jako skuteczne narzędzie ograniczania emisyjności",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 3
       },
       {
         "question": "Popieram większą decentralizację produkcji energii i umożliwienie obywatelom oraz samorządom produkcji energii na własne potrzeby",
-        "answers": {
-          "Zdecydowanie się zgadzam": -1,
-          "Częściowo się zgadzam": -0.5,
-          "Nie mam zdania": 0,
-          "Częściowo się nie zgadzam": 0.5,
-          "Zdecydowanie się nie zgadzam": 1
-        }
+        "political_tendency": "left",
+        "weight": 3
       }
     ]
   }
