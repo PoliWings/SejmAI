@@ -3,12 +3,14 @@ import os
 import json
 import re
 
+files_to_ignore = ["agenda.json", "0.json"]
+
 def load_speeches(input_folder: str):
     speeches = []
     for dir in os.listdir(input_folder):
         if os.path.isdir(os.path.join(input_folder, dir)):
             speeches += load_speeches(os.path.join(input_folder, dir))
-        elif dir != "agenda.json":
+        elif dir not in files_to_ignore:
             with open(os.path.join(input_folder, dir), "r", encoding="UTF-8") as file:
                 json_data = json.load(file)
                 speeches.append(json_data)
