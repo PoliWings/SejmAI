@@ -7,11 +7,19 @@ files_to_ignore = ["agenda.json", "0.json"]
 
 def load_speeches(input_folder: str):
     speeches = []
-    for dir in os.listdir(input_folder):
-        if os.path.isdir(os.path.join(input_folder, dir)):
-            speeches += load_speeches(os.path.join(input_folder, dir))
+
+    subdirs = sorted(os.listdir(input_folder))
+    # skip first day of term because it consists of just oaths
+    if (input_folder.endswith("/1") or input_folder.endswith("\\1")) and subdirs:
+        print(f"Skipping {subdirs[0]}")
+        subdirs = subdirs[1:]
+
+    for dir in subdirs:
+        full_path = os.path.join(input_folder, dir)
+        if os.path.isdir(full_path):
+            speeches += load_speeches(full_path)
         elif dir not in files_to_ignore:
-            with open(os.path.join(input_folder, dir), "r", encoding="UTF-8") as file:
+            with open(full_path, "r", encoding="UTF-8") as file:
                 json_data = json.load(file)
                 speeches.append(json_data)
     return speeches
