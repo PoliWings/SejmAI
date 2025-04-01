@@ -73,11 +73,18 @@ def save_as_dpo(speeches: pd.DataFrame, output_folder: str):
             print(f"Saving {file.name} with {len(json_data)} items.")
 
 def parse_text(speeches: pd.DataFrame):
-    def parse_row(row):
-        text = re.sub(r"\([^)]*\)", "", row["text"])
+    def remove_brackets(text):
+        text = re.sub(r"\([^)]*\)", "", text)
         text = re.sub(r"\s+", " ", text)
         return text
-    return speeches.apply(parse_row, axis=1)
+    def remove_greetings(text):
+        match = re.search(r"^(.*?!(?=[^!]*\.)).*", text, re.DOTALL)
+        if match:
+            to_delete = match.group(1)
+            if len(to_delete) <= len(text) / 10:
+                return text[len(to_delete):].strip()
+        return text
+    return speeches["text"].apply(remove_brackets).apply(remove_greetings)
 
 if __name__ == "__main__":
     input_folder = "../scraper/output/speeches"
