@@ -43,9 +43,17 @@
   }
 ```
 
-### Sum.py
+### create_prompts.py
 
-Simple script to calculate the number of questions and their weights. Run using:
+Script to combine questions from questions.json with answers and turn them into a prompt. Run using:
+
+```
+python create_prompts.py
+```
+
+### sum.py
+
+Simple auxiliary script to calculate the number of questions and their weights. Run using:
 
 ```
 python sum.py
