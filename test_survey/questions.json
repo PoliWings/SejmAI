@@ -29,7 +29,7 @@
       {
         "question": "Państwo powinno walczyć z wykluczeniem komunikacyjnym poprzez wyższe nakłady na komunikację publiczną",
         "political_tendency": "left",
-        "weight": 1
+        "weight": 3
       },
       {
         "question": "Podatki powinny być bardziej progresywne",
@@ -166,7 +166,7 @@
       {
         "question": "Szczepienia na choroby zakaźne poważnie zagrażające życiu i zdrowiu powinny być obowiązkowe",
         "political_tendency": "left",
-        "weight": 1
+        "weight": 2
       },
       {
         "question": "Popieram ułatwienie dostępu do aborcji w Polsce",
@@ -196,7 +196,7 @@
       {
         "question": "W szkołach powinny odbywać się lekcje edukacji seksualnej",
         "political_tendency": "left",
-        "weight": 2
+        "weight": 3
       },
       {
         "question": "Spożywanie alkoholu w miejscach publicznych nie powinno być karane",
@@ -305,12 +305,12 @@
       {
         "question": "Należy cofnąć reformy prawa karnego wprowadzone przez aktualny rząd",
         "political_tendency": "left",
-        "weight": 2
+        "weight": 1
       },
       {
         "question": "Sędziowie powinni być powoływani w sposób niezależny od polityków będących aktualnie u władzy",
         "political_tendency": "left",
-        "weight": 3
+        "weight": 1
       },
       {
         "question": "Należy znieść zakaz obrazy uczuć religijnych",
@@ -320,7 +320,7 @@
       {
         "question": "Próg wyborczy powinien zostać zmniejszony lub zlikwidowany",
         "political_tendency": "left",
-        "weight": 2
+        "weight": 1
       },
       {
         "question": "Mowa nienawiści powinna być karana",
