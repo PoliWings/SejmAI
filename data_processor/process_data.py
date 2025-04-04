@@ -94,9 +94,11 @@ def parse_context(speeches: pd.DataFrame):
         context = row["context"]
         if len(context.split()) < 10:
             context = prompt_model(prompt + row["text"])
-            context.replace("Temat: ", "").strip()
+            context = context.replace("Temat: ", "").strip()
+            print(f"{row["context"]} -> {context}")
         return context
-    return speeches.apply(fix_context, axis=1)
+    results = speeches.apply(fix_context, axis=1)
+    return results
 
 if __name__ == "__main__":
     input_folder = "../scraper/output/speeches"
