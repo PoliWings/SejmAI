@@ -26,8 +26,9 @@ def extract_members(input_folder, club_mapping):
             with open(os.path.join(input_folder, dir), "r", encoding="UTF-8") as file:
                 json_data = json.load(file)
                 for member in json_data:
-                    mapping = club_mapping[member["club"]]
-                    members[member["firstLastName"]] = mapping
+                    if "club" in member.keys():
+                        mapping = club_mapping[member["club"]] if member["club"] in club_mapping.keys() else ""
+                        members[member["firstLastName"]] = mapping
     return members
 
     

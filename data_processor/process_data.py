@@ -4,10 +4,12 @@ import json
 import re
 from llm_connection import prompt_model
 import sys
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 files_to_ignore = ["agenda.json", "0.json"]
 
 def load_speeches(input_folder: str):
+    print(input_folder)
     speeches = []
 
     subdirs = sorted(os.listdir(input_folder))
@@ -15,15 +17,21 @@ def load_speeches(input_folder: str):
     if (input_folder.endswith("/1") or input_folder.endswith("\\1")) and subdirs:
         print(f"Skipping {subdirs[0]}")
         subdirs = subdirs[1:]
+    
+    def load_file(file_path):
+        with open(file_path, "r", encoding="UTF-8") as file:
+            return json.load(file)
 
-    for dir in subdirs:
-        full_path = os.path.join(input_folder, dir)
-        if os.path.isdir(full_path):
-            speeches += load_speeches(full_path)
-        elif dir not in files_to_ignore:
-            with open(full_path, "r", encoding="UTF-8") as file:
-                json_data = json.load(file)
-                speeches.append(json_data)
+    futures = []
+    with ThreadPoolExecutor() as executor:
+        for dir in subdirs:
+            full_path = os.path.join(input_folder, dir)
+            if os.path.isdir(full_path):
+                speeches += load_speeches(full_path)
+            elif dir not in files_to_ignore:
+                futures.append(executor.submit(load_file, full_path))
+        for future in as_completed(futures):
+            speeches.append(future.result())
     return speeches
 
 def add_alignment(speeches: pd.DataFrame, member_mapping_file: str):
@@ -92,7 +100,7 @@ def parse_context(speeches: pd.DataFrame):
     prompt = "Podaj temat tej wypowiedzi w maksymalnie 10 słowach, w formacie 'Temat: '. Wypowiedź: "
     def fix_context(row):
         context = row["context"]
-        if len(context.split()) < 10:
+        if len(context.split()) <= 5:
             context = prompt_model(prompt + row["text"])
             context = context.replace("Temat: ", "").strip()
             print(f"{row["context"]} -> {context}")

@@ -2,3 +2,4 @@ env
 output
 *.json
 .env
+__pycache__
