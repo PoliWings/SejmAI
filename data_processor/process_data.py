@@ -2,6 +2,8 @@ import pandas as pd
 import os
 import json
 import re
+from llm_connection import prompt_model
+import sys
 
 files_to_ignore = ["agenda.json", "0.json"]
 
@@ -86,6 +88,16 @@ def parse_text(speeches: pd.DataFrame):
         return text
     return speeches["text"].apply(remove_brackets).apply(remove_greetings)
 
+def parse_context(speeches: pd.DataFrame):
+    prompt = "Podaj temat tej wypowiedzi w maksymalnie 10 słowach, w formacie 'Temat: '. Wypowiedź: "
+    def fix_context(row):
+        context = row["context"]
+        if len(context.split()) < 10:
+            context = prompt_model(prompt + row["text"])
+            context.replace("Temat: ", "").strip()
+        return context
+    return speeches.apply(fix_context, axis=1)
+
 if __name__ == "__main__":
     input_folder = "../scraper/output/speeches"
     member_mapping_file = "member_mapping.json"
@@ -103,8 +115,15 @@ if __name__ == "__main__":
     speeches["alignment"] = add_alignment(speeches, member_mapping_file)
     print(speeches.alignment.value_counts())
 
+    print("\nRemoving speeches without alignment")
+    speeches.drop(speeches[speeches["alignment"] == ""].index, inplace=True)
+
     print("\nParsing speeches")
     speeches["text"] = parse_text(speeches)
+
+    if "--gen_context" in sys.argv:
+        print("\nGenerating context for speeches without it")
+        speeches["context"] = parse_context(speeches)
     
     # grouped = speeches.groupby(speeches["alignment"])
     # print(grouped.groups.keys())
