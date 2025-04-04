@@ -1,464 +1,464 @@
 {
-    "questions": {
-        "economy": [
-            {
-                "question": "Jestem przeciw wprowadzeniu waluty Euro w Polsce",
-                "political_tendency": "right",
-                "weight": 2
-            },
-            {
-                "question": "Wiek emerytalny powinien zostać obniżony",
-                "political_tendency": "left",
-                "weight": 1
-            },
-            {
-                "question": "TVP powinna pozostać pod kontrolą państwa",
-                "political_tendency": "left",
-                "weight": 2
-            },
-            {
-                "question": "Należy wydłużyć czas pracy",
-                "political_tendency": "right",
-                "weight": 2
-            },
-            {
-                "question": "W Polsce nie należy wprowadzać programu masowej budowy tanich mieszkań przez instytucje państwowe",
-                "political_tendency": "right",
-                "weight": 3
-            },
-            {
-                "question": "Państwo nie powinno walczyć z wykluczeniem komunikacyjnym poprzez wyższe nakłady na komunikację publiczną",
-                "political_tendency": "right",
-                "weight": 3
-            },
-            {
-                "question": "Podatki powinny być bardziej regresywne",
-                "political_tendency": "right",
-                "weight": 3
-            },
-            {
-                "question": "Program 500+ powinien być rozwijany",
-                "political_tendency": "left",
-                "weight": 3
-            },
-            {
-                "question": "Podatki dla wszystkich powinny pozostać na aktualnym poziomie",
-                "political_tendency": "left",
-                "weight": 2
-            },
-            {
-                "question": "Kwota wolna od podatku powinna zostać znacząco obniżona",
-                "political_tendency": "left",
-                "weight": 1
-            },
-            {
-                "question": "Podatek cukrowy powinien zostać podniesiony",
-                "political_tendency": "left",
-                "weight": 1
-            },
-            {
-                "question": "Płaca minimalna powinna być podnoszona i gwarantowana przez państwo",
-                "political_tendency": "right",
-                "weight": 3
-            },
-            {
-                "question": "Pracodawcy i pracownicy powinni mieć pełną swobodę w wyborze rodzaju umowy, bez ingerencji państwa",
-                "political_tendency": "right",
-                "weight": 3
-            },
-            {
-                "question": "Jestem przeciw wprowadzeniu dobrowolnego ZUSu dla małych przedsiębiorstw",
-                "political_tendency": "left",
-                "weight": 2
-            },
-            {
-                "question": "Polska nie powinna realizować plan budowy Centralnego Portu Komunikacyjnego",
-                "political_tendency": "left",
-                "weight": 1
-            },
-            {
-                "question": "Płaca minimalna nie powinna być podwyższana lub powinna zostać zniesiona",
-                "political_tendency": "right",
-                "weight": 2
-            },
-            {
-                "question": "System składek na ZUS i NFZ powinien pozostać w obecnej formie lub zostać rozbudowany",
-                "political_tendency": "left",
-                "weight": 1
-            },
-            {
-                "question": "Nie popieram likwidacji ZUS na rzecz samodzielnego zapewniania sobie emerytury",
-                "political_tendency": "left",
-                "weight": 2
-            },
-            {
-                "question": "Spółki Skarbu Państwa powinny pozostać własnością publiczną i być zarządzane przez państwo",
-                "political_tendency": "left",
-                "weight": 2
-            },
-            {
-                "question": "13 i 14 emerytura powinny zostać zlikwidowane",
-                "political_tendency": "right",
-                "weight": 2
-            },
-            {
-                "question": "Dług publiczny jest narzędziem rozwoju i państwo powinno go wykorzystywać do finansowania inwestycji oraz polityki społecznej",
-                "political_tendency": "right",
-                "weight": 1
-            }
-        ],
-        "customary": [
-            {
-                "question": "Kara śmierci powinna być całkowicie zakazana jako nieludzka i nieskuteczna",
-                "political_tendency": "right",
-                "weight": 3
-            },
-            {
-                "question": "Małżeństwa osób tej samej płci powinny być zakazane",
-                "political_tendency": "right",
-                "weight": 3
-            },
-            {
-                "question": "Marihuana powinna pozostać nielegalna, nawet w celach rekreacyjnych",
-                "political_tendency": "right",
-                "weight": 1
-            },
-            {
-                "question": "Religia powinna być obowiązkowo nauczana w szkołach",
-                "political_tendency": "right",
-                "weight": 3
-            },
-            {
-                "question": "Państwo powinno zabronić sprzedaży produktów szkodliwych dla zdrowia i nie promować zdrowego stylu życia",
-                "political_tendency": "right",
-                "weight": 2
-            },
-            {
-                "question": "Polska powinna unikać uczestnictwa w unijnym mechanizmie relokacji migrantów",
-                "political_tendency": "right",
-                "weight": 3
-            },
-            {
-                "question": "Procedura prawnej korekty płci powinna być utrudniona lub ograniczona",
-                "political_tendency": "right",
-                "weight": 3
-            },
-            {
-                "question": "Religia przynosi społeczeństwu korzyści i laicyzacja kultury jest niepożądana",
-                "political_tendency": "right",
-                "weight": 3
-            },
-            {
-                "question": "Pary jednopłciowe nie powinny mieć możliwości adopcji dzieci",
-                "political_tendency": "right",
-                "weight": 3
-            },
-            {
-                "question": "Obywatele nie powinni mieć łatwego dostępu do broni palnej",
-                "political_tendency": "left",
-                "weight": 3
-            },
-            {
-                "question": "Tabletka 'dzień po' powinna być dostępna tylko na receptę",
-                "political_tendency": "right",
-                "weight": 2
-            },
-            {
-                "question": "Szczepienia na choroby zakaźne powinny być dobrowolne, a nie obowiązkowe",
-                "political_tendency": "right",
-                "weight": 2
-            },
-            {
-                "question": "Aborcja powinna być znacznie bardziej ograniczona w Polsce",
-                "political_tendency": "right",
-                "weight": 3
-            },
-            {
-                "question": "Państwo nie powinno refundować zabiegu in vitro",
-                "political_tendency": "right",
-                "weight": 3
-            },
-            {
-                "question": "Eutanazja powinna być zakazana, nawet dla cierpiących i nieuleczalnie chorych",
-                "political_tendency": "right",
-                "weight": 3
-            },
-            {
-                "question": "Młodzi Polacy nie powinni przechodzić obowiązkowego przeszkolenia wojskowego",
-                "political_tendency": "left",
-                "weight": 1
-            },
-            {
-                "question": "Rząd nie powinien zwiększać finansowania psychiatrii i opieki psychologicznej, szczególnie dzieci i młodzieży",
-                "political_tendency": "right",
-                "weight": 2
-            },
-            {
-                "question": "W szkołach nie powinny odbywać się lekcje edukacji seksualnej",
-                "political_tendency": "right",
-                "weight": 3
-            },
-            {
-                "question": "Spożywanie alkoholu w miejscach publicznych powinno być karane",
-                "political_tendency": "left",
-                "weight": 2
-            },
-            {
-                "question": "Uchodźcy z Ukrainy powinni mieć ograniczony dostęp do przywilejów w Polsce",
-                "political_tendency": "left",
-                "weight": 3
-            },
-            {
-                "question": "Multikulturalizm jest korzystny dla społeczeństwa",
-                "political_tendency": "left",
-                "weight": 3
-            },
-            {
-                "question": "Seksualizacja przestrzeni publicznej nie posunęła się za daleko",
-                "political_tendency": "left",
-                "weight": 2
-            },
-            {
-                "question": "Kościół powinien mieć wpływ na sprawy państwowe",
-                "political_tendency": "right",
-                "weight": 3
-            },
-            {
-                "question": "Tradycyjne role płciowe, zarówno kobiet, jak i mężczyzn, powinny być zachowane",
-                "political_tendency": "right",
-                "weight": 3
-            }
-        ],
-        "foreign_policy": [
-            {
-                "question": "Polska powinna opóźnić dołączenie Ukrainy do UE i NATO, nawet po wygranej wojnie",
-                "political_tendency": "right",
-                "weight": 2
-            },
-            {
-                "question": "Unia Europejska powinna pozostać organizacją międzyrządową, a nie zmierzać w kierunku federalizacji",
-                "political_tendency": "right",
-                "weight": 3
-            },
-            {
-                "question": "Polska powinna ograniczyć integrację z Ukrainą i nie angażować się w jej odbudowę po zakończeniu wojny",
-                "political_tendency": "right",
-                "weight": 2
-            },
-            {
-                "question": "Polska nie powinna ubiegać się o reparacje wojenne od Niemiec za II Wojnę Światową",
-                "political_tendency": "left",
-                "weight": 3
-            },
-            {
-                "question": "Unia Europejska ma odpowiednią wielkość wpływu na państwa członkowskie i nie należy go ograniczać",
-                "political_tendency": "left",
-                "weight": 3
-            },
-            {
-                "question": "Nie popieram wprowadzenia cła na produkty rolne z Ukrainy",
-                "political_tendency": "left",
-                "weight": 2
-            },
-            {
-                "question": "Polska powinna rozważyć wystąpienie z Unii Europejskiej",
-                "political_tendency": "right",
-                "weight": 2
-            },
-            {
-                "question": "Niemcy są jednym z najbliższych partnerów Polski, ale nie najważniejszym sojusznikiem",
-                "political_tendency": "right",
-                "weight": 2
-            },
-            {
-                "question": "USA nie powinny być ważniejszym partnerem dla Polski niż UE",
-                "political_tendency": "left",
-                "weight": 2
-            },
-            {
-                "question": "Polska powinna ograniczyć swoje wsparcie militarne dla Ukrainy",
-                "political_tendency": "right",
-                "weight": 2
-            },
-            {
-                "question": "Polska powinna dbać o dobre relacje z Ukrainą,zapomnieć o Rzezi Wołyńskiej i nie domagać się przeprosin",
-                "political_tendency": "left",
-                "weight": 2
-            }
-        ],
-        "system": [
-            {
-                "question": "Funkcja Prokuratora Generalnego i Ministra Sprawiedliwości powinna pozostać połączona",
-                "political_tendency": "right",
-                "weight": 2
-            },
-            {
-                "question": "Władza centralna powinna mieć więcej kompetencji kosztem samorządów",
-                "political_tendency": "right",
-                "weight": 2
-            },
-            {
-                "question": "System wyborczy powinien pozostać proporcjonalny, a Jednomandatowe Okręgi Wyborcze są niepożądane",
-                "political_tendency": "left",
-                "weight": 1
-            },
-            {
-                "question": "Reformy prawa karnego wprowadzone przez aktualny rząd powinny być utrzymane",
-                "political_tendency": "right",
-                "weight": 1
-            },
-            {
-                "question": "Sędziowie powinni być powoływani przez polityków będących aktualnie u władzy, aby zapewnić spójność z programem rządu",
-                "political_tendency": "right",
-                "weight": 1
-            },
-            {
-                "question": "Zakaz obrazy uczuć religijnych powinien zostać utrzymany w celu ochrony wartości religijnych",
-                "political_tendency": "right",
-                "weight": 3
-            },
-            {
-                "question": "Próg wyborczy powinien zostać zwiększony lub pozostać na obecnym poziomie, aby zapewnić stabilność polityczną",
-                "political_tendency": "right",
-                "weight": 1
-            },
-            {
-                "question": "Mowa nienawiści powinna być wolna od kar, aby zapewnić pełną wolność słowa",
-                "political_tendency": "right",
-                "weight": 2
-            },
-            {
-                "question": "Prezydent powinien mieć ograniczone uprawnienia, aby uniknąć koncentracji władzy",
-                "political_tendency": "left",
-                "weight": 3
-            },
-            {
-                "question": "Służba wojskowa nie powinna być obowiązkowa dla wszystkich obywateli, a tylko dla ochotników",
-                "political_tendency": "left",
-                "weight": 1
-            },
-            {
-                "question": "Każda szkoła powinna mieć swobodę ustalania własnej podstawy programowej, aby dostosować edukację do lokalnych potrzeb",
-                "political_tendency": "right",
-                "weight": 2
-            },
-            {
-                "question": "Partie polityczne nie powinny być finansowane z budżetu państwa, aby uniknąć nadmiernego wpływu państwa na politykę",
-                "political_tendency": "right",
-                "weight": 2
-            }
-        ],
-        "climate_policy": [
-            {
-                "question": "Rząd powinien kontynuować produkcję energii z węgla i opóźnić przejście na inne źródła energii",
-                "political_tendency": "right",
-                "weight": 3
-            },
-            {
-                "question": "Transport samochodowy powinien być wspierany i rozwijany, a inwestycje w transport publiczny powinny być ograniczone",
-                "political_tendency": "right",
-                "weight": 2
-            },
-            {
-                "question": "Sprzedaż nowych samochodów spalinowych powinna być wspierana, a zakaz wprowadzenia ich od 2035 roku jest nieuzasadniony",
-                "political_tendency": "right",
-                "weight": 3
-            },
-            {
-                "question": "W Polsce nie powinno się powoływać nowych parków narodowych, a obecne należy ograniczyć",
-                "political_tendency": "right",
-                "weight": 2
-            },
-            {
-                "question": "Polska powinna opóźnić rozwój OZE na rzecz dalszej inwestycji w tradycyjne źródła energii",
-                "political_tendency": "right",
-                "weight": 3
-            },
-            {
-                "question": "Elektrownia Turów powinna pozostać otwarta, aby zapewnić stabilność energetyczną kraju",
-                "political_tendency": "right",
-                "weight": 3
-            },
-            {
-                "question": "Państwo powinno zwiększyć swoje zaangażowanie w sektorze produkcji i sprzedaży energii elektrycznej, paliwa oraz ciepła, aby zapewnić większą kontrolę nad rynkiem",
-                "political_tendency": "right",
-                "weight": 2
-            },
-            {
-                "question": "Sejm powinien utrzymać obecne ograniczenia w rozwoju energetyki wiatrowej i nie zmieniać minimalnej odległości od zabudowań",
-                "political_tendency": "right",
-                "weight": 3
-            },
-            {
-                "question": "UE i Polska powinny promować wzrost spożycia mięsa w celu wspierania przemysłu rolnego",
-                "political_tendency": "right",
-                "weight": 2
-            },
-            {
-                "question": "UE powinna wzmocnić swoją politykę klimatyczną, aby chronić gospodarki państw członkowskich przed zmianami klimatycznymi",
-                "political_tendency": "left",
-                "weight": 3
-            },
-            {
-                "question": "Skala suszy nie jest powodem do paniki, a działania na rzecz zwiększania naturalnej retencji wody mogą być przesadzone, rząd powinien skupić się na bardziej pilnych kwestiach",
-                "political_tendency": "right",
-                "weight": 1
-            },
-            {
-                "question": "Samorządy powinny ulegać presji ekologów w sprawie ograniczeń samochodowych w miastach w celu poprawy jakości powietrza",
-                "political_tendency": "left",
-                "weight": 3
-            },
-            {
-                "question": "W dobie kryzysu energetycznego powinniśmy kontynuować wdrażanie polityk klimatycznych, aby uniezależnić się od źródeł węgla",
-                "political_tendency": "left",
-                "weight": 2
-            },
-            {
-                "question": "Rząd działał wystarczająco szybko i skutecznie w sprawie zeszłorocznej katastrofy na Odrze, dalsze działania mogą być przesadzone i niepotrzebnie obciążać budżet",
-                "political_tendency": "right",
-                "weight": 2
-            },
-            {
-                "question": "Państwo nie powinno wdrażać planu wsparcia dla górników, którzy powinni znaleźć inne zatrudnienie w ramach transformacji energetycznej",
-                "political_tendency": "right",
-                "weight": 2
-            },
-            {
-                "question": "Polskie rzeki są odpowiednio uregulowane i nie powinno się wprowadzać zmian, które mogłyby zaszkodzić gospodarce wodnej",
-                "political_tendency": "right",
-                "weight": 2
-            },
-            {
-                "question": "Nie popieram pomysłów UE na rzecz bioróżnorodności, które ograniczają decyzyjność Polski; nasz kraj powinien mieć pełną swobodę w zarządzaniu swoją przyrodą bez ingerencji z zewnątrz",
-                "political_tendency": "right",
-                "weight": 3
-            },
-            {
-                "question": "Wycinka lasów w Polsce jest niezbędna dla rozwoju gospodarczego i nie powinna być nadmiernie ograniczana, należy dążyć do równowagi między ochroną przyrody a potrzebami ekonomicznymi",
-                "political_tendency": "right",
-                "weight": 2
-            },
-            {
-                "question": "Nie uważam, aby zyski koncernów energetycznych były problemem, rynki same regulują te kwestie",
-                "political_tendency": "right",
-                "weight": 3
-            },
-            {
-                "question": "Polska nie powinna inwestować więcej w fotowoltaikę, a zamiast tego skoncentrować się na energii jądrowej i węglu",
-                "political_tendency": "right",
-                "weight": 3
-            },
-            {
-                "question": "Nie popieram Europejskiego Systemu Handlu Emisjami, uważam, że to rozwiązanie obciąża gospodarki państw członkowskich i nie prowadzi do realnych zmian w walce ze zmianami klimatycznymi",
-                "political_tendency": "right",
-                "weight": 3
-            },
-            {
-                "question": "Popieram centralizację produkcji energii, aby zachować kontrolę nad sektorami krytycznymi w kraju",
-                "political_tendency": "right",
-                "weight": 3
-            }
-        ]
-    }
+  "questions": {
+    "economy": [
+      {
+        "question": "Jestem przeciw wprowadzeniu waluty Euro w Polsce",
+        "political_tendency": "right",
+        "weight": 2
+      },
+      {
+        "question": "Wiek emerytalny powinien zostać utrzymany na obecnym poziomie",
+        "political_tendency": "left",
+        "weight": 1
+      },
+      {
+        "question": "TVP powinna pozostać pod kontrolą państwa",
+        "political_tendency": "left",
+        "weight": 2
+      },
+      {
+        "question": "Nie należy skracać czasu pracy",
+        "political_tendency": "right",
+        "weight": 2
+      },
+      {
+        "question": "W Polsce nie należy wprowadzać programu masowej budowy tanich mieszkań przez instytucje państwowe",
+        "political_tendency": "right",
+        "weight": 3
+      },
+      {
+        "question": "Państwo nie powinno walczyć z wykluczeniem komunikacyjnym poprzez wyższe nakłady na komunikację publiczną",
+        "political_tendency": "right",
+        "weight": 3
+      },
+      {
+        "question": "Nie popieram wprowadzenia podatków progresywnych",
+        "political_tendency": "right",
+        "weight": 3
+      },
+      {
+        "question": "Program 500+ powinien zostać utrzymany",
+        "political_tendency": "left",
+        "weight": 3
+      },
+      {
+        "question": "Podatki powinny zostać obniżone dla klas średniej i niższej, natomiast podwyższone dla wyższej",
+        "political_tendency": "left",
+        "weight": 2
+      },
+      {
+        "question": "Kwota wolna od podatku powinna pozostać na obecnym poziomie.",
+        "political_tendency": "left",
+        "weight": 1
+      },
+      {
+        "question": "Podatek cukrowy powinien zostać podtrzymany",
+        "political_tendency": "left",
+        "weight": 1
+      },
+      {
+        "question": "Płaca minimalna powinna istnieć",
+        "political_tendency": "left",
+        "weight": 3
+      },
+      {
+        "question": "Pracodawcy i pracownicy powinni mieć pełną swobodę w wyborze rodzaju umowy, bez ingerencji państwa",
+        "political_tendency": "right",
+        "weight": 3
+      },
+      {
+        "question": "Jestem przeciw wprowadzeniu dobrowolnego ZUSu dla małych przedsiębiorstw",
+        "political_tendency": "left",
+        "weight": 2
+      },
+      {
+        "question": "Plan budowy Centralnego Portu Komunikacyjnego powinien zostać porzucony",
+        "political_tendency": "left",
+        "weight": 1
+      },
+      {
+        "question": "Płaca minimalna nie powinna być podwyższana lub powinna zostać zniesiona",
+        "political_tendency": "right",
+        "weight": 2
+      },
+      {
+        "question": "System składek na ZUS i NFZ powinien pozostać w obecnej formie lub zostać rozbudowany",
+        "political_tendency": "left",
+        "weight": 1
+      },
+      {
+        "question": "Nie popieram likwidacji ZUS na rzecz samodzielnego zapewniania sobie emerytury",
+        "political_tendency": "left",
+        "weight": 2
+      },
+      {
+        "question": "Spółki Skarbu Państwa powinny pozostać własnością publiczną i być zarządzane przez państwo",
+        "political_tendency": "left",
+        "weight": 2
+      },
+      {
+        "question": "13 i 14 emerytura powinny zostać zlikwidowane",
+        "political_tendency": "right",
+        "weight": 2
+      },
+      {
+        "question": "Dług publiczny jest narzędziem rozwoju i państwo powinno go wykorzystywać do finansowania inwestycji oraz polityki społecznej",
+        "political_tendency": "left",
+        "weight": 1
+      }
+    ],
+    "customary": [
+      {
+        "question": "Kara śmierci powinna być całkowicie zakazana jako nieludzka i nieskuteczna",
+        "political_tendency": "left",
+        "weight": 3
+      },
+      {
+        "question": "Małżeństwa osób tej samej płci powinny być zakazane",
+        "political_tendency": "right",
+        "weight": 3
+      },
+      {
+        "question": "Marihuana powinna pozostać nielegalna w celach rekreacyjnych",
+        "political_tendency": "right",
+        "weight": 1
+      },
+      {
+        "question": "Religia powinna być obowiązkowo nauczana w szkołach",
+        "political_tendency": "right",
+        "weight": 3
+      },
+      {
+        "question": "Państwo powinno unikać akcyzy na alkohol i papierosy, aby nie ograniczać wolności obywateli",
+        "political_tendency": "right",
+        "weight": 2
+      },
+      {
+        "question": "Polska powinna unikać uczestnictwa w unijnym mechanizmie relokacji migrantów",
+        "political_tendency": "right",
+        "weight": 3
+      },
+      {
+        "question": "Procedura prawnej korekty płci nie powinna być dostępna",
+        "political_tendency": "right",
+        "weight": 3
+      },
+      {
+        "question": "Religia przynosi społeczeństwu korzyści i laicyzacja kultury jest niepożądana",
+        "political_tendency": "right",
+        "weight": 3
+      },
+      {
+        "question": "Pary jednopłciowe nie powinny mieć możliwości adopcji dzieci",
+        "political_tendency": "right",
+        "weight": 3
+      },
+      {
+        "question": "Obywatele nie powinni mieć łatwego dostępu do broni palnej",
+        "political_tendency": "left",
+        "weight": 3
+      },
+      {
+        "question": "Tabletka 'dzień po' powinna być dostępna tylko na receptę",
+        "political_tendency": "right",
+        "weight": 2
+      },
+      {
+        "question": "Szczepienia na choroby zakaźne powinny być dobrowolne, a nie obowiązkowe",
+        "political_tendency": "right",
+        "weight": 2
+      },
+      {
+        "question": "Aborcja powinna być znacznie bardziej ograniczona w Polsce",
+        "political_tendency": "right",
+        "weight": 3
+      },
+      {
+        "question": "Państwo nie powinno refundować zabiegu in vitro",
+        "political_tendency": "right",
+        "weight": 3
+      },
+      {
+        "question": "Eutanazja powinna być zakazana, nawet dla cierpiących i nieuleczalnie chorych",
+        "political_tendency": "right",
+        "weight": 3
+      },
+      {
+        "question": "Młodzi Polacy nie powinni przechodzić obowiązkowego przeszkolenia wojskowego",
+        "political_tendency": "left",
+        "weight": 1
+      },
+      {
+        "question": "Rząd nie powinien zwiększać finansowania psychiatrii i opieki psychologicznej, szczególnie dzieci i młodzieży",
+        "political_tendency": "right",
+        "weight": 2
+      },
+      {
+        "question": "W szkołach nie powinny odbywać się lekcje edukacji seksualnej",
+        "political_tendency": "right",
+        "weight": 3
+      },
+      {
+        "question": "Spożywanie alkoholu w miejscach publicznych powinno być karane",
+        "political_tendency": "left",
+        "weight": 2
+      },
+      {
+        "question": "Uchodźcy z Ukrainy powinni mieć prawo do stałego pobytu w Polsce oraz przywileje z tym związane",
+        "political_tendency": "left",
+        "weight": 3
+      },
+      {
+        "question": "Multikulturalizm jest korzystny dla społeczeństwa",
+        "political_tendency": "left",
+        "weight": 3
+      },
+      {
+        "question": "Obecność treści o charakterze seksualnym w przestrzeni publicznej mieści się w granicach społecznej akceptacji",
+        "political_tendency": "left",
+        "weight": 2
+      },
+      {
+        "question": "Kościół powinien mieć wpływ na sprawy państwowe",
+        "political_tendency": "right",
+        "weight": 3
+      },
+      {
+        "question": "Tradycyjne role płciowe, zarówno kobiet, jak i mężczyzn, powinny być zachowane bez dodawania nowych płci",
+        "political_tendency": "right",
+        "weight": 3
+      }
+    ],
+    "foreign_policy": [
+      {
+        "question": "Polska nie powinna popierać szybkiego dołączenie Ukrainy do UE i NATO",
+        "political_tendency": "right",
+        "weight": 2
+      },
+      {
+        "question": "Unia Europejska powinna pozostać organizacją międzyrządową, a nie zmierzać w kierunku federalizacji",
+        "political_tendency": "right",
+        "weight": 3
+      },
+      {
+        "question": "Polska powinna ograniczyć integrację z Ukrainą i nie angażować się w jej odbudowę po zakończeniu wojny",
+        "political_tendency": "right",
+        "weight": 2
+      },
+      {
+        "question": "Polska nie powinna ubiegać się o reparacje wojenne od Niemiec za II Wojnę Światową",
+        "political_tendency": "left",
+        "weight": 3
+      },
+      {
+        "question": "Unia Europejska ma odpowiednią wielkość wpływu na państwa członkowskie",
+        "political_tendency": "left",
+        "weight": 3
+      },
+      {
+        "question": "Nie popieram wprowadzenia cła na produkty rolne z Ukrainy",
+        "political_tendency": "left",
+        "weight": 2
+      },
+      {
+        "question": "Polska powinna rozważyć wystąpienie z Unii Europejskiej",
+        "political_tendency": "right",
+        "weight": 2
+      },
+      {
+        "question": "Niemcy są jednym z partnerów Polski, ale nie jednym z najważniejszych",
+        "political_tendency": "right",
+        "weight": 2
+      },
+      {
+        "question": "UE powinna być ważniejszym sojusznikiem Polski niż USA",
+        "political_tendency": "left",
+        "weight": 2
+      },
+      {
+        "question": "Polska powinna ograniczyć swoje wsparcie militarne dla Ukrainy",
+        "political_tendency": "right",
+        "weight": 2
+      },
+      {
+        "question": "Polska powinna dbać o dobre relacje z Ukrainą i nie domagać się przeprosin za Rzeź Wołyńską",
+        "political_tendency": "left",
+        "weight": 2
+      }
+    ],
+    "system": [
+      {
+        "question": "Funkcja Prokuratora Generalnego i Ministra Sprawiedliwości powinna pozostać w rękach jednej osoby",
+        "political_tendency": "right",
+        "weight": 2
+      },
+      {
+        "question": "Władza centralna powinna mieć więcej kompetencji kosztem samorządów",
+        "political_tendency": "right",
+        "weight": 2
+      },
+      {
+        "question": "System wyborczy powinien pozostać proporcjonalny, a Jednomandatowe Okręgi Wyborcze są niepożądane",
+        "political_tendency": "left",
+        "weight": 1
+      },
+      {
+        "question": "Reformy prawa karnego wprowadzone przez aktualny rząd powinny być utrzymane",
+        "political_tendency": "right",
+        "weight": 1
+      },
+      {
+        "question": "Sędziowie powinni być powoływani przez polityków będących aktualnie u władzy, aby zapewnić spójność z programem rządu",
+        "political_tendency": "right",
+        "weight": 1
+      },
+      {
+        "question": "Zakaz obrazy uczuć religijnych powinien zostać utrzymany w celu ochrony wartości religijnych",
+        "political_tendency": "right",
+        "weight": 3
+      },
+      {
+        "question": "Próg wyborczy powinien zostać zwiększony lub pozostać na obecnym poziomie, aby zapewnić stabilność polityczną",
+        "political_tendency": "right",
+        "weight": 1
+      },
+      {
+        "question": "Mowa nienawiści powinna być wolna od kar, aby zapewnić pełną wolność słowa",
+        "political_tendency": "right",
+        "weight": 2
+      },
+      {
+        "question": "Prezydent powinien mieć ograniczone uprawnienia, aby uniknąć koncentracji władzy",
+        "political_tendency": "left",
+        "weight": 3
+      },
+      {
+        "question": "Służba wojskowa nie powinna być obowiązkowa dla wszystkich obywateli, a tylko dla ochotników",
+        "political_tendency": "left",
+        "weight": 1
+      },
+      {
+        "question": "Każda szkoła powinna mieć swobodę ustalania własnej podstawy programowej, aby dostosować edukację do lokalnych potrzeb",
+        "political_tendency": "right",
+        "weight": 2
+      },
+      {
+        "question": "Partie polityczne nie powinny być finansowane z budżetu państwa, aby uniknąć nadmiernego wpływu państwa na politykę",
+        "political_tendency": "right",
+        "weight": 2
+      }
+    ],
+    "climate_policy": [
+      {
+        "question": "Rząd powinien kontynuować produkcję energii z węgla i opóźnić przejście na inne źródła energii",
+        "political_tendency": "right",
+        "weight": 3
+      },
+      {
+        "question": "Transport samochodowy powinien być wspierany i rozwijany, a inwestycje w transport publiczny powinny być ograniczone",
+        "political_tendency": "right",
+        "weight": 2
+      },
+      {
+        "question": "Sprzedaż nowych samochodów spalinowych powinna być wspierana, a zakaz wprowadzenia ich od 2035 roku jest nieuzasadniony",
+        "political_tendency": "right",
+        "weight": 3
+      },
+      {
+        "question": "W Polsce nie powinno się powoływać nowych parków narodowych",
+        "political_tendency": "right",
+        "weight": 2
+      },
+      {
+        "question": "Polska powinna opóźnić rozwój OZE na rzecz dalszej inwestycji w tradycyjne źródła energii",
+        "political_tendency": "right",
+        "weight": 3
+      },
+      {
+        "question": "Elektrownia Turów powinna pozostać otwarta, aby zapewnić stabilność energetyczną kraju",
+        "political_tendency": "right",
+        "weight": 3
+      },
+      {
+        "question": "Państwo powinno zwiększyć swoje zaangażowanie w sektorze produkcji i sprzedaży energii elektrycznej, paliwa oraz ciepła, aby zapewnić większą kontrolę nad rynkiem",
+        "political_tendency": "right",
+        "weight": 2
+      },
+      {
+        "question": "Sejm powinien utrzymać obecne ograniczenia w rozwoju energetyki wiatrowej i nie zmieniać minimalnej odległości od zabudowań",
+        "political_tendency": "right",
+        "weight": 3
+      },
+      {
+        "question": "UE i Polska nie powinny promować redukcji spożycia mięsa aby wspierać przemysł rolny",
+        "political_tendency": "right",
+        "weight": 2
+      },
+      {
+        "question": "UE powinna wzmocnić swoją politykę klimatyczną, aby chronić gospodarki państw członkowskich przed zmianami klimatycznymi",
+        "political_tendency": "left",
+        "weight": 3
+      },
+      {
+        "question": "Skala suszy nie jest powodem do paniki, a działania na rzecz zwiększania naturalnej retencji wody mogą być przesadzone",
+        "political_tendency": "right",
+        "weight": 1
+      },
+      {
+        "question": "Samorządy powinny słuchać ekologów w sprawie ograniczeń samochodowych w miastach w celu poprawy jakości powietrza",
+        "political_tendency": "left",
+        "weight": 3
+      },
+      {
+        "question": "W dobie kryzysu energetycznego powinniśmy kontynuować wdrażanie polityk klimatycznych, aby uniezależnić się od źródeł węgla",
+        "political_tendency": "left",
+        "weight": 2
+      },
+      {
+        "question": "Rząd działał wystarczająco szybko i skutecznie w sprawie zeszłorocznej katastrofy na Odrze, dalsze działania mogą być przesadzone i niepotrzebnie obciążać budżet",
+        "political_tendency": "right",
+        "weight": 2
+      },
+      {
+        "question": "Państwo nie powinno zachęcać górników do zmiany zawodu, aby uniknąć destabilizacji rynku pracy",
+        "political_tendency": "right",
+        "weight": 2
+      },
+      {
+        "question": "Polskie rzeki są odpowiednio uregulowane i nie powinno się wprowadzać zmian, które mogłyby zaszkodzić gospodarce wodnej",
+        "political_tendency": "left",
+        "weight": 2
+      },
+      {
+        "question": "Nie popieram pomysłów UE na rzecz bioróżnorodności, które ograniczają decyzyjność Polski; nasz kraj powinien mieć pełną swobodę w zarządzaniu swoją przyrodą bez ingerencji z zewnątrz",
+        "political_tendency": "right",
+        "weight": 3
+      },
+      {
+        "question": "Wycinka lasów w Polsce jest niezbędna dla rozwoju gospodarczego i nie powinna być nadmiernie ograniczana, należy dążyć do równowagi między ochroną przyrody a potrzebami ekonomicznymi",
+        "political_tendency": "right",
+        "weight": 2
+      },
+      {
+        "question": "Nie uważam, aby zyski koncernów energetycznych były problemem, rynki same regulują te kwestie",
+        "political_tendency": "right",
+        "weight": 3
+      },
+      {
+        "question": "Polska nie powinna inwestować więcej w fotowoltaikę, a zamiast tego skoncentrować się na energii jądrowej i węglu",
+        "political_tendency": "right",
+        "weight": 3
+      },
+      {
+        "question": "Nie popieram Europejskiego Systemu Handlu Emisjami, uważam, że to rozwiązanie obciąża gospodarki państw członkowskich i nie prowadzi do realnych zmian w walce ze zmianami klimatycznymi",
+        "political_tendency": "right",
+        "weight": 3
+      },
+      {
+        "question": "Popieram centralizację produkcji energii, aby zachować kontrolę nad sektorami krytycznymi w kraju",
+        "political_tendency": "right",
+        "weight": 3
+      }
+    ]
+  }
 }
