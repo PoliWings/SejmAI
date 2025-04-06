@@ -96,44 +96,77 @@ def parse_text(speeches: pd.DataFrame):
         return text
     return speeches["text"].apply(remove_brackets).apply(remove_greetings)
 
-def parse_context(speeches: pd.DataFrame):
+def parse_context(speeches: pd.DataFrame, checkpoint_path: str):
     prompt = "Podaj temat tej wypowiedzi w maksymalnie 10 słowach, w formacie 'Temat: '. Wypowiedź: "
+    save_every = 500
     def fix_context(row):
         context = row["context"]
-        if len(context.split()) <= 5:
+        if pd.isna(context) or len(context.split()) < 5:
             context = prompt_model(prompt + row["text"])
-            context = context.replace("Temat: ", "").strip()
+            context = context.replace("Temat: ", "").replace("\n", " ").strip()
             print(f"{row["context"]} -> {context}")
         return context
-    results = speeches.apply(fix_context, axis=1)
-    return results
+    # results = speeches.apply(fix_context, axis=1)
+    num_items = speeches.shape[0]
+    for idx, row in speeches.iterrows():
+        context = fix_context(row)
+        speeches.at[idx, "context"] = context
+        if idx % save_every == 0:
+            speeches.to_csv(checkpoint_path, index=False, encoding="UTF-8")
+            print(f"Saved checkpoint at {checkpoint_path} with {idx}/{num_items} items")
+        print(f"Progress: {idx}/{num_items}")
+    speeches.to_csv(checkpoint_path, index=False, encoding="UTF-8")
+    print(f"Saved checkpoint at {checkpoint_path} with {num_items}/{num_items} items")
+        
+    return speeches
 
 if __name__ == "__main__":
     input_folder = "../scraper/output/speeches"
     member_mapping_file = "member_mapping.json"
     output_folder = "output"
     os.makedirs(output_folder, exist_ok=True)
-
-    speeches = pd.DataFrame(load_speeches(input_folder), columns=["title", "speaker", "context", "text", "link"])
-
-    print(speeches.head())
-    print(f"Data size: {speeches.shape}")
-    print(f"Empty context in: {(speeches.context == "").sum()}")
-    print(f"{speeches.context.value_counts().head(10)}")
-
-    print("\nMapping political alignment")
-    speeches["alignment"] = add_alignment(speeches, member_mapping_file)
-    print(speeches.alignment.value_counts())
-
-    print("\nRemoving speeches without alignment")
-    speeches.drop(speeches[speeches["alignment"] == ""].index, inplace=True)
-
-    print("\nParsing speeches")
-    speeches["text"] = parse_text(speeches)
+    raw_filename = os.path.join(output_folder, "raw.csv")
+    checkpoint_filename = os.path.join(output_folder, "checkpoint.csv")
 
     if "--gen_context" in sys.argv:
+        # load raw data from csv
+
+        if os.path.exists(checkpoint_filename):
+            print(f"Loading checkpoint from {checkpoint_filename}")
+            speeches = pd.read_csv(checkpoint_filename, encoding="UTF-8")
+        elif os.path.exists(raw_filename):
+            print(f"Loading raw data from {raw_filename}")
+            speeches = pd.read_csv(raw_filename, encoding="UTF-8")
+        else:
+            print(f"Raw file {raw_filename} not found. Run the script without --gen_context first.")
+            sys.exit(1)
         print("\nGenerating context for speeches without it")
-        speeches["context"] = parse_context(speeches)
+        speeches = parse_context(speeches, checkpoint_filename)
+
+    else:
+        speeches = pd.DataFrame(load_speeches(input_folder), columns=["title", "speaker", "context", "text", "link"])
+
+        print(speeches.head())
+        print(f"Data size: {speeches.shape}")
+        print(f"Empty context in: {(speeches.context == "").sum()}")
+        print(f"{speeches.context.value_counts().head(10)}")
+
+        print("\nMapping political alignment")
+        speeches["alignment"] = add_alignment(speeches, member_mapping_file)
+        print(speeches.alignment.value_counts())
+
+        print("\nRemoving speeches without alignment")
+        speeches.drop(speeches[speeches["alignment"] == ""].index, inplace=True)
+
+        print("\nParsing speeches")
+        speeches["text"] = parse_text(speeches)
+
+        print("\nSaving raw file")
+        speeches.to_csv(raw_filename, index=False, encoding="UTF-8")
+        print(f"Saved raw file as {raw_filename} with {speeches.shape} items")
+        if os.path.exists(checkpoint_filename):
+            os.remove(checkpoint_filename)
+            print(f"Removed checkpoint file {checkpoint_filename}")
     
     # grouped = speeches.groupby(speeches["alignment"])
     # print(grouped.groups.keys())
