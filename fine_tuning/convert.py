@@ -1,8 +1,16 @@
 import json
+import os
 
-# Wczytaj dane z pliku val.json
+sft_folder = "./sft/"
+
+with open(os.path.join(sft_folder, "left.json"), "r", encoding="utf-8") as f:
+    left_data = json.load(f)
+
+with open(os.path.join(sft_folder, "right.json"), "r", encoding="utf-8") as f:
+    right_data = json.load(f)
+
 with open("val_questions.json", "r", encoding="utf-8") as f:
-    data = json.load(f)
+    val_data = json.load(f)
 
 def generate_answer(agrees: bool, weight: int) -> str:
     base = "Zgadzam się" if agrees else "Nie zgadzam się"
@@ -13,31 +21,39 @@ def generate_answer(agrees: bool, weight: int) -> str:
     return base + "."
 
 def build_validation(model_type: str):
-    result = []
-    for category, questions in data.get("questions", {}).items():
+    validation = []
+    for category, questions in val_data.get("questions", {}).items():
         for q in questions:
             question_text = f"Odpowiedz krótko na pytanie: {q['question']}"
             tendency = q["political_tendency"]
             weight = q.get("weight", 1)
             agrees = (model_type == tendency)
             answer = generate_answer(agrees, weight)
-            result.append({
+            validation.append({
                 "messages": [
                     {"role": "user", "content": question_text},
                     {"role": "assistant", "content": answer}
                 ]
             })
-    return result
+    return validation
 
-# Generowanie danych
-left_model = build_validation("left")
-right_model = build_validation("right")
+left_validation = build_validation("left")
+right_validation = build_validation("right")
 
-# Zapis do plików
-with open("left_model_validation.json", "w", encoding="utf-8") as f:
-    json.dump({"validation": left_model}, f, ensure_ascii=False, indent=2)
+left_final = {
+    "train": left_data,
+    "validation": left_validation
+}
 
-with open("right_model_validation.json", "w", encoding="utf-8") as f:
-    json.dump({"validation": right_model}, f, ensure_ascii=False, indent=2)
+right_final = {
+    "train": right_data,
+    "validation": right_validation
+}
 
-print("Wygenerowano left_model_validation.json i right_model_validation.json")
+with open(os.path.join(sft_folder, "left_model_sft.json"), "w", encoding="utf-8") as f:
+    json.dump(left_final, f, ensure_ascii=False, indent=2)
+
+with open(os.path.join(sft_folder, "right_model_sft.json"), "w", encoding="utf-8") as f:
+    json.dump(right_final, f, ensure_ascii=False, indent=2)
+
+print("Wygenerowano left_model_sft.json i right_model_sft.json")
