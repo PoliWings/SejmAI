@@ -4,7 +4,7 @@ import os
 from dotenv import load_dotenv
 
 # Wczytanie modelu i tokenizera
-model_path = "./data/zephyr-7b-sft-qlora"
+model_path = "speakleash/Bielik-11B-v2.2-Instruct"
 # Load environment variables from .env file
 load_dotenv()
 

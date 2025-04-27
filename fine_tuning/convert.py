@@ -50,10 +50,24 @@ right_final = {
     "validation": right_validation
 }
 
+# Zapis plików SFT
 with open(os.path.join(sft_folder, "left_model_sft.json"), "w", encoding="utf-8") as f:
     json.dump(left_final, f, ensure_ascii=False, indent=2)
 
 with open(os.path.join(sft_folder, "right_model_sft.json"), "w", encoding="utf-8") as f:
     json.dump(right_final, f, ensure_ascii=False, indent=2)
 
-print("Wygenerowano left_model_sft.json i right_model_sft.json")
+# Zapis oddzielnych plików train/test
+with open(os.path.join(sft_folder, "train_left.json"), "w", encoding="utf-8") as f:
+    json.dump(left_data, f, ensure_ascii=False, indent=2)
+
+with open(os.path.join(sft_folder, "test_left.json"), "w", encoding="utf-8") as f:
+    json.dump(left_validation, f, ensure_ascii=False, indent=2)
+
+with open(os.path.join(sft_folder, "train_right.json"), "w", encoding="utf-8") as f:
+    json.dump(right_data, f, ensure_ascii=False, indent=2)
+
+with open(os.path.join(sft_folder, "test_right.json"), "w", encoding="utf-8") as f:
+    json.dump(right_validation, f, ensure_ascii=False, indent=2)
+
+print("Wygenerowano")
