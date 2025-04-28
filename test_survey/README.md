@@ -43,6 +43,16 @@
   }
 ```
 
+### model_testing.py
+
+Script to prompt the model with political questions then receive and anaylize its answers. Run using:
+
+```
+python model_testing.py
+```
+
+Don't forget to create the 'env_variables.py' file with LLM_USERNAME, LLM_PASSWORD and base_url
+
 ### create_prompts.py
 
 Script to combine questions from questions.json with answers and turn them into a prompt. Run using:
