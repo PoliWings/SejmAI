@@ -32,6 +32,15 @@ This directory contains the code and configuration files for fine-tuning the mod
    python train.py --data_path <path_to_dataset>
    ```
 
+## File Manager
+Before using the script, ensure that the `.env` file containing the `API_URL` is created.
+
+To learn more about available options and usage, run:
+
+```bash
+./file_manager.sh --help
+```
+
 ## Useful commands
 - **Run script in background**: To run a script in the background, you can use the `nohup` command:
   ```bash
