@@ -1,0 +1,5 @@
+*.json
+*.txt
+/venv
+/__pycache__/
+env_variables.py
