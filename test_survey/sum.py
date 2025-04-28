@@ -1,5 +1,7 @@
 import json
 
+FILENAME = 'test_questions.json'
+
 def sum_weights(questions):
     total_weight = 0
     for question in questions:
@@ -11,7 +13,7 @@ def print_line(label, value):
     print(line_content.ljust(table_width - 2), "|")
 
 if __name__ == "__main__":
-    with open('questions.json', 'r', encoding='utf-8') as f:
+    with open(FILENAME, 'r', encoding='utf-8') as f:
         data = json.load(f)
 
     table_width = len("Category") + max(len(category) for category in data['questions']) + 10
