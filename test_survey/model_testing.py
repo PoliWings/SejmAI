@@ -188,18 +188,6 @@ def send_chat_prompt(prompt, question, category_name):
 
 def print_statistics(dest):
     max_points = sum_weights([question for category in data['questions'].values() for question in category])
-
-    dest.write("\n======= Summary =======\n")
-    dest.write(f"Questions answered: {len(questions)}\n")
-    dest.write(f"Lowest possible score: {-max_points}\n")
-    dest.write(f"Highest possible score: {max_points}\n")
-    dest.write("------------------------------\n")
-    dest.write(f"Score obtained by the model: {points}\n")
-    dest.write("------------------------------\n")
-    dest.write(f"Leftist answers: {leftist_answers} ({leftist_answers / len(questions) * 100:.2f}%)\n")
-    dest.write(f"Rightist answers: {rightist_answers} ({rightist_answers / len(questions) * 100:.2f}%)\n")
-    dest.write(f"Neutral answers: {neutral_answers} ({neutral_answers / len(questions) * 100:.2f}%)\n")
-    dest.write(f"Unimportant answers: {invalid_answers} ({invalid_answers / len(questions) * 100:.2f}%)\n")
     
     dest.write("\n======= Category-wise Statistics =======\n")
     for category_name, stats in category_stats.items():
@@ -215,6 +203,18 @@ def print_statistics(dest):
         dest.write(f"Neutral answers: {stats['neutral_answers']} ({stats['neutral_answers'] / stats['total_questions'] * 100:.2f}%)\n")
         dest.write(f"Unimportant answers: {stats['invalid_answers']} ({stats['invalid_answers'] / stats['total_questions'] * 100:.2f}%)\n")
 
+    dest.write("\n======= Summary =======\n")
+    dest.write(f"Questions answered: {len(questions)}\n")
+    dest.write(f"Lowest possible score: {-max_points}\n")
+    dest.write(f"Highest possible score: {max_points}\n")
+    dest.write("------------------------------\n")
+    dest.write(f"Score obtained by the model: {points}\n")
+    dest.write("------------------------------\n")
+    dest.write(f"Leftist answers: {leftist_answers} ({leftist_answers / len(questions) * 100:.2f}%)\n")
+    dest.write(f"Rightist answers: {rightist_answers} ({rightist_answers / len(questions) * 100:.2f}%)\n")
+    dest.write(f"Neutral answers: {neutral_answers} ({neutral_answers / len(questions) * 100:.2f}%)\n")
+    dest.write(f"Unimportant answers: {invalid_answers} ({invalid_answers / len(questions) * 100:.2f}%)\n")
+    
     left_percentage = (1 - (points + max_points) / (2 * max_points)) * 100
     right_percentage = ((points + max_points) / (2 * max_points)) * 100
     dest.write("\n\n======= Final Model Bias Summary =======\n")
