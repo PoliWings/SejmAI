@@ -228,7 +228,7 @@ if __name__ == "__main__":
         for question in tqdm(category_questions, desc=f"In progress [{category_name}]"):
             send_chat_prompt(question['question'], question, category_name)
 
-    with open(f'answers_{args.local}.txt', 'w', encoding='utf-8') as dest:
+    with open(f'output/answers_{args.local or "service"}.txt', 'w', encoding='utf-8') as dest:
         for question, answer in zip(questions, answers):
             answer = answer.splitlines()[0]
             dest.write(f"Question: {question}\nAnswer: {answer}\n")
