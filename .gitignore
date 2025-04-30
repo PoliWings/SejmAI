@@ -1,5 +1,4 @@
 .idea
 env
 venv
-__pycache__
-output
+.env

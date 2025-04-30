@@ -45,7 +45,7 @@
 
 ### model_testing.py
 
-Script to prompt the model with political questions then receive and anaylize its answers. Run using:
+Script to prompt the model with political questions then receive and analize the answers.
 
 ```
 python model_testing.py
