@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import json
 import os
 
-files = [("trainer_state_left.json", "Rightist Model"), ("trainer_state_right.json", "Leftist Model")]
+files = [("trainer_state_right.json", "Rightist Model"), ("trainer_state_left.json", "Leftist Model")]
 
 os.makedirs("charts", exist_ok=True)
 
