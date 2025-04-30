@@ -39,7 +39,7 @@ local_model = None
 local_tokenizer = None
 
 if use_local:
-    model_name = "speakleash/Bielik-11B-v2.2-Instruct"
+    model_name = f"../fine_tuning/output/{args.local}_model_sft"
     print(f"Loading local model from {model_name}...")
     bnb_config = BitsAndBytesConfig(
         load_in_4bit=True,
@@ -52,11 +52,6 @@ if use_local:
         quantization_config=bnb_config
     )
     local_model.to(device)
-
-    peft_model_name = f"../fine_tuning/output/{args.local}_model_sft"
-    peft_tokenizer = AutoTokenizer.from_pretrained(peft_model_name)
-    peft_model = PeftModel.from_pretrained(local_model, peft_model_name)
-    peft_model.to(device)
 else:
     assert hasattr(env_variables, 'LLM_USERNAME'), 'Environment variable LLM_USERNAME must be set'
     assert hasattr(env_variables, 'LLM_PASSWORD'), 'Environment variable LLM_PASSWORD must be set'
@@ -145,12 +140,12 @@ def send_chat_prompt(prompt, question, category_name):
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": prompt}
         ]
-        model_inputs = peft_tokenizer.apply_chat_template(
+        model_inputs = local_tokenizer.apply_chat_template(
             messages,
             add_generation_prompt=True,
             return_tensors="pt"
         ).to("cuda")
-        generated_ids = peft_model.generate(
+        generated_ids = local_model.generate(
             model_inputs,
             max_new_tokens=256,
             return_dict_in_generate=True,
