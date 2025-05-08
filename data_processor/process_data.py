@@ -8,6 +8,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 
 files_to_ignore = ["agenda.json", "0.json"]
 
+
 def load_speeches(input_folder: str):
     print(input_folder)
     speeches = []
@@ -17,7 +18,7 @@ def load_speeches(input_folder: str):
     if (input_folder.endswith("/1") or input_folder.endswith("\\1")) and subdirs:
         print(f"Skipping {subdirs[0]}")
         subdirs = subdirs[1:]
-    
+
     def load_file(file_path):
         with open(file_path, "r", encoding="UTF-8") as file:
             return json.load(file)
@@ -34,17 +35,19 @@ def load_speeches(input_folder: str):
             speeches.append(future.result())
     return speeches
 
+
 def add_alignment(speeches: pd.DataFrame, member_mapping_file: str):
     def map(row, member_mapping):
-        if row['speaker'] in member_mapping.keys():
-            return member_mapping[row['speaker']]
+        if row["speaker"] in member_mapping.keys():
+            return member_mapping[row["speaker"]]
         else:
             return ""
-        
+
     with open(member_mapping_file, "r", encoding="UTF-8") as file:
         member_mapping = json.load(file)
         return speeches.apply(map, args=[member_mapping], axis=1)
-    
+
+
 def save_as_sft(speeches: pd.DataFrame, output_folder: str):
     def gen_sft(row):
         sft = {}
@@ -59,9 +62,14 @@ def save_as_sft(speeches: pd.DataFrame, output_folder: str):
     os.makedirs(os.path.join(output_folder, "sft"), exist_ok=True)
     for name, group in grouped:
         json_data = group["sft"].values.tolist()
-        with open(os.path.join(output_folder, "sft", f"{name if name != '' else "none"}.json"), "w", encoding="UTF-8") as file:
+        with open(
+            os.path.join(output_folder, "sft", f"{name if name != '' else 'none'}.json"),
+            "w",
+            encoding="UTF-8",
+        ) as file:
             json.dump(json_data, file, indent=4, ensure_ascii=False)
             print(f"Saving {file.name} with {len(json_data)} items.")
+
 
 def save_as_dpo(speeches: pd.DataFrame, output_folder: str):
     def gen_dpo(row):
@@ -78,34 +86,44 @@ def save_as_dpo(speeches: pd.DataFrame, output_folder: str):
     os.makedirs(os.path.join(output_folder, "dpo"), exist_ok=True)
     for name, group in grouped:
         json_data = group["dpo"].values.tolist()
-        with open(os.path.join(output_folder, "dpo", f"{name if name != '' else "none"}.json"), "w", encoding="UTF-8") as file:
+        with open(
+            os.path.join(output_folder, "dpo", f"{name if name != '' else 'none'}.json"),
+            "w",
+            encoding="UTF-8",
+        ) as file:
             json.dump(json_data, file, indent=4, ensure_ascii=False)
             print(f"Saving {file.name} with {len(json_data)} items.")
+
 
 def parse_text(speeches: pd.DataFrame):
     def remove_brackets(text):
         text = re.sub(r"\([^)]*\)", "", text)
         text = re.sub(r"\s+", " ", text)
         return text
+
     def remove_greetings(text):
         match = re.search(r"^(.*?!(?=[^!]*\.)).*", text, re.DOTALL)
         if match:
             to_delete = match.group(1)
             if len(to_delete) <= len(text) / 10:
-                return text[len(to_delete):].strip()
+                return text[len(to_delete) :].strip()
         return text
+
     return speeches["text"].apply(remove_brackets).apply(remove_greetings)
+
 
 def parse_context(speeches: pd.DataFrame, checkpoint_path: str):
     prompt = "Podaj temat tej wypowiedzi w maksymalnie 10 słowach, w formacie 'Temat: '. Wypowiedź: "
     save_every = 500
+
     def fix_context(row):
         context = row["context"]
         if pd.isna(context) or len(context.split()) < 5:
             context = prompt_model(prompt + row["text"])
             context = context.replace("Temat: ", "").replace("\n", " ").strip()
-            print(f"{row["context"]} -> {context}")
+            print(f"{row['context']} -> {context}")
         return context
+
     # results = speeches.apply(fix_context, axis=1)
     num_items = speeches.shape[0]
     for idx, row in speeches.iterrows():
@@ -117,8 +135,9 @@ def parse_context(speeches: pd.DataFrame, checkpoint_path: str):
         print(f"Progress: {idx}/{num_items}")
     speeches.to_csv(checkpoint_path, index=False, encoding="UTF-8")
     print(f"Saved checkpoint at {checkpoint_path} with {num_items}/{num_items} items")
-        
+
     return speeches
+
 
 if __name__ == "__main__":
     input_folder = "../scraper/output/speeches"
@@ -144,11 +163,14 @@ if __name__ == "__main__":
         speeches = parse_context(speeches, checkpoint_filename)
 
     else:
-        speeches = pd.DataFrame(load_speeches(input_folder), columns=["title", "speaker", "context", "text", "link"])
+        speeches = pd.DataFrame(
+            load_speeches(input_folder),
+            columns=["title", "speaker", "context", "text", "link"],
+        )
 
         print(speeches.head())
         print(f"Data size: {speeches.shape}")
-        print(f"Empty context in: {(speeches.context == "").sum()}")
+        print(f"Empty context in: {(speeches.context == '').sum()}")
         print(f"{speeches.context.value_counts().head(10)}")
 
         print("\nMapping political alignment")
@@ -167,7 +189,7 @@ if __name__ == "__main__":
         if os.path.exists(checkpoint_filename):
             os.remove(checkpoint_filename)
             print(f"Removed checkpoint file {checkpoint_filename}")
-    
+
     # grouped = speeches.groupby(speeches["alignment"])
     # print(grouped.groups.keys())
     # print(grouped.get_group("left").shape)

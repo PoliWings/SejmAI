@@ -2,7 +2,10 @@ import matplotlib.pyplot as plt
 import json
 import os
 
-files = [("trainer_state_right.json", "Rightist Model"), ("trainer_state_left.json", "Leftist Model")]
+files = [
+    ("trainer_state_right.json", "Rightist Model"),
+    ("trainer_state_left.json", "Leftist Model"),
+]
 
 os.makedirs("charts", exist_ok=True)
 
@@ -17,7 +20,7 @@ metrics = [key for key in all_keys if key != "step"]
 
 for metric in metrics:
     plt.figure(figsize=(12, 4))
-    
+
     for i, history in enumerate(histories):
         steps = [entry["step"] for entry in history]
         values = [entry.get(metric, None) for entry in history]
