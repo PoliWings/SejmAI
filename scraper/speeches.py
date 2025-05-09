@@ -42,22 +42,21 @@ def get_speech_html(term, session_num, date, statement_num):
 
 
 def extract_title_from_html(html):
-    soup = BeautifulSoup(html, 'html.parser')
-    title_tag = soup.find('title')
+    soup = BeautifulSoup(html, "html.parser")
+    title_tag = soup.find("title")
     return title_tag.text.strip() if title_tag else ""
 
 
 def remove_html_tags(html):
-    soup = BeautifulSoup(html, 'html.parser')
+    soup = BeautifulSoup(html, "html.parser")
     return soup.get_text()
 
 
 def extract_context_and_text(html):
-    soup = BeautifulSoup(html, 'html.parser')
-    context_tag = soup.find('p', class_='punkt-tytul')
-    context = ' '.join(context_tag.get_text().split()) if context_tag else ""
-    text = [' '.join(p.get_text().split())
-            for p in soup.find_all('p') if not p.get('class')]
+    soup = BeautifulSoup(html, "html.parser")
+    context_tag = soup.find("p", class_="punkt-tytul")
+    context = " ".join(context_tag.get_text().split()) if context_tag else ""
+    text = [" ".join(p.get_text().split()) for p in soup.find_all("p") if not p.get("class")]
     return context, " ".join(text)
 
 
@@ -78,8 +77,7 @@ def save_proceeding(term, session_num, session_title, agenda_html):
         return
 
     soup = BeautifulSoup(agenda_html, "html.parser")
-    agenda_items = [" ".join(li.stripped_strings)
-                    for li in soup.find_all("li")]
+    agenda_items = [" ".join(li.stripped_strings) for li in soup.find_all("li")]
 
     session_url = f"{BASE_URL}/term{term}/proceedings/{session_num}"
 
@@ -88,11 +86,12 @@ def save_proceeding(term, session_num, session_title, agenda_html):
     filename = os.path.join(directory, "agenda.json")
 
     with open(filename, "w", encoding="utf-8") as f:
-        json.dump({
-            "title": session_title,
-            "agenda": agenda_items,
-            "link": session_url
-        }, f, ensure_ascii=False, indent=2)
+        json.dump(
+            {"title": session_title, "agenda": agenda_items, "link": session_url},
+            f,
+            ensure_ascii=False,
+            indent=2,
+        )
 
     print(f"Saved proceeding: {filename}")
 
@@ -105,16 +104,14 @@ def process_statement(term, session_num, date, statement):
     speaker = statement.get("name")
 
     try:
-        html_text, link = get_speech_html(
-            term, session_num, date, statement_num)
+        html_text, link = get_speech_html(term, session_num, date, statement_num)
         if stop_event.is_set():
             return
 
         title = extract_title_from_html(html_text)
         context, text = extract_context_and_text(html_text)
     except Exception as e:
-        print(
-            f"Error retrieving statement {statement_num} in session {session_num} on {date}: {e}")
+        print(f"Error retrieving statement {statement_num} in session {session_num} on {date}: {e}")
         return
 
     speech_data = {
@@ -122,7 +119,7 @@ def process_statement(term, session_num, date, statement):
         "speaker": speaker,
         "context": context,
         "text": text,
-        "link": link
+        "link": link,
     }
 
     save_speech(term, session_num, date, statement_num, speech_data)
@@ -137,13 +134,14 @@ def process_date(term, session_num, date):
         if stop_event.is_set():
             return
     except Exception as e:
-        print(
-            f"Error retrieving statements for session {session_num} on {date}: {e}")
+        print(f"Error retrieving statements for session {session_num} on {date}: {e}")
         return
 
     with ThreadPoolExecutor(max_workers=10) as executor:
-        futures = [executor.submit(process_statement, term, session_num, date, statement)
-                   for statement in transcripts_data.get("statements", [])]
+        futures = [
+            executor.submit(process_statement, term, session_num, date, statement)
+            for statement in transcripts_data.get("statements", [])
+        ]
 
         try:
             for future in as_completed(futures):
@@ -186,8 +184,7 @@ def process_term(term):
                 for date in dates:
                     if stop_event.is_set():
                         break
-                    futures.append(executor.submit(
-                        process_date, term, session_num, date))
+                    futures.append(executor.submit(process_date, term, session_num, date))
 
             for future in as_completed(futures):
                 if stop_event.is_set():
@@ -203,12 +200,9 @@ def process_term(term):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
-        description="Fetches politicians' speeches from a given term of the Polish Sejm.")
-    parser.add_argument("--term", type=int, required=True,
-                        help="Term number (e.g., 10)")
-    parser.add_argument("--force", action="store_true",
-                        help="Deletes previous files")
+    parser = argparse.ArgumentParser(description="Fetches politicians' speeches from a given term of the Polish Sejm.")
+    parser.add_argument("--term", type=int, required=True, help="Term number (e.g., 10)")
+    parser.add_argument("--force", action="store_true", help="Deletes previous files")
     args = parser.parse_args()
 
     if args.force:

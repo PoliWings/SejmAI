@@ -38,7 +38,7 @@ def save_members(term, members_data):
     filename = os.path.join(directory, "members.json")
 
     for member in members_data:
-        member['link'] = f"{BASE_URL}/term{term}/MP/{member.get('id')}"
+        member["link"] = f"{BASE_URL}/term{term}/MP/{member.get('id')}"
 
     with open(filename, "w", encoding="utf-8") as f:
         json.dump(members_data, f, ensure_ascii=False, indent=2)
@@ -55,7 +55,7 @@ def save_clubs(term, clubs_data):
     filename = os.path.join(directory, "clubs.json")
 
     for club in clubs_data:
-        club['link'] = f"{BASE_URL}/term{term}/clubs/{club.get('id')}"
+        club["link"] = f"{BASE_URL}/term{term}/clubs/{club.get('id')}"
 
     with open(filename, "w", encoding="utf-8") as f:
         json.dump(clubs_data, f, ensure_ascii=False, indent=2)
@@ -79,12 +79,9 @@ def process_term(term):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
-        description="Fetches MPs and clubs data from a given term of the Polish Sejm.")
-    parser.add_argument("--term", type=int, required=True,
-                        help="Term number (e.g., 10)")
-    parser.add_argument("--force", action="store_true",
-                        help="Deletes previous files")
+    parser = argparse.ArgumentParser(description="Fetches MPs and clubs data from a given term of the Polish Sejm.")
+    parser.add_argument("--term", type=int, required=True, help="Term number (e.g., 10)")
+    parser.add_argument("--force", action="store_true", help="Deletes previous files")
     args = parser.parse_args()
 
     if args.force:
