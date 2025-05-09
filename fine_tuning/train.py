@@ -17,11 +17,11 @@ parser.add_argument("--data_path", type=str, required=True)
 args = parser.parse_args()
 
 DATASET_PATH = args.data_path
-BASE_MODEL = "speakleash/Bielik-11B-v2.2-Instruct"
+BASE_MODEL = "CYFRAGOVPL/Llama-PLLuM-8B-instruct"
 OUTPUT_DIR = f"./output/{os.path.splitext(os.path.basename(DATASET_PATH))[0]}"
 
 # Hyperparameters
-MAX_LENGTH = 128
+MAX_LENGTH = 1024
 NUM_TRAIN_EPOCHS = 1
 PER_DEVICE_BATCH_SIZE = 8
 GRADIENT_ACCUMULATION_STEPS = 1

@@ -51,7 +51,7 @@ Script to prompt the model with political questions then receive and analize the
 python model_testing.py
 ```
 
-Don't forget to create the 'env_variables.py' file with LLM_USERNAME, LLM_PASSWORD and base_url
+Don't forget to create the '.env' file with LLM_USERNAME, LLM_PASSWORD and LLM_URL
 
 ### create_prompts.py
 

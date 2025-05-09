@@ -6,7 +6,7 @@ import urllib3
 from dotenv import load_dotenv
 
 # ===================== Load .env =====================
-load_dotenv()
+load_dotenv("../.env")
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
@@ -26,12 +26,12 @@ parser.add_argument("--version", type=str, help="Specify LoRA adapter version to
 args = parser.parse_args()
 
 # ===================== Env Variables =====================
-required_vars = ["BASE_URL", "LLM_USERNAME", "LLM_PASSWORD"]
+required_vars = ["LLM_URL", "LLM_USERNAME", "LLM_PASSWORD"]
 for var in required_vars:
     assert var in os.environ, f"Environment variable {var} must be set in .env"
 
-train_url = f"{os.getenv('BASE_URL')}/train"
-llm_url = f"{os.getenv('BASE_URL')}/llm"
+train_url = f"{os.getenv('LLM_URL')}/train"
+llm_url = f"{os.getenv('LLM_URL')}/llm"
 auth = (os.getenv("LLM_USERNAME"), os.getenv("LLM_PASSWORD"))
 auth_kwargs = {
     "auth": auth,
@@ -146,6 +146,8 @@ elif args.load_lora in ["left", "right"]:
     adapter_name = f"opposing_views__{side}_lora_module"
     adapter_version = args.version
 
+    assert adapter_version, "use --version to set adapter version"
+
     lora_data = {
         "lora_adapter": adapter_name,
         "lora_adapter_version": adapter_version,
@@ -166,6 +168,8 @@ elif args.delete_lora in ["left", "right"]:
     adapter_name = f"opposing_views__{side}_lora_module"
     adapter_version = args.version
 
+    assert adapter_version, "use --version to set adapter version"
+
     lora_data = {"lora_adapter": adapter_name}
     response = requests.delete(
         f"{llm_url}/lora",
@@ -184,6 +188,7 @@ elif args.download_lora in ["left", "right"]:
     training_id = os.getenv("TRAINING_ID")
 
     assert training_id, "TRAINING_ID must be set in .env"
+    assert adapter_version, "use --version to set adapter version"
 
     response = requests.get(
         f"{train_url}/train/model/{training_id}",

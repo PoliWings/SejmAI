@@ -6,7 +6,10 @@ import torch
 from tqdm import tqdm
 from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
 from sum import sum_weights
-import env_variables
+import os
+from dotenv import load_dotenv
+
+load_dotenv("../.env")
 
 import warnings
 
@@ -31,6 +34,7 @@ category_stats = {}
 # Argument parser
 parser = argparse.ArgumentParser()
 parser.add_argument("--local", choices=["left", "right"], help="Use local model (left or right)")
+parser.add_argument("--lora", choices=["left", "right"], help="Use lora model (left or right)")
 args = parser.parse_args()
 
 # Load local model if requested
@@ -48,10 +52,10 @@ if use_local:
     )
     local_model.to(device)
 else:
-    assert hasattr(env_variables, "LLM_USERNAME"), "Environment variable LLM_USERNAME must be set"
-    assert hasattr(env_variables, "LLM_PASSWORD"), "Environment variable LLM_PASSWORD must be set"
+    assert "LLM_USERNAME" in os.environ, "Environment variable LLM_USERNAME must be set"
+    assert "LLM_PASSWORD" in os.environ, "Environment variable LLM_PASSWORD must be set"
 
-    auth = (env_variables.LLM_USERNAME, env_variables.LLM_PASSWORD)
+    auth = (os.getenv("LLM_USERNAME"), os.getenv("LLM_PASSWORD"))
     auth_kwargs = {
         "auth": auth,
         "verify": False,
@@ -152,6 +156,8 @@ def send_chat_prompt(prompt, question, category_name):
         response = output.split("assistant\n")[-1]
     else:
         # API call
+        assert args.lora, "use --lora to select lora adapter model"
+
         data = {
             "messages": [
                 {"role": "system", "content": system_prompt},
@@ -159,9 +165,10 @@ def send_chat_prompt(prompt, question, category_name):
             ],
             "max_length": 16,
             "temperature": 0.7,
+            "lora_adapter": f"opposing_views__{args.lora}_lora_module",
         }
         response = requests.put(
-            env_variables.base_url,
+            f"{os.getenv('LLM_URL')}/llm/prompt/chat",
             json=data,
             headers={"Accept": "application/json", "Content-Type": "application/json"},
             **auth_kwargs,
@@ -223,7 +230,7 @@ if __name__ == "__main__":
         for question in tqdm(category_questions, desc=f"In progress [{category_name}]"):
             send_chat_prompt(question["question"], question, category_name)
 
-    with open(f'output/answers_{args.local or "service"}.txt', "w", encoding="utf-8") as dest:
+    with open(f"output/answers_{args.local or f'service_{args.lora}'}.txt", "w", encoding="utf-8") as dest:
         for question, answer in zip(questions, answers):
             answer = answer.splitlines()[0]
             dest.write(f"Question: {question}\nAnswer: {answer}\n")

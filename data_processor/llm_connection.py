@@ -11,12 +11,12 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
 def prompt_model(prompt):
-    load_dotenv()
+    load_dotenv("../.env")
     assert "LLM_USERNAME" in os.environ, f"Environment variable LLM_USERNAME must be set"
     assert "LLM_PASSWORD" in os.environ, f"Environment variable LLM_PASSWORD must be set"
     assert "LLM_URL" in os.environ, f"Environment variable LLM_URL must be set"
 
-    url = os.getenv("LLM_URL")
+    url = f"{os.getenv('LLM_URL')}/llm/prompt/chat"
     auth = (os.getenv("LLM_USERNAME"), os.getenv("LLM_PASSWORD"))
     auth_kwargs = {"auth": auth, "verify": False}
 
