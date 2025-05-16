@@ -40,6 +40,7 @@ auth_kwargs = {
 
 # ===================== Start =====================
 if args.start in ["left", "right"]:
+    assert "WANDB_API_KEY" in os.environ, "WANDB_API_KEY must be set in .env"
     side = args.start
     dataset_filename = f"{side}_model_sft.json"
     dataset_path = os.path.join("sft", dataset_filename)
@@ -55,8 +56,10 @@ if args.start in ["left", "right"]:
         )
     response.raise_for_status()
 
+    project_name = f"opposing_views__{side}_lora_module"
+
     payload = {
-        "registered_name": f"opposing_views__{side}_lora_module",
+        "registered_name": project_name,
         "model": "speakleash/Bielik-11B-v2.2-Instruct",
         "chat_template": None,
         "max_length": 2048,
@@ -83,6 +86,8 @@ if args.start in ["left", "right"]:
         "eval_steps": 1,
         "save_steps": 1,
         "logging_steps": 1,
+        "wandb_token": os.getenv("WANDB_API_KEY"),
+        "wandb_project": project_name
     }
 
     response = requests.post(
