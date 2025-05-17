@@ -68,3 +68,11 @@ Simple auxiliary script to calculate the number of questions and their weights. 
 ```
 python sum.py
 ```
+
+### start.sh
+
+Run testing on right and left models. You can change the model name in the script.
+
+```
+nohup ./start.sh <lora_adapter_version> &> out.log &
+```
