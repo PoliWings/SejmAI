@@ -8,6 +8,6 @@ if [ -z "$version" ]; then
 fi
 
 for side in right left; do
-    python fine_tuning.py --load-lora "$side" --version "$version" && \
+    python ../fine_tuning/fine_tuning.py --load-lora "$side" --version "$version" && \
     python model_testing.py --lora "$side"
 done
