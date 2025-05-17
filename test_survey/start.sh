@@ -1,7 +1,13 @@
 #!/bin/bash
 
-# python model_testing.py --local right && \
-# python model_testing.py --local left
+version="$1"
 
-python model_testing.py --lora right &&
-python model_testing.py --lora left
+if [ -z "$version" ]; then
+    echo "Usage: $0 <version>"
+    exit 1
+fi
+
+for side in right left; do
+    python fine_tuning.py --load-lora "$side" --version "$version" && \
+    python model_testing.py --lora "$side"
+done

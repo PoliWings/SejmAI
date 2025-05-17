@@ -83,9 +83,9 @@ if args.start in ["left", "right"]:
             "up_proj",
             "down_proj",
         ],
-        "eval_steps": 1,
-        "save_steps": 1,
-        "logging_steps": 1,
+        "eval_steps": 1000,
+        "save_steps": 1000,
+        "logging_steps": 10,
         "wandb_token": os.getenv("WANDB_API_KEY"),
         "wandb_project": project_name
     }
