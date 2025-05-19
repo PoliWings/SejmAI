@@ -25,7 +25,7 @@ BASE_MODEL = args.base_model
 timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 base_name = os.path.basename(BASE_MODEL).replace("/", "_")
 dataset_name = os.path.splitext(os.path.basename(DATASET_PATH))[0]
-OUTPUT_DIR = f"./output/{dataset_name}__{base_name}__{timestamp}"
+OUTPUT_DIR = f"./output/{base_name}__{dataset_name}__{timestamp}"
 
 # Hyperparameters
 MAX_LENGTH = 2048
@@ -48,8 +48,8 @@ LORA_TARGET_MODULES = [
     "up_proj",
     "down_proj",
 ]
-SAVE_STEPS = 1000
-EVAL_STEPS = 1000
+SAVE_STEPS = 100
+EVAL_STEPS = 100
 LOGGING_STEPS = 10
 SEED = 42
 
