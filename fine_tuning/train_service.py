@@ -87,7 +87,7 @@ if args.start in ["left", "right"]:
         "save_steps": 1000,
         "logging_steps": 10,
         "wandb_token": os.getenv("WANDB_API_KEY"),
-        "wandb_project": project_name
+        "wandb_project": project_name,
     }
 
     response = requests.post(
@@ -129,7 +129,7 @@ elif args.status:
 
     response = requests.get(f"{train_url}/train/logs/{training_id}", **auth_kwargs)
     response.raise_for_status()
-    with open("training.log", "w") as f:
+    with open(f"training_{training_id}.log", "w") as f:
         f.write(response.text)
 
 # ===================== Cancel =====================

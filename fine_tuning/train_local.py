@@ -2,6 +2,7 @@ import argparse
 import json
 import os
 import logging
+from datetime import datetime
 from datasets import Dataset
 from transformers import AutoTokenizer, AutoModelForCausalLM
 from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
@@ -13,17 +14,23 @@ logger = logging.getLogger(__name__)
 
 # Argument parsing
 parser = argparse.ArgumentParser()
-parser.add_argument("--data_path", type=str, required=True)
+parser.add_argument("--data-path", type=str, required=True, help="Path to training dataset (JSON)")
+parser.add_argument("--base-model", type=str, required=True, help="Base model name or path (e.g., Hugging Face hub ID)")
 args = parser.parse_args()
 
 DATASET_PATH = args.data_path
-BASE_MODEL = "CYFRAGOVPL/Llama-PLLuM-8B-instruct"
-OUTPUT_DIR = f"./output/{os.path.splitext(os.path.basename(DATASET_PATH))[0]}"
+BASE_MODEL = args.base_model
+
+# Generate output directory with model name and timestamp
+timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+base_name = os.path.basename(BASE_MODEL).replace("/", "_")
+dataset_name = os.path.splitext(os.path.basename(DATASET_PATH))[0]
+OUTPUT_DIR = f"./output/{dataset_name}__{base_name}__{timestamp}"
 
 # Hyperparameters
-MAX_LENGTH = 1024
+MAX_LENGTH = 2048
 NUM_TRAIN_EPOCHS = 1
-PER_DEVICE_BATCH_SIZE = 8
+PER_DEVICE_BATCH_SIZE = 1
 GRADIENT_ACCUMULATION_STEPS = 1
 LEARNING_RATE = 1e-4
 LR_SCHEDULER_TYPE = "cosine"
