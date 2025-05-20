@@ -44,7 +44,7 @@ To learn more about available options and usage, run:
 ## Useful commands
 - **Run script in background**: To run a script in the background, you can use the `nohup` command:
   ```bash
-  nohup ./start.sh &> out.log &
+  nohup ./start.sh --base-model <model_name> &> out.log &
   ```
 - **Check GPU usage**: To check the GPU usage, you can use the `nvidia-smi` command:
   ```bash

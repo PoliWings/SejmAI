@@ -1,11 +1,17 @@
 import argparse
 import json
 import os
+import datetime
 import logging
 from datasets import Dataset
 from transformers import AutoTokenizer, AutoModelForCausalLM
 from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
 from trl import SFTConfig, SFTTrainer
+from dotenv import load_dotenv
+
+load_dotenv("../.env")
+
+os.environ["WANDB_PROJECT"] = "local_training"
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
@@ -123,7 +129,8 @@ sft_config = SFTConfig(
     save_total_limit=1,
     output_dir=OUTPUT_DIR,
     seed=SEED,
-    report_to=None,
+    report_to="wandb",
+    run_name=f"{base_name}__{dataset_name}__{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}",
     push_to_hub=False,
 )
 
