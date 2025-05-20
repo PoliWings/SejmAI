@@ -29,7 +29,7 @@ This directory contains the code and configuration files for fine-tuning the mod
    ```
 6. **Run the training script**: Use the provided training script to fine-tune the model:
    ```bash
-   python train.py --data_path <path_to_dataset>
+   python train_local.py --data-path <path_to_dataset> --base-model <base_model>
    ```
 
 ## File Manager

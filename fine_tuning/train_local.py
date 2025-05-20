@@ -13,17 +13,21 @@ logger = logging.getLogger(__name__)
 
 # Argument parsing
 parser = argparse.ArgumentParser()
-parser.add_argument("--data_path", type=str, required=True)
+parser.add_argument("--data-path", type=str, required=True, help="Path to training dataset (JSON)")
+parser.add_argument("--base-model", type=str, required=True, help="Base model name or path (e.g., Hugging Face hub ID)")
 args = parser.parse_args()
 
 DATASET_PATH = args.data_path
-BASE_MODEL = "CYFRAGOVPL/Llama-PLLuM-8B-instruct"
-OUTPUT_DIR = f"./output/{os.path.splitext(os.path.basename(DATASET_PATH))[0]}"
+BASE_MODEL = args.base_model
+
+base_name = BASE_MODEL.replace("/", "_")
+dataset_name = os.path.splitext(os.path.basename(DATASET_PATH))[0]
+OUTPUT_DIR = f"./output/{base_name}__{dataset_name}"
 
 # Hyperparameters
-MAX_LENGTH = 1024
+MAX_LENGTH = 2048
 NUM_TRAIN_EPOCHS = 1
-PER_DEVICE_BATCH_SIZE = 8
+PER_DEVICE_BATCH_SIZE = 1
 GRADIENT_ACCUMULATION_STEPS = 1
 LEARNING_RATE = 1e-4
 LR_SCHEDULER_TYPE = "cosine"
@@ -41,8 +45,9 @@ LORA_TARGET_MODULES = [
     "up_proj",
     "down_proj",
 ]
-SAVE_STEPS = 1
-LOGGING_STEPS = 1
+SAVE_STEPS = 100
+EVAL_STEPS = 100
+LOGGING_STEPS = 10
 SEED = 42
 
 # Load raw JSON data
@@ -114,6 +119,7 @@ sft_config = SFTConfig(
     logging_steps=LOGGING_STEPS,
     save_strategy="steps",
     save_steps=SAVE_STEPS,
+    eval_steps=EVAL_STEPS,
     save_total_limit=1,
     output_dir=OUTPUT_DIR,
     seed=SEED,

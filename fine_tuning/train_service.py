@@ -40,6 +40,7 @@ auth_kwargs = {
 
 # ===================== Start =====================
 if args.start in ["left", "right"]:
+    assert "WANDB_API_KEY" in os.environ, "WANDB_API_KEY must be set in .env"
     side = args.start
     dataset_filename = f"{side}_model_sft.json"
     dataset_path = os.path.join("sft", dataset_filename)
@@ -55,15 +56,17 @@ if args.start in ["left", "right"]:
         )
     response.raise_for_status()
 
+    project_name = f"opposing_views__{side}_lora_module"
+
     payload = {
-        "registered_name": f"opposing_views__{side}_lora_module",
+        "registered_name": project_name,
         "model": "speakleash/Bielik-11B-v2.2-Instruct",
         "chat_template": None,
         "max_length": 2048,
         "dataset": dataset_filename,
         "num_train_epochs": 1,
-        "per_device_train_batch_size": 1,
-        "per_device_eval_batch_size": 1,
+        "per_device_train_batch_size": 2,
+        "per_device_eval_batch_size": 2,
         "learning_rate": 1e-4,
         "lr_scheduler_type": "cosine",
         "warmup_ratio": 0.1,
@@ -80,9 +83,11 @@ if args.start in ["left", "right"]:
             "up_proj",
             "down_proj",
         ],
-        "eval_steps": 1,
-        "save_steps": 1,
-        "logging_steps": 1,
+        "eval_steps": 1000,
+        "save_steps": 1000,
+        "logging_steps": 10,
+        "wandb_token": os.getenv("WANDB_API_KEY"),
+        "wandb_project": project_name,
     }
 
     response = requests.post(
@@ -124,7 +129,7 @@ elif args.status:
 
     response = requests.get(f"{train_url}/train/logs/{training_id}", **auth_kwargs)
     response.raise_for_status()
-    with open("training.log", "w") as f:
+    with open(f"training_{training_id}.log", "w") as f:
         f.write(response.text)
 
 # ===================== Cancel =====================
