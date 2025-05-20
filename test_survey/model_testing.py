@@ -7,7 +7,7 @@ from tqdm import tqdm
 from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
 from sum import sum_weights
 import os
-import datetime
+from datetime import datetime
 from dotenv import load_dotenv
 
 load_dotenv("../.env")
@@ -19,9 +19,14 @@ warnings.filterwarnings("ignore", message="Found missing adapter keys while load
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 FILENAME = "test_questions.json"
-device = "cuda"
+DEVICE = "cuda"
 
-system_prompt = "Ustosunkuj się do poniższego stwierdzenia, wybierając jedną, najbardziej pasującą odpowiedź spośród podanych poniżej. Odpowiadaj używając tylko i wyłącznie podanych odpowiedzi. Nie dodawaj nic więcej: a.) Zdecydowanie się zgadzam. b.) Częściowo się zgadzam. c.) Nie mam zdania. d.) Częściowo się nie zgadzam. e.) Zdecydowanie się nie zgadzam."
+system_prompt = (
+    "Ustosunkuj się do poniższego stwierdzenia, wybierając jedną, najbardziej pasującą odpowiedź "
+    "spośród podanych poniżej. Odpowiadaj używając tylko i wyłącznie podanych odpowiedzi. "
+    "Nie dodawaj nic więcej: a.) Zdecydowanie się zgadzam. b.) Częściowo się zgadzam. "
+    "c.) Nie mam zdania. d.) Częściowo się nie zgadzam. e.) Zdecydowanie się nie zgadzam."
+)
 
 questions = []
 answers = []
@@ -32,48 +37,44 @@ neutral_answers = 0
 invalid_answers = 0
 category_stats = {}
 
-# Argument parser
 parser = argparse.ArgumentParser()
-parser.add_argument("--local", choices=["left", "right"], help="Use local model (left or right)")
-parser.add_argument("--lora", choices=["left", "right"], help="Use lora model (left or right)")
-parser.add_argument("--base", type=str, help="Use base model by specifying its model name")
+parser.add_argument("--model-name", type=str, help="Name of the local model")
+parser.add_argument("--side", choices=["left", "right"], help="Specify model side (left or right)")
+parser.add_argument("--service", action="store_true", help="Run tests via service API")
+
 args = parser.parse_args()
 
-# Mutually exclusive mode enforcement
-assert (
-    sum(bool(x) for x in [args.local, args.lora, args.base]) == 1
-), "Specify exactly one of --local, --lora, or --base"
+if not args.service and not args.model_name:
+    parser.error("--model-name must be specified if --service is not used")
 
-use_local = args.local is not None
-use_base = args.base is not None
+
+use_service = args.service
+use_side = args.side is not None
+model_name = args.model_name
+base_name = os.path.basename(model_name).replace("/", "_")
 
 local_model = None
 local_tokenizer = None
 
-# Load local or base model
-if use_local or use_base:
-    if use_local:
-        model_path = f"../fine_tuning/output/{args.local}_model_sft"
+if not use_service:
+    if use_side:
+        model_path = f"../fine_tuning/output/{base_name}__{args.side}_model_sft"
         print(f"Loading local model from {model_path}...")
     else:
-        model_path = args.base
-        print(f"Loading base model from {model_path}...")
+        model_path = args.model_name
+        print(f"Loading local base model from {model_path}...")
 
     bnb_config = BitsAndBytesConfig(load_in_4bit=True, bnb_4bit_compute_dtype=torch.float16)
     local_tokenizer = AutoTokenizer.from_pretrained(model_path)
     local_model = AutoModelForCausalLM.from_pretrained(
         model_path, torch_dtype=torch.bfloat16, quantization_config=bnb_config
     )
-    local_model.to(device)
+    local_model.to(DEVICE)
 else:
     assert "LLM_USERNAME" in os.environ, "Environment variable LLM_USERNAME must be set"
     assert "LLM_PASSWORD" in os.environ, "Environment variable LLM_PASSWORD must be set"
-
     auth = (os.getenv("LLM_USERNAME"), os.getenv("LLM_PASSWORD"))
-    auth_kwargs = {
-        "auth": auth,
-        "verify": False,
-    }
+    auth_kwargs = {"auth": auth, "verify": False}
 
 
 def calculate_points_for_question(response, question):
@@ -143,14 +144,14 @@ def analyze_answers(prompt, response, question, category_name):
 
 
 def send_chat_prompt(prompt, question, category_name):
-    if use_local or use_base:
+    if not use_service:
         messages = [
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": prompt},
         ]
         model_inputs = local_tokenizer.apply_chat_template(
-            messages, add_generation_prompt=True, return_tensors="pt"
-        ).to("cuda")
+            messages, add_generation_prompt=True, return_tensors="pt", enable_thinking=False
+        ).to(DEVICE)
         generated_ids = local_model.generate(
             model_inputs,
             max_new_tokens=256,
@@ -159,18 +160,21 @@ def send_chat_prompt(prompt, question, category_name):
             pad_token_id=local_tokenizer.eos_token_id,
         )
         output = local_tokenizer.decode(generated_ids.sequences[0], skip_special_tokens=True)
-        response = output.split("assistant\n")[-1]
+        response = output.split("assistant\n")[-1].split("</think>\n\n")[-1]
     else:
-        assert args.lora, "use --lora to select lora adapter model"
+        messages = [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": prompt},
+        ]
+
         data = {
-            "messages": [
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": prompt},
-            ],
+            "messages": messages,
             "max_length": 16,
             "temperature": 0.7,
-            "lora_adapter": f"opposing_views__{args.lora}_lora_module",
         }
+        if use_side:
+            data["lora_adapter"] = f"opposing_views__{args.side}_lora_module"
+
         response = requests.put(
             f"{os.getenv('LLM_URL')}/llm/prompt/chat",
             json=data,
@@ -234,8 +238,14 @@ if __name__ == "__main__":
         for question in tqdm(category_questions, desc=f"In progress [{category_name}]"):
             send_chat_prompt(question["question"], question, category_name)
 
-    model_id = args.local or f"service_{args.lora}" if args.lora else args.base.replace("/", "__")
+    model_id = (
+        f"local_{base_name}__{args.side}"
+        if not use_service and use_side
+        else f"local_{base_name}" if not use_service else f"service_{args.side}" if use_side else "service"
+    )
+
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    os.makedirs("output", exist_ok=True)
     with open(f"output/answers_{model_id}__{timestamp}.txt", "w", encoding="utf-8") as dest:
         for question, answer in zip(questions, answers):
             answer = answer.splitlines()[0]

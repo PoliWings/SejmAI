@@ -2,7 +2,6 @@ import argparse
 import json
 import os
 import logging
-from datetime import datetime
 from datasets import Dataset
 from transformers import AutoTokenizer, AutoModelForCausalLM
 from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
@@ -21,11 +20,9 @@ args = parser.parse_args()
 DATASET_PATH = args.data_path
 BASE_MODEL = args.base_model
 
-# Generate output directory with model name and timestamp
-timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-base_name = os.path.basename(BASE_MODEL).replace("/", "_")
+base_name = BASE_MODEL.replace("/", "_")
 dataset_name = os.path.splitext(os.path.basename(DATASET_PATH))[0]
-OUTPUT_DIR = f"./output/{base_name}__{dataset_name}__{timestamp}"
+OUTPUT_DIR = f"./output/{base_name}__{dataset_name}"
 
 # Hyperparameters
 MAX_LENGTH = 2048
