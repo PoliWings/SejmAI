@@ -7,8 +7,9 @@ model_name=""
 
 for ((i=0; i<${#args[@]}; i++)); do
     arg="${args[i]}"
-    if [[ -z "$version" && "$arg" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-        version="$arg"
+    if [[ "$arg" == "--version" ]]; then
+        ((i++))
+        version="${args[i]}"
     elif [[ "$arg" == "--model-name" ]]; then
         ((i++))
         model_name="${args[i]}"
@@ -18,33 +19,31 @@ for ((i=0; i<${#args[@]}; i++)); do
 done
 
 mode=""
+
 for arg in "${pass_args[@]}"; do
-    if [[ "$arg" == "--service" ]]; then
+    if [[ "$arg" == "--local" ]]; then
+        mode="local"
+        break
+    elif [[ "$arg" == "--service" ]]; then
         mode="service"
         break
     fi
 done
 
-if [[ -z "$mode" ]]; then
-    mode="local"
-fi
-
 filtered_args=()
 if [[ -n "$model_name" ]]; then
     filtered_args+=(--model-name "$model_name")
 fi
+if [[ -n "$version" ]]; then
+    version_arg=(--version "$version")
+fi
 
 if [[ "$mode" == "service" ]]; then
-    if [ -z "$version" ]; then
-        echo "Usage: $0 --service <version> [other flags]"
-        exit 1
-    fi
-
     python model_testing.py --service "${filtered_args[@]}"
 
     for side in right left; do
-        echo "=== Fine-tuning for $side side ==="
-        python ../fine_tuning/train_service.py --load-lora "$side" --version "$version" || exit 1
+        echo "=== Load lora adapter for $side side ==="
+        python ../fine_tuning/train_service.py --load-lora "$side" "${version_arg[@]}" || exit 1
 
         echo "=== Testing model with $side adapter ==="
         python model_testing.py --side "$side" --service "${filtered_args[@]}"
@@ -58,12 +57,12 @@ elif [[ "$mode" == "local" ]]; then
     done
 
 else
-    echo "Usage: $0 (--service <version> | --local --model-name <model>)"
-    echo "mode: --service or --local"
-    echo "version: required only for --service"
-    echo "model-name: required only for --local"
-    echo "flags: any additional flags passed to model_testing.py"
-    echo "Example: $0 --service 1.0.0"
-    echo "Example: $0 --local --model-name my_model"
+    echo -e "Usage: $0 (--service --version <version> | --local --model-name <model>)"
+    echo -e "\tmode:\t\t--service or --local"
+    echo -e "\tversion:\trequired only for --service"
+    echo -e "\tmodel-name:\trequired only for --local"
+    echo -e "\tflags:\t\tany additional flags passed to model_testing.py"
+    echo -e "\tExample:\t$0 --service --version 1.0.0"
+    echo -e "\t\t\t$0 --local --model-name my_model"
     exit 1
 fi

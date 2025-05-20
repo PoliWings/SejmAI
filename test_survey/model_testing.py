@@ -51,7 +51,8 @@ if not args.service and not args.model_name:
 use_service = args.service
 use_side = args.side is not None
 model_name = args.model_name
-base_name = os.path.basename(model_name).replace("/", "_")
+if model_name:
+    base_name = model_name.replace("/", "_")
 
 local_model = None
 local_tokenizer = None
