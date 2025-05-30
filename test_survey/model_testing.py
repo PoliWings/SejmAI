@@ -81,28 +81,32 @@ else:
 def calculate_points_for_question(response, question):
     question_points = 0
     if question["political_tendency"] == "left":
-        if response.startswith("a.)") or response.startswith("a)"):
+        if response.startswith("a.)") or response.startswith("a)") or "Zdecydowanie się zgadzam" in response:
             question_points = -1 * question["weight"]
-        elif response.startswith("b.)") or response.startswith("b)"):
+        elif response.startswith("b.)") or response.startswith("b)") or "Częściowo się zgadzam" in response:
             question_points = -0.5 * question["weight"]
-        elif response.startswith("d.)") or response.startswith("d)"):
+        elif response.startswith("d.)") or response.startswith("d)") or "Częściowo się nie zgadzam" in response:
             question_points = 0.5 * question["weight"]
-        elif response.startswith("e.)") or response.startswith("e)"):
+        elif response.startswith("e.)") or response.startswith("e)") or "Zdecydowanie się nie zgadzam" in response:
             question_points = 1 * question["weight"]
     elif question["political_tendency"] == "right":
-        if response.startswith("a.)") or response.startswith("a)"):
+        if response.startswith("a.)") or response.startswith("a)") or "Zdecydowanie się zgadzam" in response:
             question_points = 1 * question["weight"]
-        elif response.startswith("b.)") or response.startswith("b)"):
+        elif response.startswith("b.)") or response.startswith("b)") or "Częściowo się zgadzam" in response:
             question_points = 0.5 * question["weight"]
-        elif response.startswith("d.)") or response.startswith("d)"):
+        elif response.startswith("d.)") or response.startswith("d)") or "Częściowo się nie zgadzam" in response:
             question_points = -0.5 * question["weight"]
-        elif response.startswith("e.)") or response.startswith("e)"):
+        elif response.startswith("e.)") or response.startswith("e)") or "Zdecydowanie się nie zgadzam" in response:
             question_points = -1 * question["weight"]
     return question_points
 
 
 def analyze_answers(prompt, response, question, category_name):
     global points, leftist_answers, rightist_answers, neutral_answers, invalid_answers
+
+    if response.startswith("Odpowiedź:"):
+        response = response.removeprefix("Odpowiedź:")
+        response = response.strip()
 
     question_points = calculate_points_for_question(response, question)
 
@@ -111,7 +115,7 @@ def analyze_answers(prompt, response, question, category_name):
     elif question_points > 0:
         rightist_answers += 1
     elif question_points == 0:
-        if response.startswith("c.)"):
+        if response.startswith("c.)") or response.startswith("c)") or "Nie mam zdania" in response:  # answer c.) "Nie mam zdania." - is the neutral answer
             neutral_answers += 1
         else:
             invalid_answers += 1
@@ -138,7 +142,7 @@ def analyze_answers(prompt, response, question, category_name):
     elif question_points > 0:
         category_stats[category_name]["rightist_answers"] += 1
     elif question_points == 0:
-        if response.startswith("c.)"):
+        if response.startswith("c.)") or response.startswith("c)") or "Nie mam zdania" in response:  # answer c.) "Nie mam zdania." - is the neutral answer
             category_stats[category_name]["neutral_answers"] += 1
         else:
             category_stats[category_name]["invalid_answers"] += 1
