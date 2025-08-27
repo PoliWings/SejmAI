@@ -17,15 +17,15 @@ This directory contains the code and configuration files for fine-tuning the mod
    ```
 3. **Install torch**: Install the appropriate version of PyTorch for your CUDA version. For example, if you have CUDA 11.8, you can install PyTorch with:
    ```bash
-   pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cu118
+   pip install torch==2.7.1 torchvision==0.22.1 torchaudio==2.7.1 --index-url https://download.pytorch.org/whl/cu118
    ```
 4. **Install other dependencies**: Install the required dependencies:
    ```bash
-   pip install bitsandbytes datasets peft sentencepiece transformers ipykernel protobuf wandb huggingface_hub[cli]
+   pip install bitsandbytes datasets peft sentencepiece transformers ipykernel protobuf wandb huggingface_hub[cli] dotenv trl
    ```
 5. **Login to Hugging Face**: Log in to your Hugging Face account:
    ```bash
-   huggingface-cli login
+   hf auth login
    ```
 6. **Run the training script**: Use the provided training script to fine-tune the model:
    ```bash
@@ -46,13 +46,9 @@ To learn more about available options and usage, run:
   ```bash
   nohup ./start.sh --base-model <model_name> &> out.log &
   ```
-- **Check GPU usage**: To check the GPU usage, you can use the `nvidia-smi` command:
+- **Check GPU & RAM usage**: To check the GPU & RAM usage, you can use the `nvidia-smi` and `free` command:
   ```bash
-  watch -n 0.5 -d nvidia-smi
-  ```
-- **Check RAM usage**: To check the RAM usage, you can use the `free` command:
-  ```bash
-  watch -n 0.5 -d free -h
+  watch -n 0.5 -d "nvidia-smi && free -h"
   ```
 - **Check logs**: To check the logs of a running script, you can use the `tail` command:
   ```bash

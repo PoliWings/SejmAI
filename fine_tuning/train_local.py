@@ -52,9 +52,9 @@ LORA_TARGET_MODULES = [
     "up_proj",
     "down_proj",
 ]
-SAVE_STEPS = 100
-EVAL_STEPS = 100
-LOGGING_STEPS = 10
+SAVE_STEPS = 1000
+EVAL_STEPS = 1000
+LOGGING_STEPS = 100
 SEED = 42
 
 # Load raw JSON data
@@ -121,7 +121,7 @@ sft_config = SFTConfig(
     weight_decay=WEIGHT_DECAY,
     optim="adamw_torch",
     dataset_text_field="text",
-    max_seq_length=MAX_LENGTH,
+    max_length=MAX_LENGTH,
     logging_strategy="steps",
     logging_steps=LOGGING_STEPS,
     save_strategy="steps",
