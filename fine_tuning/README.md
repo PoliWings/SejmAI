@@ -20,9 +20,9 @@ This directory contains the code and configuration files for fine-tuning the mod
    pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cu118
    ```
 4. **Install other dependencies**: Install the required dependencies:
-    ```bash
-    pip install bitsandbytes datasets peft sentencepiece transformers ipykernel protobuf
-    ```
+   ```bash
+   pip install bitsandbytes datasets peft sentencepiece transformers ipykernel protobuf wandb huggingface_hub[cli]
+   ```
 5. **Login to Hugging Face**: Log in to your Hugging Face account:
    ```bash
    huggingface-cli login
@@ -44,7 +44,7 @@ To learn more about available options and usage, run:
 ## Useful commands
 - **Run script in background**: To run a script in the background, you can use the `nohup` command:
   ```bash
-  nohup ./start.sh &> out.log &
+  nohup ./start.sh --base-model <model_name> &> out.log &
   ```
 - **Check GPU usage**: To check the GPU usage, you can use the `nvidia-smi` command:
   ```bash
