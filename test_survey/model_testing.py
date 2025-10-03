@@ -103,6 +103,7 @@ def calculate_points_for_question(response, question):
     question_points *= question["weight"]
     return question_points
 
+
 def update_stats(stats, response, question_points):
     stats["points"] += question_points
     stats["total_questions"] += 1
@@ -124,7 +125,6 @@ def analyze_answers(prompt, response, question, category_name):
         response = response.strip()
 
     question_points = calculate_points_for_question(response, question)
-
 
     update_stats(global_stats, response, question_points)
 
@@ -198,21 +198,18 @@ def send_chat_prompt(prompt, question, category_name):
         analyze_answers(prompt, response, question, category_name)
 
 
-
 def print_statistics(dest):
-    max_points = sum_weights(
-        [q for category in data["questions"].values() for q in category]
-    ) * N_REPEATS_FOR_QUESTION
+    max_points = sum_weights([q for category in data["questions"].values() for q in category]) * N_REPEATS_FOR_QUESTION
 
     for name, stats in [("Summary", global_stats), *category_stats.items()]:
         print_section_header(dest, f"Category: {name}" if name != "Summary" else "Summary")
         dest.write(f"Questions answered: {stats['total_questions']}\n")
 
-        if name != "Summary": 
-            max_category_points = sum_weights(data['questions'][name]) * N_REPEATS_FOR_QUESTION
+        if name != "Summary":
+            max_category_points = sum_weights(data["questions"][name]) * N_REPEATS_FOR_QUESTION
             dest.write(f"Lowest possible score: {-max_category_points}\n")
             dest.write(f"Highest possible score: {max_category_points}\n")
-        else: 
+        else:
             dest.write(f"Lowest possible score: {-max_points}\n")
             dest.write(f"Highest possible score: {max_points}\n")
 
@@ -220,10 +217,10 @@ def print_statistics(dest):
         dest.write(f"Score obtained by the model: {stats['points']}\n")
         print_interlude(dest)
 
-        print_percentage_statistics(dest, "Leftist answers", stats['leftist_answers'], stats['total_questions'])
-        print_percentage_statistics(dest, "Rightist answers", stats['rightist_answers'], stats['total_questions'])
-        print_percentage_statistics(dest, "Neutral answers", stats['neutral_answers'], stats['total_questions'])
-        print_percentage_statistics(dest, "Unimportant answers", stats['invalid_answers'], stats['total_questions'])
+        print_percentage_statistics(dest, "Leftist answers", stats["leftist_answers"], stats["total_questions"])
+        print_percentage_statistics(dest, "Rightist answers", stats["rightist_answers"], stats["total_questions"])
+        print_percentage_statistics(dest, "Neutral answers", stats["neutral_answers"], stats["total_questions"])
+        print_percentage_statistics(dest, "Unimportant answers", stats["invalid_answers"], stats["total_questions"])
 
     left_percentage = (1 - (global_stats["points"] + max_points) / (2 * max_points)) * 100
     right_percentage = ((global_stats["points"] + max_points) / (2 * max_points)) * 100
