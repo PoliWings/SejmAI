@@ -130,7 +130,7 @@ sft_config = SFTConfig(
     save_total_limit=1,
     output_dir=OUTPUT_DIR,
     seed=SEED,
-    report_to = "wandb" if api_key else "none",
+    report_to="wandb" if api_key else "none",
     run_name=f"{base_name}__{dataset_name}__{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}",
     push_to_hub=False,
 )
