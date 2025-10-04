@@ -36,7 +36,7 @@ def print_percentage_statistics(filename, description, count, total):
 
 
 def print_section_header(filename, header):
-    filename.write(f"\n======= {header} =======\n")
+    filename.write(f"======= {header} =======\n")
 
 
 def print_interlude(filename):

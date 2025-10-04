@@ -48,6 +48,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--model-name", type=str, help="Name of the local model")
 parser.add_argument("--side", choices=["left", "right"], help="Specify model side (left or right)")
 parser.add_argument("--service", action="store_true", help="Run tests via service API")
+parser.add_argument("--debug", action="store_true", help="Run in debug mode with limited questions")
 
 args = parser.parse_args()
 
@@ -201,6 +202,12 @@ def send_chat_prompt(prompt, question, category_name):
 def print_statistics(dest):
     max_points = sum_weights([q for category in data["questions"].values() for q in category]) * N_REPEATS_FOR_QUESTION
 
+    left_percentage = (1 - (global_stats["points"] + max_points) / (2 * max_points)) * 100
+    right_percentage = ((global_stats["points"] + max_points) / (2 * max_points)) * 100
+
+    print_section_header(dest, "Final Model Bias Summary")
+    dest.write(f"Left/Right-wing tendency ratio: {left_percentage:.2f}% / {right_percentage:.2f}% \n\n")
+
     for name, stats in [("Summary", global_stats), *category_stats.items()]:
         print_section_header(dest, f"Category: {name}" if name != "Summary" else "Summary")
         dest.write(f"Questions answered: {stats['total_questions']}\n")
@@ -221,12 +228,7 @@ def print_statistics(dest):
         print_percentage_statistics(dest, "Rightist answers", stats["rightist_answers"], stats["total_questions"])
         print_percentage_statistics(dest, "Neutral answers", stats["neutral_answers"], stats["total_questions"])
         print_percentage_statistics(dest, "Unimportant answers", stats["invalid_answers"], stats["total_questions"])
-
-    left_percentage = (1 - (global_stats["points"] + max_points) / (2 * max_points)) * 100
-    right_percentage = ((global_stats["points"] + max_points) / (2 * max_points)) * 100
-
-    print_section_header(dest, "Final Model Bias Summary")
-    dest.write(f"Left/Right-wing tendency ratio: {left_percentage:.2f}% / {right_percentage:.2f}% \n")
+        dest.write("\n")
 
 
 if __name__ == "__main__":
@@ -234,6 +236,9 @@ if __name__ == "__main__":
         data = json.load(source)
 
     for category_name, category_questions in data["questions"].items():
+        if args.debug:
+            category_questions = category_questions[:1]
+            print(f"Debug mode: limiting to first question in category '{category_name}'")
         for question in tqdm(category_questions, desc=f"In progress [{category_name}]"):
             send_chat_prompt(question["question"], question, category_name)
 
@@ -246,8 +251,7 @@ if __name__ == "__main__":
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     os.makedirs("output", exist_ok=True)
     with open(f"output/answers_{model_id}__{timestamp}.txt", "w", encoding="utf-8") as dest:
+        print_statistics(dest)
         for question, answer in zip(questions, answers):
             answer = answer.splitlines()[0]
             dest.write(f"Question: {question}\nAnswer: {answer}\n")
-
-        print_statistics(dest)
