@@ -9,7 +9,7 @@ This directory contains the code and configuration files for fine-tuning the mod
    ```
    If you don't have CUDA installed, you can download it using this command:
    ```bash
-   sudo apt install nvidia-cuda-toolkit
+   sudo apt install build-essential nvidia-cuda-toolkit -y
    ```
 2. **Create conda environment**: Create a new conda environment:
    ```bash
