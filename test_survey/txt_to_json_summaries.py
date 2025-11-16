@@ -2,6 +2,7 @@ import os
 import json
 import re
 
+
 def parse_summary_block(text):
     pattern = re.compile(
         r"======= Category: (\w+) =======\s+"
@@ -15,7 +16,7 @@ def parse_summary_block(text):
         r"Rightist answers: (\d+) \(([\d.]+)%\)\s+"
         r"Neutral answers: (\d+) \(([\d.]+)%\)\s+"
         r"Unimportant answers: (\d+) \(([\d.]+)%\)",
-        re.MULTILINE
+        re.MULTILINE,
     )
 
     results = {}
@@ -23,19 +24,17 @@ def parse_summary_block(text):
         category = match.group(1)
         results[category] = {
             "questions_answered": int(match.group(2)),
-            "score_range": {
-                "min": int(match.group(3)),
-                "max": int(match.group(4))
-            },
+            "score_range": {"min": int(match.group(3)), "max": int(match.group(4))},
             "score_obtained": float(match.group(5)),
             "answers_distribution": {
                 "leftist": {"count": int(match.group(6)), "percentage": float(match.group(7))},
                 "rightist": {"count": int(match.group(8)), "percentage": float(match.group(9))},
                 "neutral": {"count": int(match.group(10)), "percentage": float(match.group(11))},
-                "unimportant": {"count": int(match.group(12)), "percentage": float(match.group(13))}
-            }
+                "unimportant": {"count": int(match.group(12)), "percentage": float(match.group(13))},
+            },
         }
     return results
+
 
 def process_all_files(input_dir, output_file="prompt_NEUTRAL_model_neutral.json"):
     all_data = {}
@@ -52,7 +51,8 @@ def process_all_files(input_dir, output_file="prompt_NEUTRAL_model_neutral.json"
     with open(output_file, "w", encoding="utf-8") as out:
         json.dump(all_data, out, ensure_ascii=False, indent=2)
 
-    print(f"Zapisano podsumowania do pliku: {output_file}")
+    print(f"Summaries saved to file: {output_file}")
+
 
 if __name__ == "__main__":
     process_all_files("System prompt NEUTRAL/neutral")

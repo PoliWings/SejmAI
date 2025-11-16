@@ -1,6 +1,7 @@
 import json
 import sys
 
+
 def calculate_average_scores(json_filename):
     with open(json_filename, "r", encoding="utf-8") as f:
         data = json.load(f)
@@ -18,17 +19,15 @@ def calculate_average_scores(json_filename):
                 category_scores[category] = []
             category_scores[category].append(percent_score)
 
-    avg_results = {
-        category: sum(scores) / len(scores)
-        for category, scores in category_scores.items()
-    }
+    avg_results = {category: sum(scores) / len(scores) for category, scores in category_scores.items()}
 
     return avg_results
+
 
 if __name__ == "__main__":
     filename = "prompt_RIGHT_model_neutral.json"
     averages = calculate_average_scores(filename)
 
-    print(f"\nŚrednie wyniki procentowe dla każdej kategorii w pliku {filename} (%):\n")
+    print(f"\nAverage percentage scores for each category in file {filename} (%):\n")
     for category, avg in averages.items():
         print(f"{category}: {100-avg:.2f}% / {avg:.2f}%")
