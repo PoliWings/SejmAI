@@ -88,9 +88,9 @@ def plot_categories_averages(data, out_dir="plots/averages"):
             ax.bar(model_x, rightism_vals, width=bw,
                    bottom=leftism_vals, color=COLORS_MODEL[model]["score"], alpha=0.8)
 
-        ax.set_title(f"Category: {category}", fontsize=20)
-        ax.set_ylabel("Percentage (%)")
-        ax.set_xlabel("Prompt Type")
+        ax.set_title(f"Average Score for Category: {category}", fontsize=14)
+        ax.set_ylabel("Percentage (%)", fontsize=12)
+        ax.set_xlabel("Prompt Type", fontsize=12)
         ax.set_xticks(x)
         ax.set_xticklabels(PROMPT_ORDER)
         ax.set_ylim(0, 100)
@@ -103,7 +103,8 @@ def plot_categories_averages(data, out_dir="plots/averages"):
             loc="upper center",
             ncol=3,
             bbox_to_anchor=(0.3, -0.1),
-            frameon=False
+            frameon=False,
+            fontsize=10
         )
         leg2 = ax.legend(
             handles=list(LEGEND_RATIO.values()),
@@ -111,9 +112,11 @@ def plot_categories_averages(data, out_dir="plots/averages"):
             loc="upper center",
             ncol=2,
             bbox_to_anchor=(0.75, -0.1),
-            frameon=False
+            frameon=False,
+            fontsize=10
         )
         ax.add_artist(leg1)
+        ax.add_artist(leg2)
 
         fig.subplots_adjust(bottom=0.2)
         plt.savefig(f"{out_dir}/{category}.png", dpi=200)
@@ -148,28 +151,32 @@ def plot_general_average(score_data, out_file="plots/averages/general.png"):
     ax.set_xticks(x)
     ax.set_xticklabels(prompt_order)
     ax.set_ylim(0, 100)
-    ax.set_ylabel("Percentage (%)")
-    ax.set_title("Overall Score")
+    ax.set_ylabel("Percentage (%)", fontsize=12)
+    ax.set_xlabel("Prompt Type", fontsize=12)
+    ax.set_title("Overall Average Score", fontsize=14)
     ax.axhline(50, color="red", linestyle="--")
     ax.yaxis.grid(True, linestyle="--", alpha=0.7)
 
-    ax.legend(
+    leg1 = ax.legend(
         handles=list(LEGEND_MODELS_AVG.values()),
         title="Model type",
         loc="upper center",
         ncol=3,
         bbox_to_anchor=(0.3, -0.1),
-        frameon=False
+        frameon=False,
+        fontsize=10
     )
-
-    ax.legend(
+    leg2 = ax.legend(
         handles=list(LEGEND_RATIO.values()),
         title="Ratio",
         loc="upper center",
         ncol=2,
-        bbox_to_anchor=(0.7, -0.1),
-        frameon=False
+        bbox_to_anchor=(0.75, -0.1),
+        frameon=False,
+        fontsize=10
     )
+    ax.add_artist(leg1)
+    ax.add_artist(leg2)
 
     fig.subplots_adjust(bottom=0.2)
     plt.savefig(out_file, dpi=200)
@@ -213,9 +220,10 @@ def plot_categories_std_dev(data, out_dir="plots/std_dev"):
 
             ax.bar(model_x, vals, width=bw, color=COLORS_MODEL[model]["rest"], alpha=0.9)
 
-        ax.set_title(f"Standard Deviation: {category}")
-        ax.set_ylabel("Standard Deviation")
-        ax.set_xlabel("Prompt Type")
+        ax.set_title(f"Standard Deviation for Category: {category}", fontsize=14)
+        ax.set_ylabel("Standard Deviation", fontsize=12)
+        ax.set_xlabel("Prompt Type", fontsize=12)
+        ax.set_ylim(0, 4)
         ax.set_xticks(x)
         ax.set_xticklabels(PROMPT_ORDER)
         ax.yaxis.grid(True, linestyle="--", alpha=0.7)
@@ -227,7 +235,8 @@ def plot_categories_std_dev(data, out_dir="plots/std_dev"):
             loc="upper center",
             ncol=3,
             bbox_to_anchor=(0.5, -0.1),
-            frameon=False
+            frameon=False,
+            fontsize=10
         )
 
         fig.subplots_adjust(bottom=0.2)
@@ -253,8 +262,9 @@ def plot_general_std_dev(std_data, out_file="plots/std_dev/general_std_dev.png")
 
         ax.bar(model_x, vals, width=bw, color=COLORS_MODEL[model]["rest"], alpha=0.9)
 
-    ax.set_title("Standard Deviation per Prompt–Model Combination")
-    ax.set_ylabel("Standard Deviation")
+    ax.set_title("Overall Standard Deviation", fontsize=14)
+    ax.set_ylabel("Standard Deviation", fontsize=12)
+    ax.set_xlabel("Prompt Type", fontsize=12)
     ax.set_xticks(x)
     ax.set_xticklabels(PROMPT_ORDER)
     ax.yaxis.grid(True, linestyle="--", alpha=0.7)
@@ -266,7 +276,8 @@ def plot_general_std_dev(std_data, out_file="plots/std_dev/general_std_dev.png")
         loc="upper center",
         ncol=3,
         bbox_to_anchor=(0.5, -0.1),
-        frameon=False
+        frameon=False,
+        fontsize=10
     )
 
     fig.subplots_adjust(bottom=0.2)
