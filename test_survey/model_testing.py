@@ -4,6 +4,7 @@ import urllib3
 import argparse
 import torch
 import os
+import pickle
 from tqdm import tqdm
 from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
 from sum import sum_weights
@@ -31,6 +32,55 @@ system_prompt = (
     "c.) Nie mam zdania. d.) Częściowo się nie zgadzam. e.) Zdecydowanie się nie zgadzam."
 )
 
+# Argument parsing
+parser = argparse.ArgumentParser()
+parser.add_argument("--model-name", type=str, help="Name of the local model")
+parser.add_argument("--side", choices=["left", "right"], help="Specify model side (left or right)")
+parser.add_argument("--service", action="store_true", help="Run tests via service API")
+parser.add_argument("--debug", action="store_true", help="Run in debug mode with limited questions")
+parser.add_argument("--no-cache", action="store_true", help="Ignore cached progress and start over")
+parser.add_argument(
+    "--dataset", type=str, help="Name of the Hugging Face dataset to use (e.g., cajcodes/political-bias)"
+)
+args = parser.parse_args()
+
+if not args.service and not args.model_name:
+    parser.error("--model-name must be specified if --service is not used")
+
+
+# Dynamic Cache Filename Generation based on flags
+def get_run_identifier(args):
+    parts = []
+
+    # Model/Service part
+    if args.service:
+        parts.append("service")
+    elif args.model_name:
+        clean_name = args.model_name.replace("/", "_").replace("\\", "_")
+        parts.append(clean_name)
+
+    # Side part
+    if args.side:
+        parts.append(f"side-{args.side}")
+
+    # Dataset part
+    if args.dataset:
+        clean_ds = args.dataset.replace("/", "_")
+        parts.append(clean_ds)
+    else:
+        parts.append("local_json")
+
+    # Debug part
+    if args.debug:
+        parts.append("debug")
+
+    return "__".join(parts)
+
+
+run_id = get_run_identifier(args)
+CACHE_FILENAME = f"cache__{run_id}.pkl"
+
+# Global Variables
 questions = []
 answers = []
 category_stats = {}
@@ -42,21 +92,7 @@ global_stats = {
     "invalid_answers": 0,
     "total_questions": 0,
 }
-
-parser = argparse.ArgumentParser()
-parser.add_argument("--model-name", type=str, help="Name of the local model")
-parser.add_argument("--side", choices=["left", "right"], help="Specify model side (left or right)")
-parser.add_argument("--service", action="store_true", help="Run tests via service API")
-parser.add_argument("--debug", action="store_true", help="Run in debug mode with limited questions")
-parser.add_argument(
-    "--dataset", type=str, help="Name of the Hugging Face dataset to use (e.g., cajcodes/political-bias)"
-)
-
-args = parser.parse_args()
-
-if not args.service and not args.model_name:
-    parser.error("--model-name must be specified if --service is not used")
-
+processed_texts = set()
 
 use_service = args.service
 use_side = args.side is not None
@@ -67,6 +103,7 @@ if model_name:
 local_model = None
 local_tokenizer = None
 
+# Model Loading
 if not use_service:
     if use_side:
         model_path = f"../fine_tuning/output/{base_name}__{args.side}_model_sft"
@@ -86,6 +123,39 @@ else:
     assert "LLM_PASSWORD" in os.environ, "Environment variable LLM_PASSWORD must be set"
     auth = (os.getenv("LLM_USERNAME"), os.getenv("LLM_PASSWORD"))
     auth_kwargs = {"auth": auth, "verify": False}
+
+
+def save_progress_cache():
+    """
+    Saves the current state of global variables to a pickle file defined by CLI flags.
+    """
+    state = {
+        "questions": questions,
+        "answers": answers,
+        "category_stats": category_stats,
+        "global_stats": global_stats,
+        "processed_texts": processed_texts,
+    }
+    with open(CACHE_FILENAME, "wb") as f:
+        pickle.dump(state, f)
+
+
+def load_progress_cache():
+    """
+    Loads the state from the pickle file if it exists and updates global variables.
+    """
+    global questions, answers, category_stats, global_stats, processed_texts
+    if os.path.exists(CACHE_FILENAME):
+        print(f"Loading progress from specific cache file: {CACHE_FILENAME}...")
+        with open(CACHE_FILENAME, "rb") as f:
+            state = pickle.load(f)
+            questions = state["questions"]
+            answers = state["answers"]
+            category_stats = state["category_stats"]
+            global_stats = state["global_stats"]
+            processed_texts = state["processed_texts"]
+    else:
+        print(f"No existing cache found for this configuration ({CACHE_FILENAME}). Starting fresh.")
 
 
 def calculate_points_for_question(response, question):
@@ -360,23 +430,37 @@ if __name__ == "__main__":
         with open(FILENAME, "r", encoding="utf-8") as source:
             data = json.load(source)
 
+    if not args.no_cache:
+        load_progress_cache()
+
     for category_name, category_questions in data["questions"].items():
         if args.debug:
             category_questions = category_questions[:1]
             print(f"Debug mode: limiting to first question in category '{category_name}'")
+
         for question in tqdm(category_questions, desc=f"In progress [{category_name}]"):
+            if question["question"] in processed_texts:
+                continue
+
             send_chat_prompt(question["question"], question, category_name)
 
-    model_id = (
-        f"local_{base_name}__{args.side}"
-        if not use_service and use_side
-        else f"local_{base_name}" if not use_service else f"service_{args.side}" if use_side else "service"
-    )
+            processed_texts.add(question["question"])
+            save_progress_cache()
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     os.makedirs("output", exist_ok=True)
-    with open(f"output/answers_{model_id}__{timestamp}.txt", "w", encoding="utf-8") as dest:
+
+    # Use the same run_id for the final output file
+    output_filename = f"output/answers__{run_id}__{timestamp}.txt"
+
+    with open(output_filename, "w", encoding="utf-8") as dest:
         print_statistics(dest)
         for question, answer in zip(questions, answers):
             answer = answer.splitlines()[0]
             dest.write(f"Question: {question}\nAnswer: {answer}\n")
+
+    print(f"\nExecution finished. Results saved to {output_filename}")
+
+    if os.path.exists(CACHE_FILENAME):
+        os.remove(CACHE_FILENAME)
+        print(f"Cache file {CACHE_FILENAME} cleaned up.")

@@ -1,5 +1,32 @@
 #!/bin/bash
 
+run_with_retries() {
+    local max_retries=5
+    local attempt=1
+    local cmd=("$@")
+
+    while [ $attempt -le $max_retries ]; do
+        echo "----------------------------------------------------"
+        echo "Running (Attempt $attempt/$max_retries): ${cmd[*]}"
+        
+        "${cmd[@]}"
+        
+        if [ $? -eq 0 ]; then
+            return 0
+        fi
+
+        echo "Error: Command failed."
+        if [ $attempt -lt $max_retries ]; then
+            echo "Retrying in 3 seconds..."
+            sleep 3
+        fi
+        ((attempt++))
+    done
+
+    echo "Critical Error: Failed to execute command after $max_retries attempts."
+    return 1
+}
+
 args=("$@")
 version=""
 pass_args=()
@@ -48,22 +75,25 @@ fi
 if [[ "$mode" == "service" ]]; then
     python ../fine_tuning/train_service.py --unload-lora left
     python ../fine_tuning/train_service.py --unload-lora right
-    python model_testing.py --service "${filtered_args[@]}"
+    
+    run_with_retries python model_testing.py --service "${filtered_args[@]}" || exit 1
 
     for side in right left; do
         echo "=== Load lora adapter for $side side ==="
         python ../fine_tuning/train_service.py --load-lora "$side" "${version_arg[@]}" || exit 1
 
         echo "=== Testing model with $side adapter ==="
-        python model_testing.py --side "$side" --service "${filtered_args[@]}"
+        run_with_retries python model_testing.py --side "$side" --service "${filtered_args[@]}" || exit 1
+        
         python ../fine_tuning/train_service.py --unload-lora "$side"
     done
 
 elif [[ "$mode" == "local" ]]; then
-    python model_testing.py "${filtered_args[@]}"
+    run_with_retries python model_testing.py "${filtered_args[@]}" || exit 1
+    
     for side in right left; do
         echo "=== Testing local model with $side version ==="
-        python model_testing.py --side "$side" "${filtered_args[@]}"
+        run_with_retries python model_testing.py --side "$side" "${filtered_args[@]}" || exit 1
     done
 
 else

@@ -167,7 +167,7 @@ elif args.load_lora in ["left", "right"]:
     print(response.json())
     response.raise_for_status()
 
-# ===================== Delete LoRA =====================
+# ===================== Unload LoRA =====================
 elif args.unload_lora in ["left", "right"]:
     side = args.unload_lora
     adapter_name = f"opposing_views__{side}_lora_module"
