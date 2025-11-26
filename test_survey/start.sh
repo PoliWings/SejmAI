@@ -4,6 +4,7 @@ args=("$@")
 version=""
 pass_args=()
 model_name=""
+dataset=""
 
 for ((i=0; i<${#args[@]}; i++)); do
     arg="${args[i]}"
@@ -13,6 +14,9 @@ for ((i=0; i<${#args[@]}; i++)); do
     elif [[ "$arg" == "--model-name" ]]; then
         ((i++))
         model_name="${args[i]}"
+    elif [[ "$arg" == "--dataset" ]]; then
+        ((i++))
+        dataset="${args[i]}"
     else
         pass_args+=("$arg")
     fi
@@ -37,8 +41,13 @@ fi
 if [[ -n "$version" ]]; then
     version_arg=(--version "$version")
 fi
+if [[ -n "$dataset" ]]; then
+    filtered_args+=(--dataset "$dataset")
+fi
 
 if [[ "$mode" == "service" ]]; then
+    python ../fine_tuning/train_service.py --unload-lora left
+    python ../fine_tuning/train_service.py --unload-lora right
     python model_testing.py --service "${filtered_args[@]}"
 
     for side in right left; do
@@ -47,6 +56,7 @@ if [[ "$mode" == "service" ]]; then
 
         echo "=== Testing model with $side adapter ==="
         python model_testing.py --side "$side" --service "${filtered_args[@]}"
+        python ../fine_tuning/train_service.py --unload-lora "$side"
     done
 
 elif [[ "$mode" == "local" ]]; then
@@ -61,8 +71,9 @@ else
     echo -e "\tmode:\t\t--service or --local"
     echo -e "\tversion:\trequired only for --service"
     echo -e "\tmodel-name:\trequired only for --local"
+    echo -e "\tdataset:\toptional, specify dataset name"
     echo -e "\tflags:\t\tany additional flags passed to model_testing.py"
-    echo -e "\tExample:\t$0 --service --version 1.0.0"
-    echo -e "\t\t\t$0 --local --model-name my_model"
+    echo -e "\tExample:\t$0 --service --version 1.0.0 --dataset my_dataset"
+    echo -e "\t\t\t$0 --local --model-name my_model --dataset my_dataset"
     exit 1
 fi

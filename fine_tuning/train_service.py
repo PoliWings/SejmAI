@@ -20,7 +20,7 @@ parser.add_argument(
 parser.add_argument("--status", action="store_true", help="Check fine-tuning status")
 parser.add_argument("--cancel", action="store_true", help="Cancel fine-tuning")
 parser.add_argument("--load-lora", choices=["left", "right"], help="Load LoRA adapter into model")
-parser.add_argument("--delete-lora", choices=["left", "right"], help="Unload LoRA adapter from model")
+parser.add_argument("--unload-lora", choices=["left", "right"], help="Unload LoRA adapter from model")
 parser.add_argument("--download-lora", choices=["left", "right"], help="Download trained LoRA adapter")
 parser.add_argument("--version", type=str, help="Specify LoRA adapter version to load/delete/download")
 args = parser.parse_args()
@@ -168,12 +168,9 @@ elif args.load_lora in ["left", "right"]:
     response.raise_for_status()
 
 # ===================== Delete LoRA =====================
-elif args.delete_lora in ["left", "right"]:
-    side = args.delete_lora
+elif args.unload_lora in ["left", "right"]:
+    side = args.unload_lora
     adapter_name = f"opposing_views__{side}_lora_module"
-    adapter_version = args.version
-
-    assert adapter_version, "use --version to set adapter version"
 
     lora_data = {"lora_adapter": adapter_name}
     response = requests.delete(
