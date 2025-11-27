@@ -59,16 +59,16 @@ def get_run_identifier(args):
         clean_name = args.model_name.replace("/", "_").replace("\\", "_")
         parts.append(clean_name)
 
-    # Side part
-    if args.side:
-        parts.append(f"side-{args.side}")
-
     # Dataset part
     if args.dataset:
         clean_ds = args.dataset.replace("/", "_")
         parts.append(clean_ds)
     else:
         parts.append("local_json")
+
+    # Side part
+    if args.side:
+        parts.append(f"side-{args.side}")
 
     # Debug part
     if args.debug:
