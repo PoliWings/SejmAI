@@ -36,9 +36,7 @@ def parse_name(filename):
 def plot_categories_averages(data, out_dir="plots/averages"):
     os.makedirs(out_dir, exist_ok=True)
 
-    categories = sorted({
-        cat for file in data.values() for cat in file
-    })
+    categories = sorted({cat for file in data.values() for cat in file})
 
     for category in categories:
 
@@ -85,12 +83,11 @@ def plot_categories_averages(data, out_dir="plots/averages"):
                 rightism_vals.append(r)
 
             ax.bar(model_x, leftism_vals, width=bw, color=COLORS_MODEL[model]["rest"])
-            ax.bar(model_x, rightism_vals, width=bw,
-                   bottom=leftism_vals, color=COLORS_MODEL[model]["score"], alpha=0.8)
+            ax.bar(model_x, rightism_vals, width=bw, bottom=leftism_vals, color=COLORS_MODEL[model]["score"], alpha=0.8)
 
         ax.set_title(f"Average Score for Category: {category}", fontsize=14)
         ax.set_ylabel("Percentage (%)", fontsize=12)
-        ax.set_xlabel("Prompt Type", fontsize=12)
+        ax.set_xlabel("System Prompt Type", fontsize=12)
         ax.set_xticks(x)
         ax.set_xticklabels(PROMPT_ORDER)
         ax.set_ylim(0, 100)
@@ -104,7 +101,7 @@ def plot_categories_averages(data, out_dir="plots/averages"):
             ncol=3,
             bbox_to_anchor=(0.3, -0.1),
             frameon=False,
-            fontsize=10
+            fontsize=10,
         )
         leg2 = ax.legend(
             handles=list(LEGEND_RATIO.values()),
@@ -113,7 +110,7 @@ def plot_categories_averages(data, out_dir="plots/averages"):
             ncol=2,
             bbox_to_anchor=(0.75, -0.1),
             frameon=False,
-            fontsize=10
+            fontsize=10,
         )
         ax.add_artist(leg1)
         ax.add_artist(leg2)
@@ -145,14 +142,13 @@ def plot_general_average(score_data, out_file="plots/averages/general.png"):
         rightism_values = 100 - leftism_values
 
         ax.bar(model_x, leftism_values, width=bw, color=COLORS_MODEL[model]["rest"])
-        ax.bar(model_x, rightism_values,
-               width=bw, bottom=leftism_values, color=COLORS_MODEL[model]["score"], alpha=0.8)
+        ax.bar(model_x, rightism_values, width=bw, bottom=leftism_values, color=COLORS_MODEL[model]["score"], alpha=0.8)
 
     ax.set_xticks(x)
     ax.set_xticklabels(prompt_order)
     ax.set_ylim(0, 100)
     ax.set_ylabel("Percentage (%)", fontsize=12)
-    ax.set_xlabel("Prompt Type", fontsize=12)
+    ax.set_xlabel("System Prompt Type", fontsize=12)
     ax.set_title("Overall Average Score", fontsize=14)
     ax.axhline(50, color="red", linestyle="--")
     ax.yaxis.grid(True, linestyle="--", alpha=0.7)
@@ -164,7 +160,7 @@ def plot_general_average(score_data, out_file="plots/averages/general.png"):
         ncol=3,
         bbox_to_anchor=(0.3, -0.1),
         frameon=False,
-        fontsize=10
+        fontsize=10,
     )
     leg2 = ax.legend(
         handles=list(LEGEND_RATIO.values()),
@@ -173,7 +169,7 @@ def plot_general_average(score_data, out_file="plots/averages/general.png"):
         ncol=2,
         bbox_to_anchor=(0.75, -0.1),
         frameon=False,
-        fontsize=10
+        fontsize=10,
     )
     ax.add_artist(leg1)
     ax.add_artist(leg2)
@@ -184,12 +180,11 @@ def plot_general_average(score_data, out_file="plots/averages/general.png"):
 
     print(f"Saved overall average: {out_file}")
 
+
 def plot_categories_std_dev(data, out_dir="plots/std_dev"):
     os.makedirs(out_dir, exist_ok=True)
 
-    categories = sorted({
-        category for file_data in data.values() for category in file_data
-    })
+    categories = sorted({category for file_data in data.values() for category in file_data})
 
     for category in categories:
 
@@ -222,21 +217,20 @@ def plot_categories_std_dev(data, out_dir="plots/std_dev"):
 
         ax.set_title(f"Standard Deviation for Category: {category}", fontsize=14)
         ax.set_ylabel("Standard Deviation", fontsize=12)
-        ax.set_xlabel("Prompt Type", fontsize=12)
+        ax.set_xlabel("System Prompt Type", fontsize=12)
         ax.set_ylim(0, 4)
         ax.set_xticks(x)
         ax.set_xticklabels(PROMPT_ORDER)
         ax.yaxis.grid(True, linestyle="--", alpha=0.7)
 
         ax.legend(
-            handles=[Patch(color=COLORS_MODEL[m]["rest"], label=m.capitalize() + " model")
-                     for m in MODEL_ORDER],
+            handles=[Patch(color=COLORS_MODEL[m]["rest"], label=m.capitalize() + " model") for m in MODEL_ORDER],
             title="Model type",
             loc="upper center",
             ncol=3,
             bbox_to_anchor=(0.5, -0.1),
             frameon=False,
-            fontsize=10
+            fontsize=10,
         )
 
         fig.subplots_adjust(bottom=0.2)
@@ -264,20 +258,19 @@ def plot_general_std_dev(std_data, out_file="plots/std_dev/general_std_dev.png")
 
     ax.set_title("Overall Standard Deviation", fontsize=14)
     ax.set_ylabel("Standard Deviation", fontsize=12)
-    ax.set_xlabel("Prompt Type", fontsize=12)
+    ax.set_xlabel("System Prompt Type", fontsize=12)
     ax.set_xticks(x)
     ax.set_xticklabels(PROMPT_ORDER)
     ax.yaxis.grid(True, linestyle="--", alpha=0.7)
 
     ax.legend(
-        handles=[Patch(color=COLORS_MODEL[m]["rest"], label=m.capitalize() + " model")
-                 for m in MODEL_ORDER],
+        handles=[Patch(color=COLORS_MODEL[m]["rest"], label=m.capitalize() + " model") for m in MODEL_ORDER],
         title="Model type",
         loc="upper center",
         ncol=3,
         bbox_to_anchor=(0.5, -0.1),
         frameon=False,
-        fontsize=10
+        fontsize=10,
     )
 
     fig.subplots_adjust(bottom=0.2)
@@ -293,23 +286,23 @@ def plot_all():
 
     plot_categories_averages(category_data)
 
-    general_data_averages = np.array([
-        [72.42, 82.85, 54.18],
-        [88.82, 88.59, 81.41],
-        [59.03, 71.68, 55.18],
-        [18.18, 27.38, 21.38]
-    ])
+    general_data_averages = np.array(
+        [[72.42, 82.85, 54.18], [88.82, 88.59, 81.41], [59.03, 71.68, 55.18], [18.18, 27.38, 21.38]]
+    )
     plot_general_average(general_data_averages)
 
     plot_categories_std_dev(category_data)
 
-    general_data_std_dev = np.array([
-        [0.47, 0.70, 0.97],
-        [0.30, 0.32, 0.87],
-        [0.36, 0.38, 0.49],
-        [0.41, 0.62, 0.33],
-    ])
+    general_data_std_dev = np.array(
+        [
+            [0.47, 0.70, 0.97],
+            [0.30, 0.32, 0.87],
+            [0.36, 0.38, 0.49],
+            [0.41, 0.62, 0.33],
+        ]
+    )
     plot_general_std_dev(general_data_std_dev)
+
 
 if __name__ == "__main__":
     plot_all()
