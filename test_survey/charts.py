@@ -9,9 +9,9 @@ PROMPT_ORDER = ["BASIC", "LEFT", "NEUTRAL", "RIGHT"]
 MODEL_ORDER = ["left", "neutral", "right"]
 
 COLORS_MODEL = {
-    "neutral": {"score": "#254EAD", "rest": "#648FFC"},
-    "left": {"score": "#8F225B", "rest": "#DC4494"},
-    "right": {"score": "#1E695B", "rest": "#44B49C"},
+    "neutral": {"score": "#1C3D89", "rest": "#648FFC"},
+    "left": {"score": "#6E1847", "rest": "#DC4494"},
+    "right": {"score": "#154E45", "rest": "#44B49C"},
 }
 
 LEGEND_MODELS_AVG = {
@@ -21,9 +21,13 @@ LEGEND_MODELS_AVG = {
 }
 
 LEGEND_RATIO = {
-    "score": Patch(color="#4b5563", label="Rightism"),
-    "rest": Patch(color="#9ca3af", label="Leftism"),
+    "score": Patch(color="#2f3a45", label="Rightism"),
+    "rest": Patch(color="#7b828a", label="Leftism"),
 }
+
+TITLE_FONT_SIZE = 20
+LABEL_FONT_SIZE = 16
+LEGEND_FONT_SIZE = 12
 
 
 def parse_name(filename):
@@ -85,11 +89,11 @@ def plot_categories_averages(data, out_dir="plots/averages"):
             ax.bar(model_x, leftism_vals, width=bw, color=COLORS_MODEL[model]["rest"])
             ax.bar(model_x, rightism_vals, width=bw, bottom=leftism_vals, color=COLORS_MODEL[model]["score"], alpha=0.8)
 
-        ax.set_title(f"Average Score for Category: {category}", fontsize=14)
-        ax.set_ylabel("Percentage (%)", fontsize=12)
-        ax.set_xlabel("System Prompt Type", fontsize=12)
+        ax.set_title(f"Average Score for Category: {category}", fontsize=TITLE_FONT_SIZE)
+        ax.set_ylabel("Percentage (%)", fontsize=LABEL_FONT_SIZE)
+        ax.set_xlabel("System Prompt Type", fontsize=LABEL_FONT_SIZE)
         ax.set_xticks(x)
-        ax.set_xticklabels(PROMPT_ORDER)
+        ax.set_xticklabels(PROMPT_ORDER, fontsize=LEGEND_FONT_SIZE)
         ax.set_ylim(0, 100)
         ax.yaxis.grid(True, linestyle="--", alpha=0.7)
         ax.axhline(50, color="red", linestyle="--")
@@ -101,7 +105,8 @@ def plot_categories_averages(data, out_dir="plots/averages"):
             ncol=3,
             bbox_to_anchor=(0.3, -0.1),
             frameon=False,
-            fontsize=10,
+            fontsize=LEGEND_FONT_SIZE,
+            title_fontsize = LEGEND_FONT_SIZE,
         )
         leg2 = ax.legend(
             handles=list(LEGEND_RATIO.values()),
@@ -110,7 +115,8 @@ def plot_categories_averages(data, out_dir="plots/averages"):
             ncol=2,
             bbox_to_anchor=(0.75, -0.1),
             frameon=False,
-            fontsize=10,
+            fontsize=LEGEND_FONT_SIZE,
+            title_fontsize = LEGEND_FONT_SIZE,
         )
         ax.add_artist(leg1)
         ax.add_artist(leg2)
@@ -128,7 +134,7 @@ def plot_general_average(score_data, out_file="plots/averages/general.png"):
     prompt_order = PROMPT_ORDER
     models = ["neutral", "left", "right"]
 
-    fig, ax = plt.subplots(figsize=(14, 7))
+    fig, ax = plt.subplots(figsize=(16, 8))
 
     x = np.arange(len(prompt_order)) * 1.5
     bw = 0.3
@@ -145,11 +151,11 @@ def plot_general_average(score_data, out_file="plots/averages/general.png"):
         ax.bar(model_x, rightism_values, width=bw, bottom=leftism_values, color=COLORS_MODEL[model]["score"], alpha=0.8)
 
     ax.set_xticks(x)
-    ax.set_xticklabels(prompt_order)
+    ax.set_xticklabels(prompt_order, fontsize=LEGEND_FONT_SIZE)
     ax.set_ylim(0, 100)
-    ax.set_ylabel("Percentage (%)", fontsize=12)
-    ax.set_xlabel("System Prompt Type", fontsize=12)
-    ax.set_title("Overall Average Score", fontsize=14)
+    ax.set_ylabel("Percentage (%)", fontsize=LABEL_FONT_SIZE)
+    ax.set_xlabel("System Prompt Type", fontsize=LABEL_FONT_SIZE)
+    ax.set_title("Overall Average Score", fontsize=TITLE_FONT_SIZE)
     ax.axhline(50, color="red", linestyle="--")
     ax.yaxis.grid(True, linestyle="--", alpha=0.7)
 
@@ -160,7 +166,8 @@ def plot_general_average(score_data, out_file="plots/averages/general.png"):
         ncol=3,
         bbox_to_anchor=(0.3, -0.1),
         frameon=False,
-        fontsize=10,
+        fontsize=LEGEND_FONT_SIZE,
+        title_fontsize = LEGEND_FONT_SIZE,
     )
     leg2 = ax.legend(
         handles=list(LEGEND_RATIO.values()),
@@ -169,7 +176,8 @@ def plot_general_average(score_data, out_file="plots/averages/general.png"):
         ncol=2,
         bbox_to_anchor=(0.75, -0.1),
         frameon=False,
-        fontsize=10,
+        fontsize=LEGEND_FONT_SIZE,
+        title_fontsize = LEGEND_FONT_SIZE,
     )
     ax.add_artist(leg1)
     ax.add_artist(leg2)
@@ -215,12 +223,12 @@ def plot_categories_std_dev(data, out_dir="plots/std_dev"):
 
             ax.bar(model_x, vals, width=bw, color=COLORS_MODEL[model]["rest"], alpha=0.9)
 
-        ax.set_title(f"Standard Deviation for Category: {category}", fontsize=14)
-        ax.set_ylabel("Standard Deviation", fontsize=12)
-        ax.set_xlabel("System Prompt Type", fontsize=12)
+        ax.set_title(f"Standard Deviation for Category: {category}", fontsize=TITLE_FONT_SIZE)
+        ax.set_ylabel("Standard Deviation", fontsize=LABEL_FONT_SIZE)
+        ax.set_xlabel("System Prompt Type", fontsize=LABEL_FONT_SIZE)
         ax.set_ylim(0, 4)
         ax.set_xticks(x)
-        ax.set_xticklabels(PROMPT_ORDER)
+        ax.set_xticklabels(PROMPT_ORDER, fontsize=LEGEND_FONT_SIZE)
         ax.yaxis.grid(True, linestyle="--", alpha=0.7)
 
         ax.legend(
@@ -230,7 +238,8 @@ def plot_categories_std_dev(data, out_dir="plots/std_dev"):
             ncol=3,
             bbox_to_anchor=(0.5, -0.1),
             frameon=False,
-            fontsize=10,
+            fontsize=LEGEND_FONT_SIZE,
+            title_fontsize = LEGEND_FONT_SIZE,
         )
 
         fig.subplots_adjust(bottom=0.2)
@@ -243,7 +252,7 @@ def plot_categories_std_dev(data, out_dir="plots/std_dev"):
 def plot_general_std_dev(std_data, out_file="plots/std_dev/general_std_dev.png"):
     os.makedirs(os.path.dirname(out_file), exist_ok=True)
 
-    fig, ax = plt.subplots(figsize=(14, 7))
+    fig, ax = plt.subplots(figsize=(16, 8))
 
     x = np.arange(len(PROMPT_ORDER)) * 1.5
     bw = 0.3
@@ -256,11 +265,11 @@ def plot_general_std_dev(std_data, out_file="plots/std_dev/general_std_dev.png")
 
         ax.bar(model_x, vals, width=bw, color=COLORS_MODEL[model]["rest"], alpha=0.9)
 
-    ax.set_title("Overall Standard Deviation", fontsize=14)
-    ax.set_ylabel("Standard Deviation", fontsize=12)
-    ax.set_xlabel("System Prompt Type", fontsize=12)
+    ax.set_title("Overall Standard Deviation", fontsize=TITLE_FONT_SIZE)
+    ax.set_ylabel("Standard Deviation", fontsize=LABEL_FONT_SIZE)
+    ax.set_xlabel("System Prompt Type", fontsize=LABEL_FONT_SIZE)
     ax.set_xticks(x)
-    ax.set_xticklabels(PROMPT_ORDER)
+    ax.set_xticklabels(PROMPT_ORDER, fontsize=LEGEND_FONT_SIZE)
     ax.yaxis.grid(True, linestyle="--", alpha=0.7)
 
     ax.legend(
@@ -270,7 +279,8 @@ def plot_general_std_dev(std_data, out_file="plots/std_dev/general_std_dev.png")
         ncol=3,
         bbox_to_anchor=(0.5, -0.1),
         frameon=False,
-        fontsize=10,
+        fontsize=LEGEND_FONT_SIZE,
+        title_fontsize = LEGEND_FONT_SIZE,
     )
 
     fig.subplots_adjust(bottom=0.2)
