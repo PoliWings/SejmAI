@@ -3,6 +3,7 @@ import argparse
 import requests
 import urllib3
 import os
+import random
 from typing import List, Dict, Any
 from datetime import datetime
 from tqdm import tqdm
@@ -38,9 +39,6 @@ ANSWER_STRONGLY_DISAGREE = "e.) Zdecydowanie się nie zgadzam."
 
 
 def parse_arguments():
-    """
-    Parses command line arguments for the service-based few-shot testing.
-    """
     parser = argparse.ArgumentParser(description="Test LLM via Service with few-shot prompting.")
     parser.add_argument(
         "--persona",
@@ -58,9 +56,6 @@ def parse_arguments():
 
 
 def get_service_auth():
-    """
-    Retrieves authentication credentials from environment variables.
-    """
     username = os.getenv("LLM_USERNAME")
     password = os.getenv("LLM_PASSWORD")
     url = os.getenv("LLM_URL")
@@ -71,10 +66,6 @@ def get_service_auth():
 
 
 def get_persona_answer(question: Dict[str, Any], persona: str) -> str:
-    """
-    Determines the simulated answer based on the question's inherent bias
-    and the target persona.
-    """
     q_tendency = question.get("political_tendency")
 
     if persona == "left":
@@ -84,10 +75,6 @@ def get_persona_answer(question: Dict[str, Any], persona: str) -> str:
 
 
 def generate_response_service(messages: List[Dict[str, str]], args) -> str:
-    """
-    Sends the prompt to the remote LLM service and retrieves the response.
-    Constructs the LoRA adapter name dynamically if 'side' is provided.
-    """
     base_url, auth = get_service_auth()
     url = f"{base_url}/llm/prompt/chat"
 
@@ -124,10 +111,6 @@ def generate_response_service(messages: List[Dict[str, str]], args) -> str:
 
 
 def run_comparison(data: Dict, args):
-    """
-    Main execution loop.
-    Prepares tasks by grouping questions into blocks to use related variants as few-shot examples.
-    """
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
@@ -138,13 +121,10 @@ def run_comparison(data: Dict, args):
 
     for category_name, cat_questions in data["questions"].items():
         for i, question in enumerate(cat_questions):
-            block_start = (i // 3) * 3
-            block_end = block_start + 3
 
-            related_variants = []
-            for j in range(block_start, block_end):
-                if j < len(cat_questions) and j != i:
-                    related_variants.append(cat_questions[j])
+            candidates = [q for idx, q in enumerate(cat_questions) if idx != i]
+
+            related_variants = random.sample(candidates, min(len(candidates), 2))
 
             tasks.append({"target": question, "potential_shots": related_variants})
 
