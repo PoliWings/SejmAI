@@ -15,9 +15,9 @@ COLORS_MODEL = {
 }
 
 LEGEND_MODELS_AVG = {
-    "neutral": Patch(color=COLORS_MODEL["neutral"]["score"], label="Neutral model"),
-    "left": Patch(color=COLORS_MODEL["left"]["score"], label="Left-wing model"),
-    "right": Patch(color=COLORS_MODEL["right"]["score"], label="Right-wing model"),
+    "neutral": Patch(color=COLORS_MODEL["neutral"]["rest"], label="Neutral model"),
+    "left": Patch(color=COLORS_MODEL["left"]["rest"], label="Left-wing model"),
+    "right": Patch(color=COLORS_MODEL["right"]["rest"], label="Right-wing model"),
 }
 
 LEGEND_RATIO = {
