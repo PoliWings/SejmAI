@@ -25,9 +25,9 @@ LEGEND_RATIO = {
     "rest": Patch(color="#7b828a", label="Leftism"),
 }
 
-TITLE_FONT_SIZE = 20
-LABEL_FONT_SIZE = 16
-LEGEND_FONT_SIZE = 12
+TITLE_FONT_SIZE = 24
+LABEL_FONT_SIZE = 20
+LEGEND_FONT_SIZE = 14
 
 
 def parse_name(filename):
@@ -58,9 +58,9 @@ def plot_categories_averages(data, out_dir="plots/averages"):
             if prompt_type in values and model_bias in values[prompt_type]:
                 values[prompt_type][model_bias] = avg
 
-        fig, ax = plt.subplots(figsize=(16, 8))
-        x = np.arange(len(PROMPT_ORDER)) * 1.5
-        bw = 0.3
+        fig, ax = plt.subplots(figsize=(14, 8))
+        x = np.arange(len(PROMPT_ORDER)) * 1.2
+        bw = 0.2
         gap = 0.05
 
         offsets = {
@@ -113,7 +113,7 @@ def plot_categories_averages(data, out_dir="plots/averages"):
             title="Ratio",
             loc="upper center",
             ncol=2,
-            bbox_to_anchor=(0.75, -0.1),
+            bbox_to_anchor=(0.85, -0.1),
             frameon=False,
             fontsize=LEGEND_FONT_SIZE,
             title_fontsize = LEGEND_FONT_SIZE,
@@ -121,8 +121,10 @@ def plot_categories_averages(data, out_dir="plots/averages"):
         ax.add_artist(leg1)
         ax.add_artist(leg2)
 
+        extra_artists = (leg1, leg2)
+
         fig.subplots_adjust(bottom=0.2)
-        plt.savefig(f"{out_dir}/{category}.png", dpi=200)
+        plt.savefig(f"{out_dir}/{category}.png", dpi=200, bbox_inches='tight', bbox_extra_artists=extra_artists)
         plt.close()
 
         print(f"Saved average plot: {out_dir}/{category}.png")
@@ -134,10 +136,10 @@ def plot_general_average(score_data, out_file="plots/averages/general.png"):
     prompt_order = PROMPT_ORDER
     models = ["neutral", "left", "right"]
 
-    fig, ax = plt.subplots(figsize=(16, 8))
+    fig, ax = plt.subplots(figsize=(14, 8))
 
-    x = np.arange(len(prompt_order)) * 1.5
-    bw = 0.3
+    x = np.arange(len(prompt_order)) * 1.2
+    bw = 0.2
     gap = 0.05
     offsets = {"left": -bw - gap, "neutral": 0, "right": bw + gap}
 
@@ -174,7 +176,7 @@ def plot_general_average(score_data, out_file="plots/averages/general.png"):
         title="Ratio",
         loc="upper center",
         ncol=2,
-        bbox_to_anchor=(0.75, -0.1),
+        bbox_to_anchor=(0.85, -0.1),
         frameon=False,
         fontsize=LEGEND_FONT_SIZE,
         title_fontsize = LEGEND_FONT_SIZE,
@@ -182,8 +184,11 @@ def plot_general_average(score_data, out_file="plots/averages/general.png"):
     ax.add_artist(leg1)
     ax.add_artist(leg2)
 
+    extra_artists = (leg1, leg2)
+
+
     fig.subplots_adjust(bottom=0.2)
-    plt.savefig(out_file, dpi=200)
+    plt.savefig(out_file, dpi=200, bbox_inches='tight', bbox_extra_artists=extra_artists)
     plt.close()
 
     print(f"Saved overall average: {out_file}")
@@ -210,10 +215,10 @@ def plot_categories_std_dev(data, out_dir="plots/std_dev"):
 
             values[ptype][mbias] = sd
 
-        fig, ax = plt.subplots(figsize=(16, 8))
+        fig, ax = plt.subplots(figsize=(14, 8))
 
-        x = np.arange(len(PROMPT_ORDER)) * 1.5
-        bw = 0.3
+        x = np.arange(len(PROMPT_ORDER)) * 1.2
+        bw = 0.2
         gap = 0.05
         offsets = {"left": -bw - gap, "neutral": 0, "right": bw + gap}
 
@@ -243,7 +248,7 @@ def plot_categories_std_dev(data, out_dir="plots/std_dev"):
         )
 
         fig.subplots_adjust(bottom=0.2)
-        plt.savefig(f"{out_dir}/{category}_std_dev.png", dpi=200)
+        plt.savefig(f"{out_dir}/{category}_std_dev.png", dpi=200, bbox_inches='tight')
         plt.close()
 
         print(f"Saved std dev plot: {out_dir}/{category}_std_dev.png")
@@ -252,10 +257,10 @@ def plot_categories_std_dev(data, out_dir="plots/std_dev"):
 def plot_general_std_dev(std_data, out_file="plots/std_dev/general_std_dev.png"):
     os.makedirs(os.path.dirname(out_file), exist_ok=True)
 
-    fig, ax = plt.subplots(figsize=(16, 8))
+    fig, ax = plt.subplots(figsize=(14, 8))
 
-    x = np.arange(len(PROMPT_ORDER)) * 1.5
-    bw = 0.3
+    x = np.arange(len(PROMPT_ORDER)) * 1.2
+    bw = 0.2
     gap = 0.05
     offsets = {"left": -bw - gap, "neutral": 0, "right": bw + gap}
 
@@ -284,7 +289,7 @@ def plot_general_std_dev(std_data, out_file="plots/std_dev/general_std_dev.png")
     )
 
     fig.subplots_adjust(bottom=0.2)
-    plt.savefig(out_file, dpi=200)
+    plt.savefig(out_file, dpi=200, bbox_inches='tight')
     plt.close()
 
     print(f"Saved overall std dev: {out_file}")
