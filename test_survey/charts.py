@@ -25,9 +25,9 @@ LEGEND_RATIO = {
     "rest": Patch(color="#7b828a", label="Leftism"),
 }
 
-TITLE_FONT_SIZE = 24
-LABEL_FONT_SIZE = 20
-LEGEND_FONT_SIZE = 14
+TITLE_FONT_SIZE = 40
+LABEL_FONT_SIZE = 32
+LEGEND_FONT_SIZE = 24
 
 
 def parse_name(filename):
@@ -58,7 +58,7 @@ def plot_categories_averages(data, out_dir="plots/averages"):
             if prompt_type in values and model_bias in values[prompt_type]:
                 values[prompt_type][model_bias] = avg
 
-        fig, ax = plt.subplots(figsize=(14, 8))
+        fig, ax = plt.subplots(figsize=(12, 8))
         x = np.arange(len(PROMPT_ORDER)) * 1.2
         bw = 0.2
         gap = 0.05
@@ -89,42 +89,43 @@ def plot_categories_averages(data, out_dir="plots/averages"):
             ax.bar(model_x, leftism_vals, width=bw, color=COLORS_MODEL[model]["rest"])
             ax.bar(model_x, rightism_vals, width=bw, bottom=leftism_vals, color=COLORS_MODEL[model]["score"], alpha=0.8)
 
-        ax.set_title(f"Average Score for Category: {category}", fontsize=TITLE_FONT_SIZE)
+        ax.set_title(f"Average Score: {category}", fontsize=TITLE_FONT_SIZE)
         ax.set_ylabel("Percentage (%)", fontsize=LABEL_FONT_SIZE)
         ax.set_xlabel("System Prompt Type", fontsize=LABEL_FONT_SIZE)
         ax.set_xticks(x)
         ax.set_xticklabels(PROMPT_ORDER, fontsize=LEGEND_FONT_SIZE)
+        ax.tick_params(axis="y", labelsize=LEGEND_FONT_SIZE)
         ax.set_ylim(0, 100)
         ax.yaxis.grid(True, linestyle="--", alpha=0.7)
         ax.axhline(50, color="red", linestyle="--")
 
-        leg1 = ax.legend(
-            handles=list(LEGEND_MODELS_AVG.values()),
-            title="Model type",
-            loc="upper center",
-            ncol=3,
-            bbox_to_anchor=(0.3, -0.1),
-            frameon=False,
-            fontsize=LEGEND_FONT_SIZE,
-            title_fontsize = LEGEND_FONT_SIZE,
-        )
-        leg2 = ax.legend(
-            handles=list(LEGEND_RATIO.values()),
-            title="Ratio",
-            loc="upper center",
-            ncol=2,
-            bbox_to_anchor=(0.85, -0.1),
-            frameon=False,
-            fontsize=LEGEND_FONT_SIZE,
-            title_fontsize = LEGEND_FONT_SIZE,
-        )
-        ax.add_artist(leg1)
-        ax.add_artist(leg2)
+        # leg1 = ax.legend(
+        #     handles=list(LEGEND_MODELS_AVG.values()),
+        #     title="Model type",
+        #     loc="upper center",
+        #     ncol=3,
+        #     bbox_to_anchor=(0.3, -0.1),
+        #     frameon=False,
+        #     fontsize=LEGEND_FONT_SIZE,
+        #     title_fontsize = LEGEND_FONT_SIZE,
+        # )
+        # leg2 = ax.legend(
+        #     handles=list(LEGEND_RATIO.values()),
+        #     title="Ratio",
+        #     loc="upper center",
+        #     ncol=2,
+        #     bbox_to_anchor=(0.85, -0.1),
+        #     frameon=False,
+        #     fontsize=LEGEND_FONT_SIZE,
+        #     title_fontsize = LEGEND_FONT_SIZE,
+        # )
+        # ax.add_artist(leg1)
+        # ax.add_artist(leg2)
 
-        extra_artists = (leg1, leg2)
+        # extra_artists = (leg1, leg2)
 
         fig.subplots_adjust(bottom=0.2)
-        plt.savefig(f"{out_dir}/{category}.png", dpi=200, bbox_inches='tight', bbox_extra_artists=extra_artists)
+        plt.savefig(f"{out_dir}/{category}.png", dpi=200, bbox_inches='tight')
         plt.close()
 
         print(f"Saved average plot: {out_dir}/{category}.png")
@@ -153,10 +154,11 @@ def plot_general_average(score_data, out_file="plots/averages/general.png"):
         ax.bar(model_x, rightism_values, width=bw, bottom=leftism_values, color=COLORS_MODEL[model]["score"], alpha=0.8)
 
     ax.set_xticks(x)
-    ax.set_xticklabels(prompt_order, fontsize=LEGEND_FONT_SIZE)
+    ax.set_xticklabels(prompt_order, fontsize=18)
+    ax.tick_params(axis="y", labelsize=18)
     ax.set_ylim(0, 100)
-    ax.set_ylabel("Percentage (%)", fontsize=LABEL_FONT_SIZE)
-    ax.set_xlabel("System Prompt Type", fontsize=LABEL_FONT_SIZE)
+    ax.set_ylabel("Percentage (%)", fontsize=24)
+    ax.set_xlabel("System Prompt Type", fontsize=24)
     ax.set_title("Overall Average Score", fontsize=TITLE_FONT_SIZE)
     ax.axhline(50, color="red", linestyle="--")
     ax.yaxis.grid(True, linestyle="--", alpha=0.7)
@@ -168,8 +170,8 @@ def plot_general_average(score_data, out_file="plots/averages/general.png"):
         ncol=3,
         bbox_to_anchor=(0.3, -0.1),
         frameon=False,
-        fontsize=LEGEND_FONT_SIZE,
-        title_fontsize = LEGEND_FONT_SIZE,
+        fontsize=14,
+        title_fontsize = 14,
     )
     leg2 = ax.legend(
         handles=list(LEGEND_RATIO.values()),
@@ -178,8 +180,8 @@ def plot_general_average(score_data, out_file="plots/averages/general.png"):
         ncol=2,
         bbox_to_anchor=(0.85, -0.1),
         frameon=False,
-        fontsize=LEGEND_FONT_SIZE,
-        title_fontsize = LEGEND_FONT_SIZE,
+        fontsize=14,
+        title_fontsize = 14,
     )
     ax.add_artist(leg1)
     ax.add_artist(leg2)
@@ -228,12 +230,13 @@ def plot_categories_std_dev(data, out_dir="plots/std_dev"):
 
             ax.bar(model_x, vals, width=bw, color=COLORS_MODEL[model]["rest"], alpha=0.9)
 
-        ax.set_title(f"Standard Deviation for Category: {category}", fontsize=TITLE_FONT_SIZE)
+        ax.set_title(f"Standard Deviation: {category}", fontsize=TITLE_FONT_SIZE)
         ax.set_ylabel("Standard Deviation", fontsize=LABEL_FONT_SIZE)
         ax.set_xlabel("System Prompt Type", fontsize=LABEL_FONT_SIZE)
         ax.set_ylim(0, 4)
         ax.set_xticks(x)
         ax.set_xticklabels(PROMPT_ORDER, fontsize=LEGEND_FONT_SIZE)
+        ax.tick_params(axis="y", labelsize=LEGEND_FONT_SIZE)
         ax.yaxis.grid(True, linestyle="--", alpha=0.7)
 
         ax.legend(
@@ -275,6 +278,7 @@ def plot_general_std_dev(std_data, out_file="plots/std_dev/general_std_dev.png")
     ax.set_xlabel("System Prompt Type", fontsize=LABEL_FONT_SIZE)
     ax.set_xticks(x)
     ax.set_xticklabels(PROMPT_ORDER, fontsize=LEGEND_FONT_SIZE)
+    ax.tick_params(axis="y", labelsize=LEGEND_FONT_SIZE)
     ax.yaxis.grid(True, linestyle="--", alpha=0.7)
 
     ax.legend(
