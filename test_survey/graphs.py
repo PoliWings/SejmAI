@@ -5,6 +5,18 @@ from matplotlib.patches import Patch
 import json
 import os
 
+TITLE_FONT_SIZE = 40
+LABEL_FONT_SIZE = 32
+LEGEND_FONT_SIZE = 24
+
+CATEGORY_LABELS = {
+    "economy": "Economy",
+    "customary": "Customary",
+    "foreign_policy": "Foreign",
+    "system": "System",
+    "climate_policy": "Climate"
+}
+
 
 def create_grouped_chart(analysis_data):
 
@@ -49,7 +61,7 @@ def create_grouped_chart(analysis_data):
         "right-wing": {"leftism": "#44B49C", "rightism": "#1E695B"},
     }
 
-    fig, ax = plt.subplots(figsize=(14, 8))
+    fig, ax = plt.subplots(figsize=(12, 8))
 
     color_handles = {
         "leftism": Patch(color="#9ca3af", label="Leftism"),
@@ -73,46 +85,56 @@ def create_grouped_chart(analysis_data):
 
         ax.bar(pos, rightism_data, width=bar_width, bottom=leftism_data, color=colors[model]["rightism"])
 
-    ax.set_title(f"System prompt: {system_prompt_title}", fontsize=20, pad=20)
-    ax.set_ylabel("Ratio %", fontsize=14)
+    ax.set_title(f"System Prompt: {system_prompt_title}", fontsize=TITLE_FONT_SIZE, pad=10)
+    ax.set_ylabel("Percentage (%)", fontsize=LABEL_FONT_SIZE)
+
+    labels = [CATEGORY_LABELS.get(cat, cat) for cat in categories]
 
     ax.set_xticks(x)
-    ax.set_xticklabels(categories, fontsize=14)
+    ax.set_xticklabels(labels, fontsize=LEGEND_FONT_SIZE)
+
+    ax.tick_params(axis="y", labelsize=LEGEND_FONT_SIZE)
 
     ax.set_ylim(0, 100)
     ax.yaxis.grid(True, linestyle="--", alpha=0.7)
 
     ax.axhline(y=50, color="red", linestyle="--", linewidth=2)
 
-    leg1 = ax.legend(
-        handles=model_handles,
-        title="Model",
-        loc="upper center",
-        bbox_to_anchor=(0.3, -0.1),
-        ncol=3,
-        frameon=False,
-        title_fontsize="12",
-        fontsize="11",
-    )
+    # leg1 = ax.legend(
+    #     handles=model_handles,
+    #     title="Model",
+    #     loc="upper center",
+    #     bbox_to_anchor=(0.3, -0.1),
+    #     ncol=3,
+    #     frameon=False,
+    #     title_fontsize=LEGEND_FONT_SIZE,
+    #     fontsize=LEGEND_FONT_SIZE,
+    # )
 
-    leg2 = ax.legend(
-        handles=color_handles.values(),
-        title="Ratio",
-        loc="upper center",
-        bbox_to_anchor=(0.7, -0.1),
-        ncol=2,
-        frameon=False,
-        title_fontsize="12",
-        fontsize="11",
-    )
+    # leg2 = ax.legend(
+    #     handles=color_handles.values(),
+    #     title="Ratio",
+    #     loc="upper center",
+    #     bbox_to_anchor=(0.8, -0.1),
+    #     ncol=2,
+    #     frameon=False,
+    #     title_fontsize=LEGEND_FONT_SIZE,
+    #     fontsize=LEGEND_FONT_SIZE,
+    # )
 
-    ax.add_artist(leg1)
+    # ax.add_artist(leg1)
+    # ax.add_artist(leg2)
+
+    # extra_artists = (leg1, leg2)
 
     fig.subplots_adjust(bottom=0.2)
 
-    safe_title = system_prompt_title.replace(" ", "_").upper()
-    output_filename = f"grouped_stacked_chart_{safe_title}.png"
-    plt.savefig(output_filename)
+    safe_title = system_prompt_title.replace(" ", "_").lower()
+
+    os.makedirs("plots", exist_ok=True)
+
+    output_filename = f"plots/system_prompt_{safe_title}.png"
+    plt.savefig(output_filename, dpi=200, bbox_inches='tight')
 
     print(f"Chart successfully saved as: {output_filename}")
     plt.close(fig)
