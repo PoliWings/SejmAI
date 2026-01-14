@@ -22,7 +22,7 @@ parser.add_argument("--cancel", action="store_true", help="Cancel fine-tuning")
 parser.add_argument("--load-lora", choices=["left", "right"], help="Load LoRA adapter into model")
 parser.add_argument("--unload-lora", choices=["left", "right"], help="Unload LoRA adapter from model")
 parser.add_argument("--download-lora", choices=["left", "right"], help="Download trained LoRA adapter")
-parser.add_argument("--version", type=str, help="Specify LoRA adapter version to load/delete/download")
+parser.add_argument("--version", type=str, help="Specify LoRA adapter version to load/unload/download")
 args = parser.parse_args()
 
 # ===================== Env Variables =====================

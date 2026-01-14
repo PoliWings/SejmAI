@@ -341,7 +341,7 @@ def translate_texts_to_polish(texts, batch_size=12):
 
         clean_lines = []
         for line in lines:
-            if len(line) > 0 and line[0].isdigit():
+            if line[0].isdigit():
                 parts = line.split(".", 1)
                 if len(parts) > 1:
                     clean_lines.append(parts[1].strip())
@@ -417,14 +417,7 @@ if __name__ == "__main__":
         if args.dataset == "cajcodes/political-bias":
             data = convert_cajcodes_political_bias(args.dataset)
         else:
-            try:
-                data = convert_cajcodes_political_bias(args.dataset)
-            except Exception as e:
-                print(
-                    f"Warning: Attempting to use generic translation logic for {args.dataset}. "
-                    f"If dataset structure differs from cajcodes/political-bias, this may fail."
-                )
-                data = convert_cajcodes_political_bias(args.dataset)
+            raise ValueError(f"Unsupported dataset: {args.dataset}")
 
     else:
         with open(FILENAME, "r", encoding="utf-8") as source:

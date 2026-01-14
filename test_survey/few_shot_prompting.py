@@ -99,7 +99,7 @@ def generate_response_service(messages: List[Dict[str, str]], args) -> str:
         result_text = response.json().get("response", "")
 
         if result_text.startswith("Odpowiedź:"):
-            result_text = result_text.removeprefix("Odpowiedź:").strip()
+            result_text = result_text[len("Odpowiedź:") :].strip()
         if "</think>" in result_text:
             result_text = result_text.split("</think>")[-1].strip()
 

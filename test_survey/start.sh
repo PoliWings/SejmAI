@@ -73,8 +73,8 @@ if [[ -n "$dataset" ]]; then
 fi
 
 if [[ "$mode" == "service" ]]; then
-    python ../fine_tuning/train_service.py --unload-lora left
-    python ../fine_tuning/train_service.py --unload-lora right
+    python ../fine_tuning/train_service.py --unload-lora left || true
+    python ../fine_tuning/train_service.py --unload-lora right || true
     
     run_with_retries python model_testing.py --service "${filtered_args[@]}" || exit 1
 
