@@ -205,4 +205,4 @@ elif args.download_lora in ["left", "right"]:
 
 # ===================== Default =====================
 else:
-    print("No action specified. Use one of: --start, --status, --cancel, --load-lora, --delete-lora, --download-lora.")
+    print("No action specified. Use one of: --start, --status, --cancel, --load-lora, --unload-lora, --download-lora.")
