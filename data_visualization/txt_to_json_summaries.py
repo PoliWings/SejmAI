@@ -51,7 +51,7 @@ def process_all_files(input_dir, output_file="prompt_NEUTRAL_model_neutral.json"
     with open(output_file, "w", encoding="utf-8") as out:
         json.dump(all_data, out, ensure_ascii=False, indent=2)
 
-    print(f"Summaries saved to file: {output_file}")
+    print(f"Data successfully written to {output_file}")
 
 
 if __name__ == "__main__":
