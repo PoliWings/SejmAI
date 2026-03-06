@@ -13,7 +13,7 @@ CATEGORY_LABELS = {
     "customary": "Customary",
     "foreign_policy": "Foreign\nPolicy",
     "system": "System",
-    "climate_policy": "Climate\nPolicy"
+    "climate_policy": "Climate\nPolicy",
 }
 
 PROMPT_ORDER = [
@@ -22,6 +22,7 @@ PROMPT_ORDER = [
     "left-wing",
     "right-wing",
 ]
+
 
 def create_grouped_chart(analysis_data, ax):
     system_prompt_title = analysis_data.get("system_prompt", "Chart")
@@ -109,39 +110,21 @@ if __name__ == "__main__":
     if len(results) < 4:
         raise ValueError("Need at least 4 analysis_results")
 
-    fig, axes = plt.subplots(
-        2, 2, figsize=(22, 15),
-        gridspec_kw={"hspace": 0.3, "wspace": 0.1}
-    )
+    fig, axes = plt.subplots(2, 2, figsize=(22, 15), gridspec_kw={"hspace": 0.3, "wspace": 0.1})
     axes = axes.flatten()
 
-    results_by_prompt = {
-        r["system_prompt"].lower(): r
-        for r in results
-    }
+    results_by_prompt = {r["system_prompt"].lower(): r for r in results}
 
     ordered_results = [results_by_prompt[p] for p in PROMPT_ORDER]
 
     for ax, analysis in zip(axes, ordered_results):
         create_grouped_chart(analysis, ax)
 
-    fig.suptitle(
-        "Average Categories Scores for System Prompts", 
-        fontsize=40,
-        y=1
-    )
+    fig.suptitle("Average Categories Scores for System Prompts", fontsize=40, y=1)
 
-    fig.text(
-        0.07, 0.5, "Percentage (%)",
-        va="center", rotation="vertical",
-        fontsize=36
-    )
+    fig.text(0.07, 0.5, "Percentage (%)", va="center", rotation="vertical", fontsize=36)
 
-    fig.text(
-        0.5, 0.02, "Category",
-        ha="center",
-        fontsize=36
-    )
+    fig.text(0.5, 0.02, "Category", ha="center", fontsize=36)
 
     model_handles = [
         Patch(color="#648FFC", label="Neutral"),

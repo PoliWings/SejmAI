@@ -99,33 +99,33 @@ def plot_categories_averages(data, out_dir="plots/averages"):
         ax.yaxis.grid(True, linestyle="--", alpha=0.7)
         ax.axhline(50, color="red", linestyle="--")
 
-        # leg1 = ax.legend(
-        #     handles=list(LEGEND_MODELS_AVG.values()),
-        #     title="Model type",
-        #     loc="upper center",
-        #     ncol=3,
-        #     bbox_to_anchor=(0.3, -0.1),
-        #     frameon=False,
-        #     fontsize=LEGEND_FONT_SIZE,
-        #     title_fontsize = LEGEND_FONT_SIZE,
-        # )
-        # leg2 = ax.legend(
-        #     handles=list(LEGEND_RATIO.values()),
-        #     title="Ratio",
-        #     loc="upper center",
-        #     ncol=2,
-        #     bbox_to_anchor=(0.85, -0.1),
-        #     frameon=False,
-        #     fontsize=LEGEND_FONT_SIZE,
-        #     title_fontsize = LEGEND_FONT_SIZE,
-        # )
-        # ax.add_artist(leg1)
-        # ax.add_artist(leg2)
+        leg1 = ax.legend(
+            handles=list(LEGEND_MODELS_AVG.values()),
+            title="Model type",
+            loc="upper center",
+            ncol=3,
+            bbox_to_anchor=(0.3, -0.1),
+            frameon=False,
+            fontsize=LEGEND_FONT_SIZE,
+            title_fontsize=LEGEND_FONT_SIZE,
+        )
+        leg2 = ax.legend(
+            handles=list(LEGEND_RATIO.values()),
+            title="Ratio",
+            loc="upper center",
+            ncol=2,
+            bbox_to_anchor=(0.85, -0.1),
+            frameon=False,
+            fontsize=LEGEND_FONT_SIZE,
+            title_fontsize=LEGEND_FONT_SIZE,
+        )
+        ax.add_artist(leg1)
+        ax.add_artist(leg2)
 
-        # extra_artists = (leg1, leg2)
+        extra_artists = (leg1, leg2)
 
         fig.subplots_adjust(bottom=0.2)
-        plt.savefig(f"{out_dir}/{category}.png", dpi=200, bbox_inches='tight')
+        plt.savefig(f"{out_dir}/{category}.png", dpi=200, bbox_inches="tight")
         plt.close()
 
         print(f"Saved average plot: {out_dir}/{category}.png")
@@ -171,7 +171,7 @@ def plot_general_average(score_data, out_file="plots/averages/general.png"):
         bbox_to_anchor=(0.3, -0.1),
         frameon=False,
         fontsize=14,
-        title_fontsize = 14,
+        title_fontsize=14,
     )
     leg2 = ax.legend(
         handles=list(LEGEND_RATIO.values()),
@@ -181,16 +181,15 @@ def plot_general_average(score_data, out_file="plots/averages/general.png"):
         bbox_to_anchor=(0.85, -0.1),
         frameon=False,
         fontsize=14,
-        title_fontsize = 14,
+        title_fontsize=14,
     )
     ax.add_artist(leg1)
     ax.add_artist(leg2)
 
     extra_artists = (leg1, leg2)
 
-
     fig.subplots_adjust(bottom=0.2)
-    plt.savefig(out_file, dpi=200, bbox_inches='tight', bbox_extra_artists=extra_artists)
+    plt.savefig(out_file, dpi=200, bbox_inches="tight", bbox_extra_artists=extra_artists)
     plt.close()
 
     print(f"Saved overall average: {out_file}")
@@ -247,11 +246,11 @@ def plot_categories_std_dev(data, out_dir="plots/std_dev"):
             bbox_to_anchor=(0.5, -0.1),
             frameon=False,
             fontsize=LEGEND_FONT_SIZE,
-            title_fontsize = LEGEND_FONT_SIZE,
+            title_fontsize=LEGEND_FONT_SIZE,
         )
 
         fig.subplots_adjust(bottom=0.2)
-        plt.savefig(f"{out_dir}/{category}_std_dev.png", dpi=200, bbox_inches='tight')
+        plt.savefig(f"{out_dir}/{category}_std_dev.png", dpi=200, bbox_inches="tight")
         plt.close()
 
         print(f"Saved std dev plot: {out_dir}/{category}_std_dev.png")
@@ -289,11 +288,11 @@ def plot_general_std_dev(std_data, out_file="plots/std_dev/general_std_dev.png")
         bbox_to_anchor=(0.5, -0.1),
         frameon=False,
         fontsize=LEGEND_FONT_SIZE,
-        title_fontsize = LEGEND_FONT_SIZE,
+        title_fontsize=LEGEND_FONT_SIZE,
     )
 
     fig.subplots_adjust(bottom=0.2)
-    plt.savefig(out_file, dpi=200, bbox_inches='tight')
+    plt.savefig(out_file, dpi=200, bbox_inches="tight")
     plt.close()
 
     print(f"Saved overall std dev: {out_file}")
