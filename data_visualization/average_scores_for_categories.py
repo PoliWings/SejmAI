@@ -3,7 +3,6 @@ import sys
 import statistics
 import glob
 
-
 def calculate_average_scores(json_filename):
     with open(json_filename, "r", encoding="utf-8") as f:
         data = json.load(f)
@@ -30,7 +29,7 @@ def calculate_average_scores(json_filename):
         stats_results[category] = {
             "average": round(avg, 2),
             "variance": round(variance, 2),
-            "std_dev": round(std_dev, 2),
+            "std_dev": round(std_dev, 2)
         }
 
     return stats_results
@@ -49,7 +48,7 @@ if __name__ == "__main__":
         print(f"\n=== Processing file: {filename} ===")
         results = calculate_average_scores(filename)
 
-        summary_output[filename] = results
+        summary_output[filename] = results 
 
         print(f"\nAverage percentage scores for each category in file {filename}:\n")
         for category, stats in results.items():

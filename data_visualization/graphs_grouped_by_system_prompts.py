@@ -98,7 +98,7 @@ def create_grouped_chart(analysis_data, ax):
 
 if __name__ == "__main__":
 
-    filepath = os.path.join("output", "accuracies.json")
+    filepath = "system_prompt_statistics.json"
     if not os.path.exists(filepath):
         raise FileNotFoundError(filepath)
 
