@@ -1,6 +1,4 @@
 *.json
-*.txt
-/venv
-/__pycache__/
 *.log
 *.pkl
+*.txt

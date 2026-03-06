@@ -1,6 +1,6 @@
-*.zip
 *.json
-*.whl
 *.log
-output*
+*.whl
+*.zip
+output
 wandb
