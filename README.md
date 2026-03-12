@@ -11,8 +11,7 @@ The project constructs the **Polish Parliamentary Speeches Corpus (PPSC)**, fine
 ## Hugging Face Resources
 
 | Resource         | URL                                                                                                                              |
-| ---------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| Organization     | [huggingface.co/PoliWings](https://huggingface.co/PoliWings)                                                                     |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------------------- |                                                                   |
 | Left-wing model  | [PoliWings/opposing-views-left-wing](https://huggingface.co/PoliWings/opposing-views-left-wing)                                  |
 | Right-wing model | [PoliWings/opposing-views-right-wing](https://huggingface.co/PoliWings/opposing-views-right-wing)                                |
 | Dataset          | [PoliWings/Polish-Parliamentary-Speeches-Corpus](https://huggingface.co/datasets/PoliWings/Polish-Parliamentary-Speeches-Corpus) |
