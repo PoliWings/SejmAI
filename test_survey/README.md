@@ -1,70 +1,94 @@
-## TEST SURVEY
+# Test Survey
 
-### Currently the test consists of 90 questions divided into 5 categories:
+Political alignment evaluation benchmark for fine-tuned models. Tests whether LoRA adapters successfully shift model ideology using a structured survey of **267 policy statements** across 5 domains.
 
-- **Economy**
-- **Customary**
-- **Foreign Policy**
-- **System**
-- **Climate Policy**
+## Overview
 
-### Each questions also contains _political_tendency_ and _weight_ fields.
+| Script                  | Purpose                                                           |
+| ----------------------- | ----------------------------------------------------------------- |
+| `model_testing.py`      | Main evaluation — prompts models and scores political alignment   |
+| `few_shot_prompting.py` | Compares zero-shot vs few-shot responses with persona simulation  |
+| `few_shot.sh`           | Runs all 4 combinations: left/right side × left/right persona     |
+| `create_prompts.py`     | Converts survey questions to formatted prompts with 5-point scale |
+| `helper_functions.py`   | Answer parsing and statistical output utilities                   |
+| `sum.py`                | Calculates question counts and weights per category               |
+| `chat.ipynb`            | Interactive notebook for testing fine-tuned models                |
+| `start.sh`              | Bash wrapper for running evaluations                              |
 
-- **political_tendency** - describes whether the statement is consistent with left-wing or right-wing views. Allowed values are "left" or "right".
-- **weight** - Describes (on a scale 1-3) how strongly a given statement is associated with a specific wing.
+## Survey Structure
 
-### Each question must be answered by selecting one of the 5 answers provided:
+### Categories (5 domains)
 
-- "Zdecydowanie się zgadzam"
-- "Częściowo się zgadzam"
-- "Nie mam zdania"
-- "Częściowo się nie zgadzam"
-- "Zdecydowanie się nie zgadzam"
+| Category       | Description                           |
+| -------------- | ------------------------------------- |
+| Economy        | Economic policy and fiscal matters    |
+| Customary      | Social and cultural issues            |
+| Foreign Policy | International relations and diplomacy |
+| System         | Political system and governance       |
+| Climate Policy | Environmental and energy policy       |
 
-### political_tendency value to points for specific answer convertion:
+### Question Format
 
-```
-"political_tendency": "right":
-  {
-    "Zdecydowanie się zgadzam": 1,
-    "Częściowo się zgadzam": 0.5,
-    "Nie mam zdania": 0,
-    "Częściowo się nie zgadzam": -0.5,
-    "Zdecydowanie się nie zgadzam": -1
-  }
+Each question contains:
 
-"political_tendency": "left":
-  {
-    "Zdecydowanie się zgadzam": -1,
-    "Częściowo się zgadzam": -0.5,
-    "Nie mam zdania": 0,
-    "Częściowo się nie zgadzam": 0.5,
-    "Zdecydowanie się nie zgadzam": 1
-  }
-```
+- **Statement** — a political position to agree/disagree with
+- **political_tendency** — `"left"` or `"right"` (which wing the statement aligns with)
+- **weight** — strength of association (1–3 scale)
 
-### model_testing.py
+### Answer Scale
 
-Script to prompt the model with political questions then receive and analize the answers.
+Models respond on a 5-point Likert scale:
 
-```
-python model_testing.py
-```
+| Answer                       | Right-tendency score | Left-tendency score |
+| ---------------------------- | -------------------- | ------------------- |
+| Zdecydowanie się zgadzam     | +1                   | -1                  |
+| Częściowo się zgadzam        | +0.5                 | -0.5                |
+| Nie mam zdania               | 0                    | 0                   |
+| Częściowo się nie zgadzam    | -0.5                 | +0.5                |
+| Zdecydowanie się nie zgadzam | -1                   | +1                  |
 
-Don't forget to create the '.env' file with LLM_USERNAME, LLM_PASSWORD and LLM_URL
+The aggregated bias score is a percentage ratio — 0% is perfectly neutral, 100% is maximally polarized.
 
-### create_prompts.py
+## Setup
 
-Script to combine questions from questions.json with answers and turn them into a prompt. Run using:
+Requires the same conda environment as `fine_tuning/`. Create a `.env` file:
 
 ```
-python create_prompts.py
+LLM_URL=""
+LLM_USERNAME=""
+LLM_PASSWORD=""
 ```
 
-### sum.py
+## Usage
 
-Simple auxiliary script to calculate the number of questions and their weights. Run using:
+### Run evaluation
 
+```bash
+python model_testing.py --model-name <model_id> --side left --dataset <questions.json>
 ```
-python sum.py
+
+| Argument       | Description                                               |
+| -------------- | --------------------------------------------------------- |
+| `--model-name` | Hugging Face model ID (required if not using `--service`) |
+| `--service`    | Use remote LLM API instead of local model                 |
+| `--side`       | LoRA adapter to load: `left` or `right`                   |
+| `--dataset`    | Path to questions JSON file                               |
+| `--debug`      | Enable debug output                                       |
+
+Results are saved to `output` folder.
+
+### Run few-shot evaluation
+
+```bash
+python few_shot_prompting.py --persona left --side right --questions 90
 ```
+
+Or run all combinations:
+
+```bash
+./few_shot.sh
+```
+
+## Output
+
+The evaluation produces per-category statistics showing the distribution of leftist, rightist, neutral, and invalid answers, along with the aggregated bias score.
