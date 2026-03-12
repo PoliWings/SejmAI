@@ -49,13 +49,11 @@ python bar_chart.py
 
 ### Training metric comparison
 
-Requires `trainer_state_left.json` and `trainer_state_right.json` (exported from Hugging Face Trainer):
+Requires `trainer_state_left.json` and `trainer_state_right.json`:
 
 ```bash
 python data_visualization.py
 ```
-
-Outputs comparison charts to `charts/`.
 
 ### Other utilities
 
@@ -67,4 +65,4 @@ python txt_to_json_summaries.py           # Convert text outputs to JSON for plo
 
 ## Output
 
-All generated plots are saved to the `plots/` directory (or `charts/` for training metrics).
+All generated plots are saved to the `plots/` directory.

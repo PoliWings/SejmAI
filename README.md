@@ -41,11 +41,11 @@ The end-to-end workflow follows these stages:
 
 ## Key Results
 
-| Model                                 | Bias Score | Direction      |
-| ------------------------------------- | ---------- | -------------- |
-| Base model (Bielik-11B-v2.2-Instruct) | 72.18%     | Left           |
-| Left-wing fine-tuned                  | 82.85%     | Left           |
-| Right-wing fine-tuned                 | 54.18%     | Left (reduced) |
+| Model                                 | Bias Score |
+| ------------------------------------- | ---------- |
+| Base model (Bielik-11B-v2.2-Instruct) | 72.18%     |
+| Left-wing fine-tuned                  | 82.85%     |
+| Right-wing fine-tuned                 | 54.18%     |
 
 The fine-tuning exhibits **asymmetric behavior** — left-wing training amplifies the base model's existing left bias, while right-wing training primarily neutralizes it rather than pushing the model to the right.
 

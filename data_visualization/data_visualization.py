@@ -7,7 +7,7 @@ files = [
     ("trainer_state_left.json", "Leftist Model"),
 ]
 
-os.makedirs("charts", exist_ok=True)
+os.makedirs("plots", exist_ok=True)
 
 histories = []
 for filename, _ in files:
@@ -33,6 +33,6 @@ for metric in metrics:
     plt.grid(True)
     plt.legend()
     plt.tight_layout()
-    filename = os.path.join("charts", f"{metric}_comparison.png")
+    filename = os.path.join("plots", f"{metric}_comparison.png")
     plt.savefig(filename)
     plt.close()
